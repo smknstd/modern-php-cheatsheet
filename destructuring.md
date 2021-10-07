@@ -55,7 +55,7 @@ Previous list syntax won't work with an associative array, and you'll get a warn
 list($a, $b, $c) = $array; // PHP Warning:  Undefined array key 0 ...
 ```
 
-You can destruct
+But you can destruct it with another syntax based on keys:
 
 ```
 list('eeny' => $a, 'meeny' => $b, miny' => $c) = $array;
@@ -74,7 +74,7 @@ Or the shorthand syntax:
 // $c = 3
 ```
 
-You can also destruct only a portion of the array. The order doesn't matter.
+You can also destruct only a portion of the array (The order doesn't matter):
 
 ```
 ['miny' => $c, 'eeny' => $a] = $array;
