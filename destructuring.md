@@ -86,7 +86,5 @@ You can also destruct only a portion of the array. The order doesn't matter.
 When you try to destruct a key that doesn't exist in the given array, you'll get a warning:
 
 ```
-list('moe' => $d) = $array;
-
-// PHP Warning:  Undefined array key "moe"
+list('moe' => $d) = $array; // PHP Warning:  Undefined array key "moe"
 ```
