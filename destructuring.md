@@ -11,7 +11,7 @@ Considering an indexed array like :
 $array = ["eeny", "meeny", "miny"];
 ```
 
-Using the list syntax:
+You can destruct it using the list syntax:
 ```
 list($a, $b, $c) = $array;
 ```
