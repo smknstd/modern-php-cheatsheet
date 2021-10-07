@@ -1,9 +1,9 @@
-#Destructuring array
+# Destructuring array
 
 You can destructure arrays to pull out several elements into separate variables.
 
 
-##Indexed array
+## Indexed array
 
 Considering an indexed array like :
 
@@ -37,7 +37,7 @@ Or the shorthand syntax:
 ```
 
 
-##Associative array
+## Associative array
 
 Considering an associative array like :
 
