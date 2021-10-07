@@ -58,7 +58,7 @@ list($a, $b, $c) = $array; // PHP Warning:  Undefined array key 0 ...
 But you can destruct it with another syntax based on keys:
 
 ```
-list('eeny' => $a, 'meeny' => $b, miny' => $c) = $array;
+list('eeny' => $a, 'meeny' => $b, 'miny' => $c) = $array;
 
 // $a = 1
 // $b = 2
@@ -67,7 +67,7 @@ list('eeny' => $a, 'meeny' => $b, miny' => $c) = $array;
 Or the shorthand syntax:
 
 ```
-['eeny' => $a, 'meeny' => $b, miny' => $c] = $array;
+['eeny' => $a, 'meeny' => $b, 'miny' => $c] = $array;
 
 // $a = 1
 // $b = 2
