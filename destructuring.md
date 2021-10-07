@@ -21,7 +21,7 @@ Or the shorthand syntax:
 [$a, $b, $c] = $array;
 ```
 
-You can skip elements with both syntax:
+You can skip elements:
 
 ```
 list(, , $c) = $array;
