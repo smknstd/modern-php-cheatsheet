@@ -66,6 +66,9 @@ It also works with indexed arrays:
 
 ```php
 $a = ['foo'];
+
+// reminder: $a[0] = 'foo'
+
 $b = $a[1] ?? 'fallback';
 
 // $b = 'fallback'
