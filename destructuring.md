@@ -47,7 +47,7 @@ list($a, $b, $c, $d) = $array; // PHP Warning:  Undefined array key 3
 // $a = 1
 // $b = 2
 // $c = 3
-//$d = null;
+// $d = null;
 ```
 
 
