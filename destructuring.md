@@ -67,6 +67,10 @@ Previous list syntax won't work with an associative array, and you'll get a warn
 
 ```php
 list($a, $b, $c) = $array; // PHP Warning:  Undefined array key 0 ...
+
+// $a = null
+// $b = null
+// $c = null
 ```
 
 But you can destruct it with another syntax based on keys:
