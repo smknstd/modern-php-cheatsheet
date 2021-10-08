@@ -1,4 +1,4 @@
-# Modern JavaScript Cheatsheet
+# Modern Php Cheatsheet
 
 > If you like this content, you can ping me or follow me on Twitter :+1:
 
