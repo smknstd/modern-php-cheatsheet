@@ -8,15 +8,17 @@ You can destructure arrays to pull out several elements into separate variables.
 Considering an indexed array like :
 
 ```
-$array = ["eeny", "meeny", "miny"];
+$array = ['foo', 'bar', 'baz'];
 ```
 
 Using the list syntax:
+
 ```
 list($a, $b, $c) = $array;
 ```
 
 Or the shorthand syntax:
+
 ```
 [$a, $b, $c] = $array;
 ```
@@ -26,14 +28,15 @@ You can skip elements with both syntax:
 ```
 list(, , $c) = $array;
 
-// $c = "miny"
+// $c = 'baz'
 ```
+
 Or the shorthand syntax:
 
 ```
 [, , $c] = $array;
 
-// $c = "miny"
+// $c = 'baz'
 ```
 
 
@@ -43,9 +46,9 @@ Considering an associative array like :
 
 ```
 $array = [
-    'eeny' => 1,
-    'meeny' => 2,
-    'miny' => 3,
+    'foo' => 1,
+    'bar' => 2,
+    'baz' => 3,
 ];
 ```
 
@@ -58,16 +61,17 @@ list($a, $b, $c) = $array; // PHP Warning:  Undefined array key 0 ...
 You can destruct
 
 ```
-list('eeny' => $a, 'meeny' => $b, miny' => $c) = $array;
+list('foo' => $a, 'bar' => $b, miny' => $c) = $array;
 
 // $a = 1
 // $b = 2
 // $c = 3
 ```
+
 Or the shorthand syntax:
 
 ```
-['eeny' => $a, 'meeny' => $b, miny' => $c] = $array;
+['foo' => $a, 'bar' => $b, miny' => $c] = $array;
 
 // $a = 1
 // $b = 2
@@ -77,7 +81,7 @@ Or the shorthand syntax:
 You can also destruct only a portion of the array. The order doesn't matter.
 
 ```
-['miny' => $c, 'eeny' => $a] = $array;
+['baz' => $c, 'foo' => $a] = $array;
 
 // $a = 1
 // $c = 3
