@@ -36,6 +36,13 @@ Or the shorthand syntax:
 // $c = "miny"
 ```
 
+When you try to destruct an index that doesn't exist in the given array, you'll get a warning:
+
+```
+list($a, $b, $c, $d) = $array; // PHP Warning:  Undefined array key 3
+```
+
+
 
 ## Associative array
 
