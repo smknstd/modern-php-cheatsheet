@@ -178,7 +178,7 @@ $b = $a->baz() ?? 'fallback';
 
 ### Chained method
 
-When using chained methods on object and it can't be found, null coalescing won't work and you'll get an error:
+When using chained methods on object and an intermediary element can't be found, null coalescing won't work and you'll get an error:
 
 ```php
 class Foo
