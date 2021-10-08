@@ -100,7 +100,7 @@ $b = $a->baz ?? 'fallback';
 ```
 
 
-### Chained methods
+### Object's method
 
 You can also use the null coalescing operator on call to an object's method. If the given method exists, then fallback isn't triggered:
 
@@ -146,6 +146,24 @@ class Foo
 
 $a = new Foo();
 $b = $a->baz() ?? 'fallback';
+
+// PHP Error:  Call to undefined method baz()
+```
+
+### Chained method
+
+When using chained methods on object and it can't be found, null coalescing won't work and you'll get an error:
+
+```
+class Foo
+{
+    public function bar() {
+        return (object)[];
+    }
+}
+
+$a = new Foo();
+$b = $a->bar()->baz() ?? 'fallback';
 
 // PHP Error:  Call to undefined method baz()
 ```
