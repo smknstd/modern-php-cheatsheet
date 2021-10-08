@@ -36,11 +36,37 @@ $b = $a['foo'] ?? 'fallback';
 // $b = 'bar'
 ```
 
-But when key can't be found in the given array, fallback is triggered with no error nor warning:
+But when array doesn't exist, fallback is triggered with no error nor warning:
+
+```php
+$a = null;
+$b = $a['foo'] ?? 'fallback';
+
+// $b = 'fallback'
+```
+
+Or array property is undefined, fallback is triggered with no error nor warning:
+
+```php
+$b = $undefined['foo'] ?? 'fallback';
+
+// $b = 'fallback'
+```
+
+When array exist but key can't be found in the given array, fallback is triggered with no error nor warning:
 
 ```php
 $a = [];
 $b = $a['foo'] ?? 'fallback';
+
+// $b = 'fallback'
+```
+
+It also works with indexed arrays:
+
+```php
+$a = ['foo'];
+$b = $a[1] ?? 'fallback';
 
 // $b = 'fallback'
 ```
