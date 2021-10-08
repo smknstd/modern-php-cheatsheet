@@ -50,12 +50,20 @@ You can destruct it using the list syntax:
 
 ```php
 list($a, $b, $c) = $array;
+
+// $a = 'foo'
+// $b = 'bar'
+// $c = 'baz'
 ```
 
 Or the shorthand syntax:
 
 ```php
 [$a, $b, $c] = $array;
+
+// $a = 'foo'
+// $b = 'bar'
+// $c = 'baz'
 ```
 
 You can skip elements:
@@ -79,9 +87,9 @@ When you try to destruct an index that doesn't exist in the given array, you'll 
 ```php
 list($a, $b, $c, $d) = $array; // PHP Warning:  Undefined array key 3
 
-// $a = 1
-// $b = 2
-// $c = 3
+// $a = 'foo'
+// $b = 'bar'
+// $c = 'baz'
 // $d = null;
 ```
 
@@ -92,9 +100,9 @@ Considering an associative array like :
 
 ```php
 $array = [
-    'foo' => 1,
-    'bar' => 2,
-    'baz' => 3,
+    'foo' => 'value1',
+    'bar' => 'value2',
+    'baz' => 'value3',
 ];
 ```
 
@@ -113,9 +121,9 @@ But you can destruct it with another syntax based on keys:
 ```php
 list('foo' => $a, 'bar' => $b, 'baz' => $c) = $array;
 
-// $a = 1
-// $b = 2
-// $c = 3
+// $a = 'value1'
+// $b = 'value2'
+// $c = 'value3'
 ```
 
 Or the shorthand syntax:
@@ -123,9 +131,9 @@ Or the shorthand syntax:
 ```php
 ['foo' => $a, 'bar' => $b, 'baz' => $c] = $array;
 
-// $a = 1
-// $b = 2
-// $c = 3
+// $a = 'value1'
+// $b = 'value2'
+// $c = 'value3'
 ```
 
 You can also destruct only a portion of the array (The order doesn't matter):
@@ -133,8 +141,8 @@ You can also destruct only a portion of the array (The order doesn't matter):
 ```php
 ['baz' => $c, 'foo' => $a] = $array;
 
-// $a = 1
-// $c = 3
+// $a = 'value1'
+// $c = 'value3'
 ```
 
 When you try to destruct a key that doesn't exist in the given array, you'll get a warning:
