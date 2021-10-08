@@ -11,7 +11,7 @@ Considering an indexed array like :
 $array = ['foo', 'bar', 'baz'];
 ```
 
-Using the list syntax:
+You can destruct it using the list syntax:
 
 ```php
 list($a, $b, $c) = $array;
@@ -23,7 +23,7 @@ Or the shorthand syntax:
 [$a, $b, $c] = $array;
 ```
 
-You can skip elements with both syntax:
+You can skip elements:
 
 ```php
 list(, , $c) = $array;
@@ -64,7 +64,7 @@ Previous list syntax won't work with an associative array, and you'll get a warn
 list($a, $b, $c) = $array; // PHP Warning:  Undefined array key 0 ...
 ```
 
-You can destruct
+But you can destruct it with another syntax based on keys:
 
 ```php
 list('foo' => $a, 'bar' => $b, 'baz' => $c) = $array;
@@ -84,7 +84,7 @@ Or the shorthand syntax:
 // $c = 3
 ```
 
-You can also destruct only a portion of the array. The order doesn't matter.
+You can also destruct only a portion of the array (The order doesn't matter):
 
 ```php
 ['baz' => $c, 'foo' => $a] = $array;
@@ -96,7 +96,5 @@ You can also destruct only a portion of the array. The order doesn't matter.
 When you try to destruct a key that doesn't exist in the given array, you'll get a warning:
 
 ```php
-list('moe' => $d) = $array;
-
-// PHP Warning:  Undefined array key "moe"
+list('moe' => $d) = $array; // PHP Warning:  Undefined array key "moe"
 ```
