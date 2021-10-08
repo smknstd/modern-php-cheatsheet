@@ -43,6 +43,11 @@ When you try to destruct an index that doesn't exist in the given array, you'll 
 
 ```php
 list($a, $b, $c, $d) = $array; // PHP Warning:  Undefined array key 3
+
+// $a = 1
+// $b = 2
+// $c = 3
+//$d = null;
 ```
 
 
@@ -97,4 +102,6 @@ When you try to destruct a key that doesn't exist in the given array, you'll get
 
 ```php
 list('moe' => $d) = $array; // PHP Warning:  Undefined array key "moe"
+
+// $d = null
 ```
