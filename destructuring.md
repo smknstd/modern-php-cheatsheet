@@ -39,6 +39,12 @@ Or the shorthand syntax:
 // $c = 'baz'
 ```
 
+When you try to destruct an index that doesn't exist in the given array, you'll get a warning:
+
+```
+list($a, $b, $c, $d) = $array; // PHP Warning:  Undefined array key 3
+```
+
 
 ##Associative array
 
@@ -61,7 +67,7 @@ list($a, $b, $c) = $array; // PHP Warning:  Undefined array key 0 ...
 You can destruct
 
 ```
-list('foo' => $a, 'bar' => $b, miny' => $c) = $array;
+list('foo' => $a, 'bar' => $b, 'baz' => $c) = $array;
 
 // $a = 1
 // $b = 2
@@ -71,7 +77,7 @@ list('foo' => $a, 'bar' => $b, miny' => $c) = $array;
 Or the shorthand syntax:
 
 ```
-['foo' => $a, 'bar' => $b, miny' => $c] = $array;
+['foo' => $a, 'bar' => $b, 'baz' => $c] = $array;
 
 // $a = 1
 // $b = 2
