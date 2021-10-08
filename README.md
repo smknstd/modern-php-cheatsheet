@@ -17,8 +17,12 @@ This guide is not intended to teach you Php from the ground up, but to help deve
 ### Complementary Resources
 
 When you struggle to understand a notion, I suggest you look for answers on the following resources:
+- [Stitcher's blog](https://stitcher.io/blog)
+- [StackOverflow](https://stackoverflow.com/questions/tagged/php)
 
-- [Modern JavaScript cheatsheet](#modern-javascript-cheatsheet)
+## Table of Contents
+
+- [Modern Php cheatsheet](#modern-php-cheatsheet)
     * [Introduction](#introduction)
         + [Motivation](#motivation)
         + [Complementary resources](#complementary-resources)
@@ -29,7 +33,7 @@ When you struggle to understand a notion, I suggest you look for answers on the 
 
 ## Notions
 
-### Destructuring array
+### Destructuring arrays
 
 You can destructure arrays to pull out several elements into separate variables.
 
