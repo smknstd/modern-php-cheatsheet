@@ -1,4 +1,4 @@
-#Null Coalescing 
+# Null Coalescing 
 
 Use the null coalescing operator to provide a fallback when a property is null with no error nor warning:
 
@@ -25,7 +25,7 @@ Every other value of the property won't trigger the fallback:
 false ?? 'fallback'; // false
 ```
 
-##  Null coalescing on array
+## Null coalescing on array
 
 If array key exists, then fallback isn't triggered:
 
@@ -71,7 +71,7 @@ $b = $a['foo']['qux'] ?? 'fallback';
 // $b = 'fallback'
 ```
 
-##  Null coalescing on object
+## Null coalescing on object
 
 You can also use null coalescing operator with object.
 
