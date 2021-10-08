@@ -1,9 +1,9 @@
-#Destructuring array
+# Destructuring array
 
 You can destructure arrays to pull out several elements into separate variables.
 
 
-##Indexed array
+## Indexed array
 
 Considering an indexed array like :
 
@@ -46,7 +46,7 @@ list($a, $b, $c, $d) = $array; // PHP Warning:  Undefined array key 3
 ```
 
 
-##Associative array
+## Associative array
 
 Considering an associative array like :
 
