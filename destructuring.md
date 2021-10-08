@@ -50,9 +50,9 @@ Considering an associative array like :
 
 ```
 $array = [
-    'eeny' => 1,
-    'meeny' => 2,
-    'miny' => 3,
+    'eeny' => 'value1',
+    'meeny' => 'value2',
+    'miny' => 'value3',
 ];
 ```
 
@@ -67,18 +67,18 @@ But you can destruct it with another syntax based on keys:
 ```
 list('eeny' => $a, 'meeny' => $b, 'miny' => $c) = $array;
 
-// $a = 1
-// $b = 2
-// $c = 3
+// $a = 'value1'
+// $b = 'value2'
+// $c = 'value3'
 ```
 Or the shorthand syntax:
 
 ```
 ['eeny' => $a, 'meeny' => $b, 'miny' => $c] = $array;
 
-// $a = 1
-// $b = 2
-// $c = 3
+// $a = 'value1'
+// $b = 'value2'
+// $c = 'value3'
 ```
 
 You can also destruct only a portion of the array (The order doesn't matter):
@@ -86,8 +86,8 @@ You can also destruct only a portion of the array (The order doesn't matter):
 ```
 ['miny' => $c, 'eeny' => $a] = $array;
 
-// $a = 1
-// $c = 3
+// $a = 'value1'
+// $c = 'value3'
 ```
 
 When you try to destruct a key that doesn't exist in the given array, you'll get a warning:
