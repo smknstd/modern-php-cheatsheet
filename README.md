@@ -1,5 +1,8 @@
 # Modern Php Cheatsheet
 
+![Modern Php Cheatsheet](https://i.imgur.com/3jR7w62.png)
+
+
 > If you like this content, you can ping me or follow me on Twitter :+1:
 
 [![Tweet for help](https://img.shields.io/twitter/follow/smknstd?label=Tweet%20%40smknstd&style=social)](https://twitter.com/smknstd/)
