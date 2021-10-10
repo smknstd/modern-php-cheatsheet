@@ -399,7 +399,7 @@ countArguments('foo', 'bar'); // 2
 countArguments('foo', 'bar', 'baz'); // 3
 ```
 
-Varadic parameter should always be the last parameter declared:
+Variadic parameter should always be the last parameter declared:
 
 ```php
 function countParameters(string ...$options, string $param) { ... }
@@ -446,7 +446,7 @@ countArguments('foo', []);
 
 #### Argument unpacking
 
-Since php 5.6 (~ aug 2014)
+Since php 5.6 (~ aug 2014), arrays and traversable objects can be unpacked into argument lists when calling functions by using the spread operator:
 
 ```php
 function add(int $a, int $b, int $c) : int {
@@ -458,6 +458,8 @@ $r = add(1, ...$array);
 // $r = 6
 ```
 
+The given array can have more elements than needed:
+
 ```php
 function add(int $a, int $b, int $c) : int {
     return $a + $b + $c;
@@ -468,6 +470,8 @@ $r = add(1, ...$array);
 // $r = 6
 ```
 
+The given array can't have lesser elements than needed:
+
 ```php
 function add(int $a, int $b, int $c) : int {
     return $a + $b + $c;
@@ -475,6 +479,8 @@ function add(int $a, int $b, int $c) : int {
 $array = [2];
 $r = add(1, ...$array); // TypeError: Too few arguments to function add(), 2 passed
 ```
+
+Except when some function arguments have a default value:
 
 ```php
 function add(int $a, int $b, int $c = 0) : int {
@@ -485,6 +491,7 @@ $r = add(1, ...$array);
 // $r = 3
 ```
 
+If an argument is typed and the passed value does not match the given type, you'll get an error:
 
 ```php
 function add(int $a, int $b, int $c) : int {
@@ -493,6 +500,8 @@ function add(int $a, int $b, int $c) : int {
 $array = ['foo', 'bar'];
 $r = add(1, ...$array); // TypeError: add(): Argument #2 ($b) must be of type int, string given
 ```
+
+It is possible to use an associative array, but keys should match arguments names
 
 ```php
 function add(int $a, int $b, int $c) : int {
@@ -506,6 +515,8 @@ $r = add(1, ...$array);
 // $r = 6
 ```
 
+Order of the elements in the associative array doesn't matter:
+
 ```php
 function add(int $a, int $b, int $c) : int {
     return $a + $b + $c;
@@ -517,6 +528,8 @@ $array = [
 $r = add(1, ...$array);
 // $r = 6
 ```
+
+If a key doesn't match an argument's name, you'll get an error:
 
 ```php
 function add(int $a, int $b, int $c) : int {
