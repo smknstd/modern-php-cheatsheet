@@ -13,7 +13,7 @@
 
 This document is a cheatsheet for Php you will frequently encounter in modern projects and most contemporary sample code.
 
-This guide is not intended to teach you Php from the ground up, but to help developers with basic knowledge who may struggle to get familiar with modern codebases (or let's say to learn Laravel or Symfony for instance) because of the new Php concepts and features used.
+This guide is not intended to teach you Php from the ground up, but to help developers with basic knowledge who may struggle to get familiar with modern codebases (or let's say to learn Laravel or Symfony for instance) because of the new Php concepts and features introduced over the years.
 
 > **Note:** Concepts introduced here are based on the most recent version of php available ([Php8](https://www.php.net/releases/8.0/en.php) at the time of the initial writing) 
 
@@ -31,16 +31,44 @@ When you struggle to understand a notion, I suggest you look for answers on the 
         + [Complementary resources](#complementary-resources)
     * [Table of contents](#table-of-contents)
     * [Notions](#notions)
+        + [Function default parameter value](#function-default-parameter-value)
         + [Destructuring arrays](#destructuring-arrays)
         + [Null Coalescing](#null-coalescing)
         + [Spread operator](#spread-operator)
 
 ## Notions
 
+### Function default parameter value
+
+You can set default value to your function parameters:
+
+```php
+function myFunction(string $param = 'foo') {
+    return $param;
+}
+$a = myFunction();
+// $a = 'foo'
+
+$b = myFunction('bar');
+// $a = 'bar'
+```
+
+But if you send null or an undefined property, default value won't be used:
+
+```php
+function myFunction(string $param = 'foo') {
+    return $param;
+}
+$a = myFunction(null);
+// $a = null
+
+$b = myFunction($undefined);
+// $a = null
+```
+
 ### Destructuring arrays
 
 You can destructure arrays to pull out several elements into separate variables.
-
 
 #### Indexed array
 
@@ -96,7 +124,6 @@ list($a, $b, $c, $d) = $array; // PHP Warning:  Undefined array key 3
 // $c = 'baz'
 // $d = null;
 ```
-
 
 #### Associative array
 
@@ -287,7 +314,6 @@ $b = $a->baz ?? 'fallback';
 // $b = 'fallback'
 ```
 
-
 ##### Object's method
 
 You can also use the null coalescing operator on call to an object's method. If the given method exists, then fallback isn't triggered:
@@ -426,37 +452,37 @@ Since php 5.6 (~ aug 2014)
 function add(int $a, int $b, int $c) : int {
     return $a + $b + $c;
 }
-$operators = [2, 3];
-$a = add(1, ...$operators);
+$array = [2, 3];
+$r = add(1, ...$array);
 
-// $a = 6
+// $r = 6
 ```
 
 ```php
 function add(int $a, int $b, int $c) : int {
     return $a + $b + $c;
 }
-$operators = [2, 3, 4, 5];
-$a = add(1, ...$operators);
+$array = [2, 3, 4, 5];
+$r = add(1, ...$array);
 
-// $a = 6
+// $r = 6
 ```
 
 ```php
 function add(int $a, int $b, int $c) : int {
     return $a + $b + $c;
 }
-$operators = [2];
-$a = add(1, ...$operators); // TypeError: Too few arguments to function add(), 2 passed
+$array = [2];
+$r = add(1, ...$array); // TypeError: Too few arguments to function add(), 2 passed
 ```
 
 ```php
 function add(int $a, int $b, int $c = 0) : int {
     return $a + $b + $c;
 }
-$operators = [2];
-$a = add(1, ...$operators);
-// $a = 3
+$array = [2];
+$r = add(1, ...$array);
+// $r = 3
 ```
 
 
@@ -464,44 +490,44 @@ $a = add(1, ...$operators);
 function add(int $a, int $b, int $c) : int {
     return $a + $b + $c;
 }
-$operators = ['foo', 'bar'];
-$a = add(1, ...$operators); // TypeError: add(): Argument #2 ($b) must be of type int, string given
+$array = ['foo', 'bar'];
+$r = add(1, ...$array); // TypeError: add(): Argument #2 ($b) must be of type int, string given
 ```
 
 ```php
 function add(int $a, int $b, int $c) : int {
     return $a + $b + $c;
 }
-$operators = [
+$array = [
     "b" => 2,
     "c" => 3
 ];
-$a = add(1, ...$operators);
-// $a = 6
+$r = add(1, ...$array);
+// $r = 6
 ```
 
 ```php
 function add(int $a, int $b, int $c) : int {
     return $a + $b + $c;
 }
-$operators = [
+$array = [
     "c" => 3,
     "b" => 2,
 ];
-$a = add(1, ...$operators);
-// $a = 6
+$r = add(1, ...$array);
+// $r = 6
 ```
 
 ```php
 function add(int $a, int $b, int $c) : int {
     return $a + $b + $c;
 }
-$operators = [
+$array = [
     "b" => 2,
     "c" => 3,
     "d" => 4,
 ];
-$a = add(1, ...$operators); // PHP Error:  Unknown named parameter $d
+$r = add(1, ...$array); // PHP Error:  Unknown named parameter $d
 ```
 
 #### Array unpacking
@@ -594,7 +620,4 @@ $array = [...getArray(), 'baz'];
 
 ##### Associative array
 
-Since php 8.1 (~ nov 2021), you can use associative array (string-keyed)
-
-
-
+Since php 8.1 (~ nov 2021), you can unpack associative array (string-keyed) ... //@todo
