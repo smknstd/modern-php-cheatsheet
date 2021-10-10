@@ -368,9 +368,9 @@ function countParameters(string $param, string ...$options) : int {
     return 1 + count($options);
 }
 
-countArguments('foo'); //1
-countArguments('foo', 'bar'); //2
-countArguments('foo', 'bar', 'baz'); //3
+countArguments('foo'); // 1
+countArguments('foo', 'bar'); // 2
+countArguments('foo', 'bar', 'baz'); // 3
 ```
 
 Varadic parameter should always be the last parameter declared:
@@ -392,6 +392,30 @@ It can't have a default value:
 ```php
 function countParameters(string $param, string ...$options = []) { ... }
 // PHP Parse error: Variadic parameter cannot have a default value
+```
+
+When not typed, it accepts any value:
+
+```php
+function countParameters(string $param, ...$options) : int {
+    return 1 + count($options);
+}
+
+countArguments('foo', null, [], true); // 4
+```
+
+When typed, you have to use properly typed values:
+
+```php
+function countParameters(string $param, string ...$options) : int {
+    return 1 + count($options);
+}
+
+countArguments('foo', null);
+// TypeError: countArguments(): Argument #2 must be of type string, null given
+
+countArguments('foo', []);
+// TypeError: countArguments(): Argument #2 must be of type string, array given
 ```
 
 #### Argument unpacking
