@@ -33,6 +33,7 @@ When you struggle to understand a notion, I suggest you look for answers on the 
     * [Notions](#notions)
         + [Destructuring arrays](#destructuring-arrays)
         + [Null Coalescing](#null-coalescing)
+        + [Spread operator](#spread-operator)
 
 ## Notions
 
@@ -99,7 +100,7 @@ list($a, $b, $c, $d) = $array; // PHP Warning:  Undefined array key 3
 
 #### Associative array
 
-Considering an associative array like :
+Considering an associative array (string-keyed) like :
 
 ```php
 $array = [
@@ -119,7 +120,7 @@ list($a, $b, $c) = $array; // PHP Warning:  Undefined array key 0 ...
 // $c = null
 ```
 
-But you can destruct it with another syntax based on keys:
+But since php 7.1.0 (~ dec 2016), you can destruct it with another syntax based on keys:
 
 ```php
 list('foo' => $a, 'bar' => $b, 'baz' => $c) = $array;
@@ -158,7 +159,7 @@ list('moe' => $d) = $array; // PHP Warning:  Undefined array key "moe"
 
 ### Null Coalescing
 
-Use the null coalescing operator to provide a fallback when a property is null with no error nor warning:
+Since php 7.0 (~ dec 2015), you can use the null coalescing operator to provide a fallback when a property is null with no error nor warning:
 
 ```php
 $a = null;
@@ -327,14 +328,12 @@ If object's method can't be found, null coalescing won't work and you'll get an 
 class Foo
 {
     public function bar() {
-        return null;
+        return 'baz';
     }
 }
 
 $a = new Foo();
-$b = $a->baz() ?? 'fallback';
-
-// PHP Error:  Call to undefined method baz()
+$b = $a->baz() ?? 'fallback'; // PHP Error:  Call to undefined method baz()
 ```
 
 ##### Chained method
@@ -350,9 +349,228 @@ class Foo
 }
 
 $a = new Foo();
-$b = $a->bar()->baz() ?? 'fallback';
-
-// PHP Error:  Call to undefined method baz()
+$b = $a->bar()->baz() ?? 'fallback'; // PHP Error:  Call to undefined method baz()
 ```
+
+### Spread operator
+
+#### Variadic parameter
+
+Since php 5.6 (~ aug 2014), you can add a variadic parameter to any function that let you use an argument lists with variable-length:
+
+```php
+function countParameters(string $param, string ...$options) : int {
+
+    foreach ($options as $option) {
+        // you can iterate on $options
+    }
+ 
+    return 1 + count($options);
+}
+
+countArguments('foo'); //1
+countArguments('foo', 'bar'); //2
+countArguments('foo', 'bar', 'baz'); //3
+```
+
+Varadic parameter should always be the last parameter declared:
+
+```php
+function countParameters(string ...$options, string $param) { ... }
+// PHP Fatal error: Only the last parameter can be variadic
+```
+
+You can have only one variadic parameter:
+
+```php
+function countParameters(string ...$options, string ...$moreOptions) { ... }
+// PHP Fatal error: Only the last parameter can be variadic
+```
+
+It can't have a default value:
+
+```php
+function countParameters(string $param, string ...$options = []) { ... }
+// PHP Parse error: Variadic parameter cannot have a default value
+```
+
+#### Argument unpacking
+
+Since php 5.6 (~ aug 2014)
+
+```php
+function add(int $a, int $b, int $c) : int {
+    return $a + $b + $c;
+}
+$operators = [2, 3];
+$a = add(1, ...$operators);
+
+// $a = 6
+```
+
+```php
+function add(int $a, int $b, int $c) : int {
+    return $a + $b + $c;
+}
+$operators = [2, 3, 4, 5];
+$a = add(1, ...$operators);
+
+// $a = 6
+```
+
+```php
+function add(int $a, int $b, int $c) : int {
+    return $a + $b + $c;
+}
+$operators = [2];
+$a = add(1, ...$operators); // TypeError: Too few arguments to function add(), 2 passed
+```
+
+```php
+function add(int $a, int $b, int $c = 0) : int {
+    return $a + $b + $c;
+}
+$operators = [2];
+$a = add(1, ...$operators);
+// $a = 3
+```
+
+
+```php
+function add(int $a, int $b, int $c) : int {
+    return $a + $b + $c;
+}
+$operators = ['foo', 'bar'];
+$a = add(1, ...$operators); // TypeError: add(): Argument #2 ($b) must be of type int, string given
+```
+
+```php
+function add(int $a, int $b, int $c) : int {
+    return $a + $b + $c;
+}
+$operators = [
+    "b" => 2,
+    "c" => 3
+];
+$a = add(1, ...$operators);
+// $a = 6
+```
+
+```php
+function add(int $a, int $b, int $c) : int {
+    return $a + $b + $c;
+}
+$operators = [
+    "c" => 3,
+    "b" => 2,
+];
+$a = add(1, ...$operators);
+// $a = 6
+```
+
+```php
+function add(int $a, int $b, int $c) : int {
+    return $a + $b + $c;
+}
+$operators = [
+    "b" => 2,
+    "c" => 3,
+    "d" => 4,
+];
+$a = add(1, ...$operators); // PHP Error:  Unknown named parameter $d
+```
+
+#### Array unpacking
+
+##### Indexed array
+
+When you want to merge multiple arrays, you generally use `array_merge`:
+
+```php
+$array1 = ['baz'];
+$array2 = ['foo', 'bar'];
+
+$array3 = array_merge($array1,$array2);
+// $array3 = ['baz', 'foo', 'bar']
+```
+
+But since php 7.4 (~ nov 2019), you can unpack indexed arrays, with spread operator:
+
+```php
+$array1 = ['foo', 'bar'];
+$array2 = ['baz', ...$array1];
+// $array2 = ['baz', 'foo', 'bar']
+```
+
+Elements will be merged in the order they are passed:
+
+```php
+$array1 = ['foo', 'bar'];
+$array2 = ['baz', ...$array1, "qux"];
+// $array2 = ['baz', 'foo', 'bar', "qux"]
+```
+
+It doesn't do any deduplication:
+
+```php
+$array1 = ['foo', 'bar'];
+$array2 = ['foo', ...$array1];
+// $array2 = ['foo', 'foo', 'bar']
+```
+
+You can unpack multiple arrays at once:
+
+```php
+$array1 = ['foo', 'bar'];
+$array2 = ['baz'];
+$array3 = [ ...$array1, ...$array2];
+// $array3 = ['foo', 'bar', 'baz']
+```
+
+You can unpack the same array multiple times:
+
+```php
+$array1 = ['foo', 'bar'];
+$array2 = [ ...$array1, ...$array1];
+// $array2 = ['foo', 'bar', 'foo', 'bar']
+```
+
+You can unpack an empty array with no error nor warning:
+
+```php
+$array1 = [];
+$array2 = ['foo', ...$array1];
+// $array2 = ['foo']
+```
+
+You can unpack an array that has not been previously stored in a property:
+
+```php
+$array1 = [...['foo', 'bar'], 'baz'];
+// $array1 = ['foo', 'bar', 'baz']
+```
+
+If you try to unpack an array valued with null, you'll get an error: 
+
+```php
+$array1 = null;
+$array2 = ['foo', ...$array1]; // PHP Error:  Only arrays and Traversables can be unpacked
+```
+
+You can unpack the result of a function/method:
+
+```php
+function getArray() : array {
+  return ['foo', 'bar'];
+}
+
+$array = [...getArray(), 'baz']; 
+// $array = ['foo', 'bar', 'baz']
+```
+
+##### Associative array
+
+Since php 8.1 (~ nov 2021), you can use associative array (string-keyed)
+
 
 
