@@ -396,9 +396,9 @@ function countParameters(string $param, string ...$options) : int {
     return 1 + count($options);
 }
 
-countArguments('foo'); // 1
-countArguments('foo', 'bar'); // 2
-countArguments('foo', 'bar', 'baz'); // 3
+countParameters('foo'); // 1
+countParameters('foo', 'bar'); // 2
+countParameters('foo', 'bar', 'baz'); // 3
 ```
 
 Variadic parameter should always be the last parameter declared:
@@ -429,7 +429,7 @@ function countParameters(string $param, ...$options) : int {
     return 1 + count($options);
 }
 
-countArguments('foo', null, [], true); // 4
+countParameters('foo', null, [], true); // 4
 ```
 
 When typed, you have to use properly typed values:
@@ -439,11 +439,11 @@ function countParameters(string $param, string ...$options) : int {
     return 1 + count($options);
 }
 
-countArguments('foo', null);
-// TypeError: countArguments(): Argument #2 must be of type string, null given
+countParameters('foo', null);
+// TypeError: countParameters(): Argument #2 must be of type string, null given
 
-countArguments('foo', []);
-// TypeError: countArguments(): Argument #2 must be of type string, array given
+countParameters('foo', []);
+// TypeError: countParameters(): Argument #2 must be of type string, array given
 ```
 
 #### Argument unpacking
