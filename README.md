@@ -53,7 +53,7 @@ $a = myFunction();
 // $a = 'foo'
 
 $b = myFunction('bar');
-// $a = 'bar'
+// $b = 'bar'
 ```
 
 But if you send null or an undefined property, default value won't be used:
@@ -66,7 +66,7 @@ $a = myFunction(null);
 // $a = null
 
 $b = myFunction($undefined); // PHP Warning:  Undefined variable $undefined
-// $a = null
+// $b = null
 ```
 
 ### Type hint
