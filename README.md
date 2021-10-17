@@ -151,7 +151,17 @@ Class Foo() {
 
 #### Nullable type hint
 
-When a parameter has no type, it can accept null value. But as soon as a parameter has a type hint, it won't accept null value anymore and you'll get an error:
+When a parameter has no type, it can accept null value:
+
+```php
+function myFunction($param) {
+    return $param;
+}
+$a = myFunction(null);
+// $a = null
+```
+
+But as soon as a parameter has a type hint, it won't accept null value anymore and you'll get an error:
 
 ```php
 function myFunction(string $param) {
