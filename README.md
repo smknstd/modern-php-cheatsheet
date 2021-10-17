@@ -632,7 +632,3 @@ function getArray() : array {
 $array = [...getArray(), 'baz']; 
 // $array = ['foo', 'bar', 'baz']
 ```
-
-##### Associative array
-
-Since php 8.1 (~ nov 2021), you can unpack associative array (string-keyed) ... //@todo
