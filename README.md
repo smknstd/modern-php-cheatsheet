@@ -34,6 +34,7 @@ When you struggle to understand a notion, I suggest you look for answers on the 
     * [Table of contents](#table-of-contents)
     * [Notions](#notions)
         + [Function default parameter value](#function-default-parameter-value)
+        + [Type hint](#type-hint)
         + [Destructuring arrays](#destructuring-arrays)
         + [Null Coalescing](#null-coalescing)
         + [Spread operator](#spread-operator)
@@ -45,7 +46,7 @@ When you struggle to understand a notion, I suggest you look for answers on the 
 You can set default value to your function parameters:
 
 ```php
-function myFunction(string $param = 'foo') {
+function myFunction($param = 'foo') {
     return $param;
 }
 $a = myFunction();
@@ -58,13 +59,165 @@ $b = myFunction('bar');
 But if you send null or an undefined property, default value won't be used:
 
 ```php
-function myFunction(string $param = 'foo') {
+function myFunction($param = 'foo') {
     return $param;
 }
 $a = myFunction(null);
 // $a = null
 
-$b = myFunction($undefined);
+$b = myFunction($undefined); // PHP Warning:  Undefined variable $undefined
+// $a = null
+```
+
+### Type hint
+
+With Type hinting you can specify the expected data type for a property. It supports many types like scalar types (int, string, bool, and float) but also array, iterable, object, stdClass, etc.
+
+You can set a type to a function's parameter:
+
+```php
+function myFunction(int $param) {
+    return $param;
+}
+$a = myFunction(10);
+// $a = 10
+$b = myFunction('foo'); // TypeError: myFunction(): Argument #1 ($param) must be of type int, string given
+```
+
+You can set a return type to a function:
+
+```php
+function myFunction() : int {
+    return 'foo';
+}
+$a = myFunction(); // TypeError: myFunction(): Return value must be of type int, string returned
+```
+
+When a function should not return something, you can use the type "void":
+
+```php
+function myFunction() : void {
+    return 'foo';
+}
+// PHP Fatal error:  A void function must not return a value
+```
+
+You cannot return null either:
+
+```php
+function myFunction() : void {
+    return null;
+}
+// PHP Fatal error:  A void function must not return a value
+```
+
+However, using return to exit the function is valid:
+
+```php
+function myFunction() : void {
+    return;
+}
+$a = myFunction();
+// $a = null
+```
+
+You can set a return type to a class property:
+
+```php
+Class Foo() {
+    public int $bar;
+}
+$f = new Foo();
+$f->bar = 'baz'; // TypeError: Cannot assign string to property Foo::$bar of type int
+```
+
+#### Union type hint
+
+You can use a “union type” that accepts values of multiple different types, rather than a single one:
+
+```php
+function myFunction(string|int|array $param) : string|int|array {
+    return $param;
+}
+```
+
+It also works with class property:
+
+```php
+Class Foo() {
+    public string|int|array $bar;
+}
+```
+
+#### Nullable type hint
+
+When a parameter has no type, it can accept null value. But as soon as a parameter has a type hint, it won't accept null value anymore and you'll get an error:
+
+```php
+function myFunction(string $param) {
+    return $param;
+}
+$a = myFunction(null); // TypeError: myFunction(): Argument #1 ($param) must be of type string, null given
+```
+
+If a function has a return type hint, it won't accept null value either:
+
+```php
+function myFunction() : string {
+    return null;
+}
+$a = myFunction(); // TypeError: myFunction(): Return value must be of type string, null returned
+```
+
+You can make a type hint explicitly nullable:
+
+```php
+function myFunction(?string $param) {
+    return $param;
+}
+$a = myFunction(null);
+// $a = null
+```
+
+or with a union type:
+
+```php
+function myFunction(string|null $param) {
+    return $param;
+}
+$a = myFunction(null);
+// $a = null
+```
+
+It also works with return type:
+
+```php
+function myFunction(?string $param) : ?string {
+    return $param;
+}
+// or
+function myFunction(string|null $param) : string|null {
+    return $param;
+}
+```
+
+But void cannot be nullable:
+
+```php
+function myFunction() : ?void {} // PHP Fatal error:  Void type cannot be nullable
+// or
+function myFunction() : void|null {} // PHP Fatal error:  Void type cannot be nullable
+```
+
+You can set a nullable type to a class property:
+
+```php
+Class Foo() {
+    public int|null $bar;
+}
+$f = new Foo();
+$f->bar = null;
+$a = $f->bar;
 // $a = null
 ```
 
