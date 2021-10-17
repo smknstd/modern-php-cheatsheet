@@ -632,3 +632,18 @@ function getArray() : array {
 $array = [...getArray(), 'baz']; 
 // $array = ['foo', 'bar', 'baz']
 ```
+
+##### Associative array
+
+Since php 8.1 (~ nov 2021), you can unpack associative array (string-keyed):
+
+```php
+$array1 = ['foo' => 'bar'];
+$array2 = [
+   'baz' => 'qux', 
+   ...$array1
+];
+// $array2 = ['foo' => 'bar', 'baz' => 'qux']
+```
+
+@todo: same key ? empty array ? etc
