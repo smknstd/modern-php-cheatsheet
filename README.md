@@ -688,7 +688,7 @@ countParameters('foo', []);
 
 #### Argument unpacking
 
-Since php 5.6 (~ aug 2014), arrays and traversable objects can be unpacked into argument lists when calling functions by using the spread operator:
+Arrays and traversable objects can be unpacked into argument lists when calling functions by using the spread operator:
 
 ```php
 function add(int $a, int $b, int $c) : int {
