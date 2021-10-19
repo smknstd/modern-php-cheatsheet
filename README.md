@@ -37,6 +37,7 @@ When you struggle to understand a notion, I suggest you look for answers on the 
         + [Type hint](#type-hint)
         + [Destructuring arrays](#destructuring-arrays)
         + [Null Coalescing](#null-coalescing)
+        + [Nullsafe operator](#nullsafe-operator)
         + [Spread operator](#spread-operator)
 
 ## Notions
@@ -541,6 +542,82 @@ class Foo
 
 $a = new Foo();
 $b = $a->bar()->baz() ?? 'fallback'; // PHP Error:  Call to undefined method baz()
+```
+
+### Nullsafe operator
+
+When trying to read a property or calling a method on null, you'll get a warning and an error:
+
+```php
+$a = null;
+$b = $a->foo; // PHP Warning:  Attempt to read property "foo" on null
+// $b = null
+
+$c = $a->foo(); // PHP Error:  Call to a member function foo() on null
+```
+
+With the nullsafe operator, you can do both without warning nor error:
+
+```php
+$a = null;
+$b = $a?->foo;
+// $b = null
+$c = $a?->foo();
+// $c = null
+```
+
+You can chain multiple nullsafe operators:
+
+```php
+$a = null;
+$b = $a?->foo?->bar;
+// $b = null
+$c = $a?->foo()?->bar();
+// $c = null
+```
+
+An expression is short-circuited from the first null-safe operator that encounters null:
+
+```php
+$a = null;
+$b = $a?->foo->bar->baz();
+// $b = null
+```
+
+Nullsafe operator has no effect if the target is not null:
+
+```php
+$a = 'foo';
+$b = $a?->bar; // PHP Warning:  Attempt to read property "bar" on string
+// $b = null
+$c = $a?->baz(); // PHP Error:  Call to a member function baz() on string
+```
+
+Nullsafe operator can't handle arrays properly but still can have some effect:
+
+```php
+$a = [];
+$b = $a['foo']->bar;
+// PHP Warning:  Undefined array key "foo"
+// PHP Warning:  Attempt to read property "bar" on null
+// $b = null
+
+$c = $a['foo']?->bar; // PHP Warning:  Undefined array key "foo"
+// $c = null
+
+$d = $a['foo']->bar();
+// PHP Warning:  Undefined array key "foo"
+// PHP Error:  Call to a member function bar() on null
+
+$e = $a['foo']?->bar(); // PHP Warning:  Undefined array key "foo"
+// $c = null
+```
+
+You cannot use the nullsafe operator to write, it is read only:
+
+```php
+$a = null;
+$a?->foo = 'bar'; // PHP Fatal error:  Can't use nullsafe operator in write context
 ```
 
 ### Spread operator
