@@ -1,6 +1,6 @@
 # Modern Php Cheatsheet
 
-![Modern Php Cheatsheet](https://i.imgur.com/3jR7w62.png)
+![Modern Php Cheatsheet](https://i.imgur.com/2STEtgG.png)
 
 
 > If you like this content, you can ping me or follow me on Twitter :+1:
