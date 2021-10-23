@@ -194,7 +194,8 @@ $a = myFunction(null); // TypeError: myFunction(): Argument #1 ($param) must be 
 If a function has a return type, it won't accept null value either:
 
 ```php
-function myFunction() : string {
+function myFunction() : string
+{
     return null;
 }
 $a = myFunction(); // TypeError: myFunction(): Return value must be of type string, null returned
@@ -225,11 +226,13 @@ $a = myFunction(null);
 It also works with return type:
 
 ```php
-function myFunction(?string $param) : ?string {
+function myFunction(?string $param) : ?string
+{
     return $param;
 }
 // or
-function myFunction(string|null $param) : string|null {
+function myFunction(string|null $param) : string|null
+{
     return $param;
 }
 ```
