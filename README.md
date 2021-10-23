@@ -626,7 +626,7 @@ $d = $a['foo']->bar();
 // PHP Error:  Call to a member function bar() on null
 
 $e = $a['foo']?->bar(); // PHP Warning:  Undefined array key "foo"
-// $c = null
+// $e = null
 ```
 
 You cannot use the nullsafe operator to write, it is read only:
