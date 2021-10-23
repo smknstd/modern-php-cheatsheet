@@ -72,6 +72,8 @@ $b = myFunction($undefined); // PHP Warning:  Undefined variable $undefined
 
 ### Type hint
 
+![php-version-70](https://shields.io/badge/php->=7.0-blue)
+
 With Type hinting you can specify the expected data type for a property. It supports many types like scalar types (int, string, bool, and float) but also array, iterable, object, stdClass, etc.
 
 You can set a type to a function's parameter:
@@ -122,6 +124,10 @@ $a = myFunction();
 // $a = null
 ```
 
+#### Class property
+
+![php-version-74](https://shields.io/badge/php->=7.4-blue)
+
 You can set a return type to a class property:
 
 ```php
@@ -133,6 +139,8 @@ $f->bar = 'baz'; // TypeError: Cannot assign string to property Foo::$bar of typ
 ```
 
 #### Union type hint
+
+![php-version-80](https://shields.io/badge/php->=8.0-blue)
 
 You can use a “union type” that accepts values of multiple different types, rather than a single one:
 
@@ -151,6 +159,8 @@ Class Foo() {
 ```
 
 #### Nullable type hint
+
+![php-version-70](https://shields.io/badge/php->=7.0-blue)
 
 When a parameter has no type, it can accept null value:
 
@@ -238,6 +248,8 @@ You can destructure arrays to pull out several elements into separate variables.
 
 #### Indexed array
 
+![php-version-40](https://shields.io/badge/php->=4.0-blue)
+
 Considering an indexed array like :
 
 ```php
@@ -272,7 +284,7 @@ list(, , $c) = $array;
 // $c = 'baz'
 ```
 
-Or the shorthand syntax:
+Or since php 7.1, the shorthand syntax:
 
 ```php
 [, , $c] = $array;
@@ -351,6 +363,8 @@ list('moe' => $d) = $array; // PHP Warning:  Undefined array key "moe"
 ```
 
 ### Null Coalescing
+
+![php-version-70](https://shields.io/badge/php->=7.0-blue)
 
 Since php 7.0 (~ dec 2015), you can use the null coalescing operator to provide a fallback when a property is null with no error nor warning:
 
@@ -546,6 +560,8 @@ $b = $a->bar()->baz() ?? 'fallback'; // PHP Error:  Call to undefined method baz
 
 ### Nullsafe operator
 
+![php-version-80](https://shields.io/badge/php->=8.0-blue)
+
 When trying to read a property or calling a method on null, you'll get a warning and an error:
 
 ```php
@@ -624,6 +640,8 @@ $a?->foo = 'bar'; // PHP Fatal error:  Can't use nullsafe operator in write cont
 
 #### Variadic parameter
 
+![php-version-56](https://shields.io/badge/php->=5.6-blue)
+
 Since php 5.6 (~ aug 2014), you can add a variadic parameter to any function that let you use an argument lists with variable-length:
 
 ```php
@@ -687,6 +705,8 @@ countParameters('foo', []);
 ```
 
 #### Argument unpacking
+
+![php-version-56](https://shields.io/badge/php->=5.6-blue)
 
 Arrays and traversable objects can be unpacked into argument lists when calling functions by using the spread operator:
 
@@ -788,6 +808,8 @@ $r = add(1, ...$array); // PHP Error:  Unknown named parameter $d
 #### Array unpacking
 
 ##### Indexed array
+
+![php-version-74](https://shields.io/badge/php->=7.4-blue)
 
 When you want to merge multiple arrays, you generally use `array_merge`:
 
