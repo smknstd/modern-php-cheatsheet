@@ -102,7 +102,8 @@ $a = myFunction(); // TypeError: myFunction(): Return value must be of type int,
 When a function should not return something, you can use the type "void":
 
 ```php
-function myFunction() : void {
+function myFunction() : void
+{
     return 'foo';
 }
 // PHP Fatal error:  A void function must not return a value
@@ -111,7 +112,8 @@ function myFunction() : void {
 You cannot return null either:
 
 ```php
-function myFunction() : void {
+function myFunction() : void
+{
     return null;
 }
 // PHP Fatal error:  A void function must not return a value
@@ -120,7 +122,8 @@ function myFunction() : void {
 However, using return to exit the function is valid:
 
 ```php
-function myFunction() : void {
+function myFunction() : void
+{
     return;
 }
 $a = myFunction();
@@ -234,9 +237,21 @@ function myFunction(string|null $param) : string|null {
 But void cannot be nullable:
 
 ```php
-function myFunction() : ?void {} // PHP Fatal error:  Void type cannot be nullable
-// or
-function myFunction() : void|null {} // PHP Fatal error:  Void type cannot be nullable
+function myFunction() : ?void
+{
+   // some code
+} 
+// PHP Fatal error:  Void type cannot be nullable
+```
+
+or
+
+```php
+function myFunction() : void|null
+{
+   // some code
+}
+// PHP Fatal error:  Void type cannot be nullable
 ```
 
 You can set a nullable type to a class property:
