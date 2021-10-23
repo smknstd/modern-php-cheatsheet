@@ -70,11 +70,11 @@ $b = myFunction($undefined); // PHP Warning:  Undefined variable $undefined
 // $b = null
 ```
 
-### Type hint
+### Type declaration
 
 ![php-version-70](https://shields.io/badge/php->=7.0-blue)
 
-With Type hinting you can specify the expected data type for a property. It supports many types like scalar types (int, string, bool, and float) but also array, iterable, object, stdClass, etc.
+With Type declaration you can specify the expected data type for a property that will be enforce at runtime. It supports many types like scalar types (int, string, bool, and float) but also array, iterable, object, stdClass, etc.
 
 You can set a type to a function's parameter:
 
@@ -138,7 +138,7 @@ $f = new Foo();
 $f->bar = 'baz'; // TypeError: Cannot assign string to property Foo::$bar of type int
 ```
 
-#### Union type hint
+#### Union type
 
 ![php-version-80](https://shields.io/badge/php->=8.0-blue)
 
@@ -158,7 +158,7 @@ Class Foo() {
 }
 ```
 
-#### Nullable type hint
+#### Nullable type
 
 ![php-version-70](https://shields.io/badge/php->=7.0-blue)
 
@@ -172,7 +172,7 @@ $a = myFunction(null);
 // $a = null
 ```
 
-But as soon as a parameter has a type hint, it won't accept null value anymore and you'll get an error:
+But as soon as a parameter has a type, it won't accept null value anymore and you'll get an error:
 
 ```php
 function myFunction(string $param) {
@@ -181,7 +181,7 @@ function myFunction(string $param) {
 $a = myFunction(null); // TypeError: myFunction(): Argument #1 ($param) must be of type string, null given
 ```
 
-If a function has a return type hint, it won't accept null value either:
+If a function has a return type, it won't accept null value either:
 
 ```php
 function myFunction() : string {
@@ -190,7 +190,7 @@ function myFunction() : string {
 $a = myFunction(); // TypeError: myFunction(): Return value must be of type string, null returned
 ```
 
-You can make a type hint explicitly nullable:
+You can make a type declaration explicitly nullable:
 
 ```php
 function myFunction(?string $param) {
