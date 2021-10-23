@@ -393,6 +393,15 @@ Every other value of the property won't trigger the fallback:
 false ?? 'fallback'; // false
 ```
 
+You can chain null coalescing multiple times:
+
+```php
+$a = null;
+$b = null;
+$c = $a ?? $b ?? 'fallback';
+// $c = 'fallback'
+```
+
 #### Null coalescing on array
 
 If array key exists, then fallback isn't triggered:
