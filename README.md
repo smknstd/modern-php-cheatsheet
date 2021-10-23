@@ -34,7 +34,7 @@ When you struggle to understand a notion, I suggest you look for answers on the 
     * [Table of contents](#table-of-contents)
     * [Notions](#notions)
         + [Function default parameter value](#function-default-parameter-value)
-        + [Type hint](#type-hint)
+        + [Type declaration](#type-declaration)
         + [Destructuring arrays](#destructuring-arrays)
         + [Null Coalescing](#null-coalescing)
         + [Nullsafe operator](#nullsafe-operator)
