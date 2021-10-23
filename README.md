@@ -47,7 +47,8 @@ When you struggle to understand a notion, I suggest you look for answers on the 
 You can set default value to your function parameters:
 
 ```php
-function myFunction($param = 'foo') {
+function myFunction($param = 'foo')
+{
     return $param;
 }
 $a = myFunction();
@@ -60,7 +61,8 @@ $b = myFunction('bar');
 But if you send null or an undefined property, default value won't be used:
 
 ```php
-function myFunction($param = 'foo') {
+function myFunction($param = 'foo')
+{
     return $param;
 }
 $a = myFunction(null);
@@ -79,7 +81,8 @@ With Type declaration you can specify the expected data type for a property that
 You can set a type to a function's parameter:
 
 ```php
-function myFunction(int $param) {
+function myFunction(int $param)
+{
     return $param;
 }
 $a = myFunction(10);
@@ -131,7 +134,8 @@ $a = myFunction();
 You can set a return type to a class property:
 
 ```php
-Class Foo() {
+Class Foo()
+{
     public int $bar;
 }
 $f = new Foo();
@@ -153,7 +157,8 @@ function myFunction(string|int|array $param) : string|int|array {
 It also works with class property:
 
 ```php
-Class Foo() {
+Class Foo()
+{
     public string|int|array $bar;
 }
 ```
@@ -165,7 +170,8 @@ Class Foo() {
 When a parameter has no type, it can accept null value:
 
 ```php
-function myFunction($param) {
+function myFunction($param)
+{
     return $param;
 }
 $a = myFunction(null);
@@ -175,7 +181,8 @@ $a = myFunction(null);
 But as soon as a parameter has a type, it won't accept null value anymore and you'll get an error:
 
 ```php
-function myFunction(string $param) {
+function myFunction(string $param)
+{
     return $param;
 }
 $a = myFunction(null); // TypeError: myFunction(): Argument #1 ($param) must be of type string, null given
@@ -193,7 +200,8 @@ $a = myFunction(); // TypeError: myFunction(): Return value must be of type stri
 You can make a type declaration explicitly nullable:
 
 ```php
-function myFunction(?string $param) {
+function myFunction(?string $param)
+{
     return $param;
 }
 $a = myFunction(null);
@@ -203,7 +211,8 @@ $a = myFunction(null);
 or with a union type:
 
 ```php
-function myFunction(string|null $param) {
+function myFunction(string|null $param)
+{
     return $param;
 }
 $a = myFunction(null);
@@ -233,7 +242,8 @@ function myFunction() : void|null {} // PHP Fatal error:  Void type cannot be nu
 You can set a nullable type to a class property:
 
 ```php
-Class Foo() {
+Class Foo()
+{
     public int|null $bar;
 }
 $f = new Foo();
@@ -512,7 +522,8 @@ You can also use the null coalescing operator on call to an object's method. If 
 ```php
 class Foo
 {
-    public function bar() {
+    public function bar()
+    {
         return 'baz';
     }
 }
@@ -528,7 +539,8 @@ But when object's method returns null, fallback is triggered with no error nor w
 ```php
 class Foo
 {
-    public function bar() {
+    public function bar()
+    {
         return null;
     }
 }
@@ -544,7 +556,8 @@ If object's method can't be found, null coalescing won't work and you'll get an 
 ```php
 class Foo
 {
-    public function bar() {
+    public function bar()
+    {
         return 'baz';
     }
 }
@@ -560,7 +573,8 @@ When using chained methods on object and an intermediary element can't be found,
 ```php
 class Foo
 {
-    public function bar() {
+    public function bar()
+    {
         return (object)[];
     }
 }
@@ -673,28 +687,38 @@ countParameters('foo', 'bar', 'baz'); // 3
 Variadic parameter should always be the last parameter declared:
 
 ```php
-function countParameters(string ...$options, string $param) { ... }
+function countParameters(string ...$options, string $param)
+{ 
+   // some code
+}
 // PHP Fatal error: Only the last parameter can be variadic
 ```
 
 You can have only one variadic parameter:
 
 ```php
-function countParameters(string ...$options, string ...$moreOptions) { ... }
+function countParameters(string ...$options, string ...$moreOptions)
+{ 
+   // some code
+}
 // PHP Fatal error: Only the last parameter can be variadic
 ```
 
 It can't have a default value:
 
 ```php
-function countParameters(string $param, string ...$options = []) { ... }
+function countParameters(string $param, string ...$options = [])
+{
+   // some code
+}
 // PHP Parse error: Variadic parameter cannot have a default value
 ```
 
 When not typed, it accepts any value:
 
 ```php
-function countParameters(string $param, ...$options) : int {
+function countParameters(string $param, ...$options) : int
+{
     return 1 + count($options);
 }
 
