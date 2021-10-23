@@ -168,7 +168,7 @@ Class Foo()
 
 #### Nullable type
 
-![php-version-70](https://shields.io/badge/php->=7.0-blue)
+![php-version-71](https://shields.io/badge/php->=7.1-blue)
 
 When a parameter has no type, it can accept null value:
 
