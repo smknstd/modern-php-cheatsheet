@@ -305,6 +305,8 @@ list($a, $b, $c, $d) = $array; // PHP Warning:  Undefined array key 3
 
 #### Associative array
 
+![php-version-71](https://shields.io/badge/php->=7.1-blue)
+
 Considering an associative array (string-keyed) like :
 
 ```php
