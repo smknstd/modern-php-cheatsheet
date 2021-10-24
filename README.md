@@ -1,6 +1,6 @@
-# Modern Php Cheatsheet
+# Modern PHP Cheatsheet
 
-![Modern Php Cheatsheet](https://i.imgur.com/2STEtgG.png)
+![Modern PHP Cheatsheet](https://i.imgur.com/2STEtgG.png)
 
 
 > If you like this content, you can ping me or follow me on Twitter :+1:
@@ -11,11 +11,11 @@
 
 ### Motivation
 
-This document is a cheatsheet for Php you will frequently encounter in modern projects and most contemporary sample code.
+This document is a cheatsheet for PHP you will frequently encounter in modern projects and most contemporary sample code.
 
-This guide is not intended to teach you Php from the ground up, but to help developers with basic knowledge who may struggle to get familiar with modern codebases (or let's say to learn Laravel or Symfony for instance) because of the new Php concepts and features introduced over the years.
+This guide is not intended to teach you PHP from the ground up, but to help developers with basic knowledge who may struggle to get familiar with modern codebases (or let's say to learn Laravel or Symfony for instance) because of the new PHP concepts and features introduced over the years.
 
-> **Note:** Concepts introduced here are based on the most recent version of php available ([Php8.0](https://www.php.net/releases/8.0/en.php) at the time of the last update) 
+> **Note:** Concepts introduced here are based on the most recent version of PHP available ([PHP 8.0](https://www.php.net/releases/8.0/en.php) at the time of the last update)
 
 ### Complementary Resources
 
@@ -27,7 +27,7 @@ When you struggle to understand a notion, I suggest you look for answers on the 
 
 ## Table of Contents
 
-- [Modern Php cheatsheet](#modern-php-cheatsheet)
+- [Modern PHP cheatsheet](#modern-php-cheatsheet)
     * [Introduction](#introduction)
         + [Motivation](#motivation)
         + [Complementary resources](#complementary-resources)
