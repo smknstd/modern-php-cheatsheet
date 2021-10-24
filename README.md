@@ -930,7 +930,7 @@ $array1 = [...['foo', 'bar'], 'baz'];
 // $array1 = ['foo', 'bar', 'baz']
 ```
 
-If you try to unpack an array valued with null, you'll get an error: 
+Unpacking only works with arrays (or objects inplementing Traversable interface). If you try to unpack any other value, such as null, you'll get an error: 
 
 ```php
 $array1 = null;
