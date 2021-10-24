@@ -294,7 +294,7 @@ list($a, $b, $c) = $array;
 // $c = 'baz'
 ```
 
-Or the shorthand syntax:
+Or since php 7.1, the shorthand syntax:
 
 ```php
 [$a, $b, $c] = $array;
