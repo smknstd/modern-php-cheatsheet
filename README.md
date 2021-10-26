@@ -296,7 +296,7 @@ list($a, $b, $c) = $array;
 // $c = 'baz'
 ```
 
-Or since php 7.1, the shorthand syntax:
+Or since PHP 7.1, the shorthand syntax:
 
 ```php
 [$a, $b, $c] = $array;
@@ -314,7 +314,7 @@ list(, , $c) = $array;
 // $c = 'baz'
 ```
 
-Or since php 7.1, the shorthand syntax:
+Or since PHP 7.1, the shorthand syntax:
 
 ```php
 [, , $c] = $array;
@@ -357,7 +357,7 @@ list($a, $b, $c) = $array; // PHP Warning:  Undefined array key 0 ...
 // $c = null
 ```
 
-But since php 7.1.0 (~ dec 2016), you can destruct it with another syntax based on keys:
+But since PHP 7.1.0 (~ dec 2016), you can destruct it with another syntax based on keys:
 
 ```php
 list('foo' => $a, 'bar' => $b, 'baz' => $c) = $array;
@@ -398,7 +398,7 @@ list('moe' => $d) = $array; // PHP Warning:  Undefined array key "moe"
 
 ![php-version-70](https://shields.io/badge/php->=7.0-blue)
 
-Since php 7.0 (~ dec 2015), you can use the null coalescing operator to provide a fallback when a property is null with no error nor warning:
+Since PHP 7.0 (~ dec 2015), you can use the null coalescing operator to provide a fallback when a property is null with no error nor warning:
 
 ```php
 $a = null;
@@ -605,6 +605,8 @@ $b = $a->bar()->baz() ?? 'fallback'; // PHP Error:  Call to undefined method baz
 
 #### Null Coalescing Assignment operator
 
+![php-version-74](https://shields.io/badge/php->=7.4-blue)
+
 You can set a default value to a property when it is null:
 
 ```php
@@ -613,7 +615,7 @@ $a = $a ?? 'foo';
 // $a = 'foo'
 ```
 
-You can use the null coalescing assignment operator to do the same:
+Since PHP 7.4, you can use the null coalescing assignment operator to do the same:
 
 ```php
 $a = null;
@@ -705,7 +707,7 @@ $a?->foo = 'bar'; // PHP Fatal error:  Can't use nullsafe operator in write cont
 
 ![php-version-56](https://shields.io/badge/php->=5.6-blue)
 
-Since php 5.6 (~ aug 2014), you can add a variadic parameter to any function that let you use an argument lists with variable-length:
+Since PHP 5.6 (~ aug 2014), you can add a variadic parameter to any function that let you use an argument lists with variable-length:
 
 ```php
 function countParameters(string $param, string ...$options) : int
@@ -904,7 +906,7 @@ $array3 = array_merge($array1,$array2);
 // $array3 = ['baz', 'foo', 'bar']
 ```
 
-But since php 7.4 (~ nov 2019), you can unpack indexed arrays, with spread operator:
+But since PHP 7.4 (~ nov 2019), you can unpack indexed arrays, with spread operator:
 
 ```php
 $array1 = ['foo', 'bar'];
