@@ -440,6 +440,35 @@ $c = $a ?? $b ?? 'fallback';
 // $c = 'fallback'
 ```
 
+#### Elvis operator
+
+![php-version-53](https://shields.io/badge/php->=5.3-blue)
+
+It should not be confused with the shorthand ternary operator (aka the elvis operator), which was introduced in PHP 5.3:
+
+```php
+$a = null;
+$b = $a ?: 'fallback';
+
+// $b = 'fallback'
+```
+
+The shorthand ternary operator is equivalent to:
+
+```php
+$a = null;
+$b = $a ? $a : 'fallback';
+// $b = 'fallback'
+```
+
+Result between null coalescing and elvis operator can be similar, but also different for some specific values:
+
+```php
+'' ?: 'fallback'; // 'fallback'
+0 ?: 'fallback'; // 'fallback'
+false ?: 'fallback'; // 'fallback'
+```
+
 #### Null coalescing on array
 
 If array key exists, then fallback isn't triggered:
