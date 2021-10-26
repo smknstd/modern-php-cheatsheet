@@ -21,7 +21,7 @@ This guide is not intended to teach you PHP from the ground up, but to help deve
 
 When you struggle to understand a notion, I suggest you look for answers on the following resources:
 - [Stitcher's blog](https://stitcher.io/blog)
-- [PHP.Watch](https://php.watch/versions)
+- [php.Watch](https://php.watch/versions)
 - [PHP The Right Way](https://phptherightway.com/)
 - [StackOverflow](https://stackoverflow.com/questions/tagged/php)
 
@@ -93,7 +93,8 @@ $b = myFunction('foo'); // TypeError: myFunction(): Argument #1 ($param) must be
 You can set a return type to a function:
 
 ```php
-function myFunction() : int {
+function myFunction() : int
+{
     return 'foo';
 }
 $a = myFunction(); // TypeError: myFunction(): Return value must be of type int, string returned
@@ -152,7 +153,8 @@ $f->bar = 'baz'; // TypeError: Cannot assign string to property Foo::$bar of typ
 You can use a “union type” that accepts values of multiple different types, rather than a single one:
 
 ```php
-function myFunction(string|int|array $param) : string|int|array {
+function myFunction(string|int|array $param) : string|int|array
+{
     return $param;
 }
 ```
@@ -599,6 +601,24 @@ class Foo
 
 $a = new Foo();
 $b = $a->bar()->baz() ?? 'fallback'; // PHP Error:  Call to undefined method baz()
+```
+
+#### Null Coalescing Assignment operator
+
+You can set a default value to a property when it is null:
+
+```php
+$a = null;
+$a = $a ?? 'foo';
+// $a = 'foo'
+```
+
+You can use the null coalescing assignment operator to do the same:
+
+```php
+$a = null;
+$a ??= 'foo';
+// $a = 'foo'
 ```
 
 ### Nullsafe operator
