@@ -407,6 +407,14 @@ $b = $a ?? 'fallback';
 // $b = 'fallback'
 ```
 
+It is equivalent to:
+
+```php
+$a = null;
+$b = isset($a) ? $a : 'fallback';
+// $b = 'fallback'
+```
+
 It also works when property is undefined:
 
 ```php
