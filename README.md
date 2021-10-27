@@ -729,6 +729,10 @@ $d = $a['foo']->bar();
 
 $e = $a['foo']?->bar(); // PHP Warning:  Undefined array key "foo"
 // $e = null
+
+// If you still want the above snippet to work w/o warning
+$e = ($a['foo'] ?? null)?->bar();
+// $e = null
 ```
 
 You cannot use the nullsafe operator to write, it is read only:
