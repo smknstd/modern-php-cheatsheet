@@ -421,6 +421,11 @@ It also works when property is undefined:
 $a = $undefined ?? 'fallback';
 
 // $a = 'fallback'
+
+$c = new class{};
+$value = $c->myVariable ?? 'fallback';
+
+// $value = 'fallback';
 ```
 
 Every other value of the property won't trigger the fallback:
@@ -489,7 +494,7 @@ $b = $a['foo'] ?? 'fallback';
 // $b = 'fallback'
 ```
 
-Or array property is undefined, fallback is triggered with no error nor warning:
+Or array index is undefined, fallback is triggered with no error nor warning:
 
 ```php
 $b = $undefined['foo'] ?? 'fallback';
