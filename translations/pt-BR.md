@@ -75,9 +75,9 @@ $b = myFunction($undefined); // PHP Warning:  Undefined variable $undefined
 
 ![php-version-70](https://shields.io/badge/php->=7.0-blue)
 
-With Type declaration you can specify the expected data type for a property that will be enforce at runtime. It supports many types like scalar types (int, string, bool, and float) but also array, iterable, object, stdClass, etc.
+Com declaração de tipo você pode especificar o tipo de dado que uma propriedade irá receber e força-lo em rempo de execução. Isso funciona tanto com scalar types (int, string, bool, and float) como também array, iterable, object, stdClass, etc.
 
-You can set a type to a function's parameter:
+Você pode definir o tipo de um parâmetro de uma função:
 
 ```php
 function myFunction(int $param)
@@ -89,7 +89,7 @@ $a = myFunction(10);
 $b = myFunction('foo'); // TypeError: myFunction(): Argument #1 ($param) must be of type int, string given
 ```
 
-You can set a return type to a function:
+Você também pode definir o tipo de retorno de uma função:
 
 ```php
 function myFunction() : int
@@ -99,7 +99,7 @@ function myFunction() : int
 $a = myFunction(); // TypeError: myFunction(): Return value must be of type int, string returned
 ```
 
-When a function should not return something, you can use the type "void":
+Quando uma função não deve devolver nada, você pode definir o tipo de retorno como void:
 
 ```php
 function myFunction() : void
@@ -109,7 +109,7 @@ function myFunction() : void
 // PHP Fatal error:  A void function must not return a value
 ```
 
-You cannot return null either:
+Nesse caso tamnbém não se pode devolver nulo:
 
 ```php
 function myFunction() : void
@@ -119,7 +119,7 @@ function myFunction() : void
 // PHP Fatal error:  A void function must not return a value
 ```
 
-However, using return to exit the function is valid:
+Entretanto, o uso de return para sair da função é válido e não irá disparar em um erro:
 
 ```php
 function myFunction() : void
@@ -134,7 +134,7 @@ $a = myFunction();
 
 ![php-version-74](https://shields.io/badge/php->=7.4-blue)
 
-You can set a return type to a class property:
+Você pode definir o tipo de retorno de uma propriedade de uma classe:
 
 ```php
 Class Foo()
@@ -149,7 +149,7 @@ $f->bar = 'baz'; // TypeError: Cannot assign string to property Foo::$bar of typ
 
 ![php-version-80](https://shields.io/badge/php->=8.0-blue)
 
-You can use a “union type” that accepts values of multiple different types, rather than a single one:
+Você pode usar uma "união de tipo" para aceitar tipos diferentes, ao invés de um único:
 
 ```php
 function myFunction(string|int|array $param) : string|int|array
@@ -158,7 +158,7 @@ function myFunction(string|int|array $param) : string|int|array
 }
 ```
 
-It also works with class property:
+Isso também funciona com atributos de classes:
 
 ```php
 Class Foo()
