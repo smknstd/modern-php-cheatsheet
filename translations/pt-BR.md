@@ -7,6 +7,9 @@
 
 [![Tweet for help](https://img.shields.io/twitter/follow/smknstd?label=Tweet%20%40smknstd&style=social)](https://twitter.com/smknstd/)
 
+Traduzido por: [Daniel Lemes](https://github.com/lemesdaniel)
+> **Nota da tradução** Optei por não traduzir alguns termos por serem extremanento técnicos e poderia prejudicar em uma futura pesquisa do leitor, no entanto sinta-se a vontade para submeter uma PR se achar algum termo melhor e que seja de fácil entendimento
+
 ## Introdução
 
 ### Motivação
@@ -34,7 +37,7 @@ Quando tiver dificuldade em entender algum conceito, eu sugiro que você busque 
     * [Sumário](#sumario)
     * [Notions](#notions)
         + [Valor padrão para um parâmetro de uma função](#valor-padrão-para-um-parâmetro-de-uma-função)
-        + [Type declaration](#type-declaration)
+        + [Declaração de tipo](#declaração-de-tipo)
         + [Destructuring arrays](#destructuring-arrays)
         + [Null Coalescing](#null-coalescing)
         + [Nullsafe operator](#nullsafe-operator)
@@ -71,7 +74,7 @@ $b = myFunction($undefined); // PHP Warning:  Undefined variable $undefined
 // $b = null
 ```
 
-### Type declaration
+### Declaração de tipo
 
 ![php-version-70](https://shields.io/badge/php->=7.0-blue)
 
