@@ -801,7 +801,8 @@ function countParameters(string $param, ...$options) : int
     return 1 + count($options);
 }
 
-countParameters('foo', null, [], true); // 4
+$a = countParameters('foo', null, [], true);
+// $a = 4
 ```
 
 When typed, you have to use properly typed values:
@@ -1032,9 +1033,11 @@ function concat(string $first, string $second) : string
 {
     return $first . ' ' . $second;
 }
+$a = concat('foo', 'bar');
+// $a = 'foo bar'
 ```
 
-You can call:
+You can have the same result with the named argument syntax:
 
 ```php
 $a = concat(first: 'foo', second: 'bar');
@@ -1048,15 +1051,48 @@ $a = concat(second: 'bar', first: 'foo');
 // $a = 'foo bar'
 ```
 
+You can skip optional parameters:
+
+```php
+function orGate(bool $option1 = false, bool $option2 = false, bool $option3 = false) : bool
+{
+   return $option1 || $option2 || $option3;
+}
+$a = orGate(option3: true);
+// $a = true
+```
+
+But you cannot skip a mandatory argument:
+
 ```php
 $a = concat(second: 'bar');
 // TypeError: concat(): Argument #1 ($first) not passed
 ```
 
+You cannot include some extra arguments:
+
 ```php
 $a = concat(first: 'foo', second: 'bar', third: 'baz');
 // PHP Error:  Unknown named parameter $third
 ```
+
+Named arguments also work with object constructor:
+
+```php
+Class Foo()
+{
+    public function __construct(
+        public string $first,
+        public string $second
+    ) {}
+    
+}
+$f = new Foo(first: 'bar', second: 'baz');
+```
+
+#### Named variadics
+
+You can use named arguments with a variadic parameter:
 
 ```php
 function showParams(string ...$params) : array
@@ -1066,3 +1102,18 @@ function showParams(string ...$params) : array
 $a = showParams(first: 'foo', second: 'bar', third: 'baz');
 // $a = ["first" => "foo", "second" => "bar", "third" => "baz"]
 ```
+
+#### Unpacking named argument
+
+You can unpack an array as named arguments:
+
+```php
+$array = ['second' => 'bar', 'first' => 'foo']
+$a = concat(...$array);
+// $a = 'foo bar'
+```
+
+#### External resource
+
+- [Named arguments in depth on stitcher's blof](https://stitcher.io/blog/php-8-named-arguments)
+- [Named Parameters on PHP.Watch](https://php.watch/versions/8.0/named-parameters)
