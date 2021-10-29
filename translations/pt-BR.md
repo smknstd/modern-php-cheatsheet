@@ -28,12 +28,12 @@ Quando tiver dificuldade em entender algum conceito, eu sugiro que você busque 
 ## Sumário
 
 - [Moderno PHP cheatsheet](#moderno-php-cheatsheet)
-    * [Introdução](#introducao)
+    * [Introdução](#introdução)
         + [Motivação](#motivação)
         + [Recursos complementares](#recursos-complementares)
     * [Sumário](#sumario)
     * [Notions](#notions)
-        + [Valor padrão para um parâmetro de uma função](#function-default-parameter-value)
+        + [Valor padrão para um parâmetro de uma função](#valor-padrão-para-um-parâmetro-de-uma-função)
         + [Type declaration](#type-declaration)
         + [Destructuring arrays](#destructuring-arrays)
         + [Null Coalescing](#null-coalescing)
@@ -57,8 +57,7 @@ $a = myFunction();
 $b = myFunction('bar');
 // $b = 'bar'
 ```
-Mas se você enviar um valor null ou undefined, 
-But if you send null or an undefined property, o valor padrão será ignorado:
+Mas se você enviar um valor null ou undefined, o valor padrão será ignorado:
 
 ```php
 function myFunction($param = 'foo')
@@ -172,7 +171,7 @@ Class Foo()
 
 ![php-version-71](https://shields.io/badge/php->=7.1-blue)
 
-When a parameter has no type, it can accept null value:
+Quando um parâmetro não tem tipo, pode-se aceitar nulo:
 
 ```php
 function myFunction($param)
@@ -183,7 +182,7 @@ $a = myFunction(null);
 // $a = null
 ```
 
-But as soon as a parameter has a type, it won't accept null value anymore and you'll get an error:
+Mas quando um parâmetro é tipado, ao tentar inserir um valor nulo teremos um erro:
 
 ```php
 function myFunction(string $param)
@@ -193,8 +192,7 @@ function myFunction(string $param)
 $a = myFunction(null); // TypeError: myFunction(): Argument #1 ($param) must be of type string, null given
 ```
 
-If a function has a return type, it won't accept null value either:
-
+Se a função tem um tipo de retorno, também não será aceito um retorno nulo 
 ```php
 function myFunction() : string
 {
@@ -203,7 +201,7 @@ function myFunction() : string
 $a = myFunction(); // TypeError: myFunction(): Return value must be of type string, null returned
 ```
 
-You can make a type declaration explicitly nullable:
+É possível fazer uma declaração onde é permitido receber null
 
 ```php
 function myFunction(?string $param)
@@ -214,7 +212,7 @@ $a = myFunction(null);
 // $a = null
 ```
 
-or with a union type:
+ou com união de tipos (union type):
 
 ```php
 function myFunction(string|null $param)
@@ -225,7 +223,7 @@ $a = myFunction(null);
 // $a = null
 ```
 
-It also works with return type:
+Isso também funciona com retornos de função
 
 ```php
 function myFunction(?string $param) : ?string
@@ -239,7 +237,7 @@ function myFunction(string|null $param) : string|null
 }
 ```
 
-But void cannot be nullable:
+Funções que retornam void não podem retornar null:
 
 ```php
 function myFunction() : ?void
@@ -249,7 +247,7 @@ function myFunction() : ?void
 // PHP Fatal error:  Void type cannot be nullable
 ```
 
-or
+ou
 
 ```php
 function myFunction() : void|null
@@ -259,7 +257,7 @@ function myFunction() : void|null
 // PHP Fatal error:  Void type cannot be nullable
 ```
 
-You can set a nullable type to a class property:
+Pode-se definir null para uma propriedade de uma classe:
 
 ```php
 Class Foo()
@@ -274,19 +272,19 @@ $a = $f->bar;
 
 ### Destructuring arrays
 
-You can destructure arrays to pull out several elements into separate variables.
+Pode-se desestruturar um array para extrair seus elementos em variáveis.
 
 #### Indexed array
 
 ![php-version-40](https://shields.io/badge/php->=4.0-blue)
 
-Considering an indexed array like :
+Considerando um array indexado :
 
 ```php
 $array = ['foo', 'bar', 'baz'];
 ```
 
-You can destruct it using the list syntax:
+Pode-se desestruturar com list:
 
 ```php
 list($a, $b, $c) = $array;
@@ -296,7 +294,7 @@ list($a, $b, $c) = $array;
 // $c = 'baz'
 ```
 
-Or since PHP 7.1, the shorthand syntax:
+Ou desde PHP 7.1, a sintaxe curta (shorthand syntax):
 
 ```php
 [$a, $b, $c] = $array;
@@ -306,7 +304,7 @@ Or since PHP 7.1, the shorthand syntax:
 // $c = 'baz'
 ```
 
-You can skip elements:
+Você pode pular elementos:
 
 ```php
 list(, , $c) = $array;
@@ -314,7 +312,7 @@ list(, , $c) = $array;
 // $c = 'baz'
 ```
 
-Or since PHP 7.1, the shorthand syntax:
+Ou desde PHP 7.1, a sintaxe curta (shorthand syntax):
 
 ```php
 [, , $c] = $array;
@@ -322,7 +320,7 @@ Or since PHP 7.1, the shorthand syntax:
 // $c = 'baz'
 ```
 
-When you try to destruct an index that doesn't exist in the given array, you'll get a warning:
+Quando tentamos desestruturar um indexe inexistente recebemos um aviso (warning) e um valor null é lançado nessa posição:
 
 ```php
 list($a, $b, $c, $d) = $array; // PHP Warning:  Undefined array key 3
@@ -337,7 +335,7 @@ list($a, $b, $c, $d) = $array; // PHP Warning:  Undefined array key 3
 
 ![php-version-71](https://shields.io/badge/php->=7.1-blue)
 
-Considering an associative array (string-keyed) like :
+Em array associativos (string-keyed) :
 
 ```php
 $array = [
@@ -347,7 +345,7 @@ $array = [
 ];
 ```
 
-Previous list syntax won't work with an associative array, and you'll get a warning:
+A sintaxe utilizando lista não irá funcionar e um aviso (warning) será lançado
 
 ```php
 list($a, $b, $c) = $array; // PHP Warning:  Undefined array key 0 ...
@@ -357,7 +355,7 @@ list($a, $b, $c) = $array; // PHP Warning:  Undefined array key 0 ...
 // $c = null
 ```
 
-But since PHP 7.1.0 (~ dec 2016), you can destruct it with another syntax based on keys:
+Mas desde PHP 7.1.0 (~ dec 2016), você pode desestruturar com uma sintaxe baseada nas chaves:
 
 ```php
 list('foo' => $a, 'bar' => $b, 'baz' => $c) = $array;
@@ -367,7 +365,7 @@ list('foo' => $a, 'bar' => $b, 'baz' => $c) = $array;
 // $c = 'value3'
 ```
 
-Or the shorthand syntax:
+Ou com a sintaxe curta (shorthand syntax):
 
 ```php
 ['foo' => $a, 'bar' => $b, 'baz' => $c] = $array;
@@ -377,7 +375,7 @@ Or the shorthand syntax:
 // $c = 'value3'
 ```
 
-You can also destruct only a portion of the array (The order doesn't matter):
+Podemos também desestruturar apenas uma parte do array (sem que a ordem importe)
 
 ```php
 ['baz' => $c, 'foo' => $a] = $array;
@@ -386,7 +384,7 @@ You can also destruct only a portion of the array (The order doesn't matter):
 // $c = 'value3'
 ```
 
-When you try to destruct a key that doesn't exist in the given array, you'll get a warning:
+Quando tentamos desestruturar uma chave que não exista no array, recebemos um aviso (warning):
 
 ```php
 list('moe' => $d) = $array; // PHP Warning:  Undefined array key "moe"
@@ -398,7 +396,7 @@ list('moe' => $d) = $array; // PHP Warning:  Undefined array key "moe"
 
 ![php-version-70](https://shields.io/badge/php->=7.0-blue)
 
-Since PHP 7.0 (~ dec 2015), you can use the null coalescing operator to provide a fallback when a property is null with no error nor warning:
+Desde de PHP 7.0 (~ dec 2015), você pode usar o operador null coalescing para atribuir um valor no caso de variáveis/propriedades nulas sem que seja emitidos avisos ou erros:
 
 ```php
 $a = null;
@@ -407,7 +405,7 @@ $b = $a ?? 'fallback';
 // $b = 'fallback'
 ```
 
-It is equivalent to:
+Isso é equivalente a:
 
 ```php
 $a = null;
@@ -415,7 +413,7 @@ $b = isset($a) ? $a : 'fallback';
 // $b = 'fallback'
 ```
 
-It also works when property is undefined:
+Isso também funciona quando a variável não for definida:
 
 ```php
 $a = $undefined ?? 'fallback';
@@ -423,7 +421,8 @@ $a = $undefined ?? 'fallback';
 // $a = 'fallback'
 ```
 
-Every other value of the property won't trigger the fallback:
+
+Qualquer outro valor será aceito e não será definido em fallback:
 
 ```php
 '' ?? 'fallback'; // ''
@@ -431,7 +430,7 @@ Every other value of the property won't trigger the fallback:
 false ?? 'fallback'; // false
 ```
 
-You can chain null coalescing multiple times:
+Podemos encadear multiplos null coalescing:
 
 ```php
 $a = null;
@@ -444,7 +443,7 @@ $c = $a ?? $b ?? 'fallback';
 
 ![php-version-53](https://shields.io/badge/php->=5.3-blue)
 
-It should not be confused with the shorthand ternary operator (aka the elvis operator), which was introduced in PHP 5.3:
+Não deve ser confundido com o operador ternário (aka the elvis operator), que foi introduzido no PHP 5.3:
 
 ```php
 $a = null;
@@ -453,7 +452,7 @@ $b = $a ?: 'fallback';
 // $b = 'fallback'
 ```
 
-The shorthand ternary operator is equivalent to:
+A opção equivalente do operador ternário é:
 
 ```php
 $a = null;
@@ -461,7 +460,7 @@ $b = $a ? $a : 'fallback';
 // $b = 'fallback'
 ```
 
-Result between null coalescing and elvis operator can be similar, but also different for some specific values:
+O resultado entre null coalescing e elvis operator podem ser similares, mas também diferente para algumas situações específicas:
 
 ```php
 '' ?: 'fallback'; // 'fallback'
@@ -471,7 +470,7 @@ false ?: 'fallback'; // 'fallback'
 
 #### Null coalescing on array
 
-If array key exists, then fallback isn't triggered:
+Se a chave de um array existe, o fallback não é chamado:
 
 ```php
 $a = ['foo' => 'bar'];
@@ -480,7 +479,7 @@ $b = $a['foo'] ?? 'fallback';
 // $b = 'bar'
 ```
 
-But when array doesn't exist, fallback is triggered with no error nor warning:
+Mas quando o array não existe, fallback é chamado sem emitir erros ou avisos:
 
 ```php
 $a = null;
@@ -489,7 +488,7 @@ $b = $a['foo'] ?? 'fallback';
 // $b = 'fallback'
 ```
 
-Or array property is undefined, fallback is triggered with no error nor warning:
+Ou a propriedade de um array é indefinida, fallback é chamado sem emitir erros ou avisos:
 
 ```php
 $b = $undefined['foo'] ?? 'fallback';
@@ -497,7 +496,7 @@ $b = $undefined['foo'] ?? 'fallback';
 // $b = 'fallback'
 ```
 
-When array exist but key can't be found in the given array, fallback is triggered with no error nor warning:
+Quando o array existe mas a chave não, fallback é chamado sem emitir erros ou avisos:
 
 ```php
 $a = [];
@@ -506,7 +505,8 @@ $b = $a['foo'] ?? 'fallback';
 // $b = 'fallback'
 ```
 
-It also works with indexed arrays:
+
+Isso também funciona com arrays indexados:
 
 ```php
 $a = ['foo'];
@@ -518,7 +518,7 @@ $b = $a[1] ?? 'fallback';
 // $b = 'fallback'
 ```
 
-It also works with nested arrays. If nested array key exists, then fallback isn't triggered:
+Isso também funciona com array multi dimensionais. Se a chave existir, fallback não é chamado:
 
 ```php
 $a = [
@@ -531,7 +531,7 @@ $b = $a['foo']['bar'] ?? 'fallback';
 // $b = 'baz'
 ```
 
-But when nested key can't be found in the given array, fallback is triggered with no error nor warning:
+Mas em arrays multi dimensionais quando a chave não existir, fallback é chamado sem emitir erros ou avisos:
 
 ```php
 $a = [
@@ -546,11 +546,13 @@ $b = $a['foo']['qux'] ?? 'fallback';
 
 #### Null coalescing on object
 
-You can also use null coalescing operator with object.
+
+Você também pode usar null operador coalescing com objetos.
 
 ##### Object's attribute
 
 If object's attribute exists, then fallback isn't triggered:
+Se a propriedade do objeto existir, fallback não é chamado:
 
 ```php
 $a = (object)[
@@ -561,7 +563,7 @@ $b = $a->foo ?? 'fallback';
 // $b = 'bar'
 ```
 
-But when object's attribute can't be found, fallback is triggered with no error nor warning:
+mas se a propriedade do objeto não for encontrada, fallback é chamado sem emitir erros ou avisos:
 
 ```php
 $a = (object)[
@@ -574,7 +576,8 @@ $b = $a->baz ?? 'fallback';
 
 ##### Object's method
 
-You can also use the null coalescing operator on call to an object's method. If the given method exists, then fallback isn't triggered:
+Você também pode usar o operador null coalescing ao chamar métodos. Se ele existir, fallback é ignorado.
+
 
 ```php
 class Foo
@@ -591,7 +594,7 @@ $b = $a->bar() ?? 'fallback';
 // $b = 'baz'
 ```
 
-But when object's method returns null, fallback is triggered with no error nor warning:
+Mas quando o método retornar null, fallback é chamado sem emitir erros ou avisos:
 
 ```php
 class Foo
@@ -608,7 +611,7 @@ $b = $a->bar() ?? 'fallback';
 // $b = 'fallback'
 ```
 
-If object's method can't be found, null coalescing won't work and you'll get an error:
+Se o método não for encontrado na classe, null coalescing não funcionará e um erro será lançado:
 
 ```php
 class Foo
@@ -625,7 +628,7 @@ $b = $a->baz() ?? 'fallback'; // PHP Error:  Call to undefined method baz()
 
 ##### Chained method
 
-When using chained methods on object and an intermediary element can't be found, null coalescing won't work and you'll get an error:
+Quando usamos métodos encadeados um método intermediário retornar null, o operador null coalescing não funcionará e um erro será lançado:
 
 ```php
 class Foo
@@ -644,7 +647,8 @@ $b = $a->bar()->baz() ?? 'fallback'; // PHP Error:  Call to undefined method baz
 
 ![php-version-74](https://shields.io/badge/php->=7.4-blue)
 
-You can set a default value to a property when it is null:
+
+Você pode definidir um valor padrão quando o valor for null
 
 ```php
 $a = null;
@@ -652,7 +656,7 @@ $a = $a ?? 'foo';
 // $a = 'foo'
 ```
 
-Since PHP 7.4, you can use the null coalescing assignment operator to do the same:
+Desde de PHP 7.4, você pode usar o operador null coalescing para fazer o mesmo:
 
 ```php
 $a = null;
@@ -660,11 +664,11 @@ $a ??= 'foo';
 // $a = 'foo'
 ```
 
-### Nullsafe operator
+### Operador Nullsafe
 
 ![php-version-80](https://shields.io/badge/php->=8.0-blue)
 
-When trying to read a property or calling a method on null, you'll get a warning and an error:
+Ao tentar ler uma propriedade ou um chamar um método null, você receberá um aviso e um erro:
 
 ```php
 $a = null;
@@ -673,8 +677,7 @@ $b = $a->foo; // PHP Warning:  Attempt to read property "foo" on null
 
 $c = $a->foo(); // PHP Error:  Call to a member function foo() on null
 ```
-
-With the nullsafe operator, you can do both without warning nor error:
+Com o operador nullsafe, você pode fazer sem receber erros ou avisos 
 
 ```php
 $a = null;
@@ -684,7 +687,7 @@ $c = $a?->foo();
 // $c = null
 ```
 
-You can chain multiple nullsafe operators:
+Você pode encadear multiplos operadores nullsafe:
 
 ```php
 $a = null;
@@ -694,7 +697,7 @@ $c = $a?->foo()?->bar();
 // $c = null
 ```
 
-An expression is short-circuited from the first null-safe operator that encounters null:
+Uma expressão é um short-circuited do primeiro operador null-safe encontrado:
 
 ```php
 $a = null;
@@ -702,7 +705,7 @@ $b = $a?->foo->bar->baz();
 // $b = null
 ```
 
-Nullsafe operator has no effect if the target is not null:
+Operador Nullsafe não tem efeito em valores não nulos.
 
 ```php
 $a = 'foo';
@@ -711,7 +714,7 @@ $b = $a?->bar; // PHP Warning:  Attempt to read property "bar" on string
 $c = $a?->baz(); // PHP Error:  Call to a member function baz() on string
 ```
 
-Nullsafe operator can't handle arrays properly but still can have some effect:
+Operador Nullsafe não consegue trabalhar adequadamente com arrays, mesmo assim tem algum efeito: 
 
 ```php
 $a = [];
@@ -731,7 +734,7 @@ $e = $a['foo']?->bar(); // PHP Warning:  Undefined array key "foo"
 // $e = null
 ```
 
-You cannot use the nullsafe operator to write, it is read only:
+Você não pode usar o operador nullsafe em operações de escrita, ele é apenas um recurso de leitura:
 
 ```php
 $a = null;
@@ -744,7 +747,7 @@ $a?->foo = 'bar'; // PHP Fatal error:  Can't use nullsafe operator in write cont
 
 ![php-version-56](https://shields.io/badge/php->=5.6-blue)
 
-Since PHP 5.6 (~ aug 2014), you can add a variadic parameter to any function that let you use an argument lists with variable-length:
+Desde do PHP 5.6 (~ aug 2014), você pode adicionar uma lista de parâmetros com tamanho indefinido ou variáveis:
 
 ```php
 function countParameters(string $param, string ...$options) : int
@@ -762,7 +765,7 @@ countParameters('foo', 'bar'); // 2
 countParameters('foo', 'bar', 'baz'); // 3
 ```
 
-Variadic parameter should always be the last parameter declared:
+Parâmetros variáveis devem ser semre o último parâmetros declarados:
 
 ```php
 function countParameters(string ...$options, string $param)
@@ -772,7 +775,7 @@ function countParameters(string ...$options, string $param)
 // PHP Fatal error: Only the last parameter can be variadic
 ```
 
-You can have only one variadic parameter:
+Você pode definir um ou mais parâmetros variáveis:
 
 ```php
 function countParameters(string ...$options, string ...$moreOptions)
@@ -782,7 +785,7 @@ function countParameters(string ...$options, string ...$moreOptions)
 // PHP Fatal error: Only the last parameter can be variadic
 ```
 
-It can't have a default value:
+Você não deve ter um valor padrão:
 
 ```php
 function countParameters(string $param, string ...$options = [])
@@ -792,7 +795,7 @@ function countParameters(string $param, string ...$options = [])
 // PHP Parse error: Variadic parameter cannot have a default value
 ```
 
-When not typed, it accepts any value:
+Quando não tipado, isso aceita qualquer valor:
 
 ```php
 function countParameters(string $param, ...$options) : int
@@ -803,7 +806,7 @@ function countParameters(string $param, ...$options) : int
 countParameters('foo', null, [], true); // 4
 ```
 
-When typed, you have to use properly typed values:
+Quando tipado, deve-se passar os valores de acordo com o tipo:
 
 ```php
 function countParameters(string $param, string ...$options) : int
@@ -822,7 +825,7 @@ countParameters('foo', []);
 
 ![php-version-56](https://shields.io/badge/php->=5.6-blue)
 
-Arrays and traversable objects can be unpacked into argument lists when calling functions by using the spread operator:
+Array e objetos podem ser desempacotados em uma lista de argumentos usando spread operator:
 
 ```php
 function add(int $a, int $b, int $c) : int
@@ -835,7 +838,7 @@ $r = add(1, ...$array);
 // $r = 6
 ```
 
-The given array can have more elements than needed:
+O array inserido pode ter mais elementos que o necessário:
 
 ```php
 function add(int $a, int $b, int $c) : int
@@ -848,7 +851,7 @@ $r = add(1, ...$array);
 // $r = 6
 ```
 
-The given array can't have lesser elements than needed:
+O array passando não pode ter menos elementos que o necessário:
 
 ```php
 function add(int $a, int $b, int $c) : int
@@ -859,7 +862,7 @@ $array = [2];
 $r = add(1, ...$array); // TypeError: Too few arguments to function add(), 2 passed
 ```
 
-Except when some function arguments have a default value:
+Exceto quando algum argumento da função tem um valor padrão:
 
 ```php
 function add(int $a, int $b, int $c = 0) : int
@@ -871,7 +874,7 @@ $r = add(1, ...$array);
 // $r = 3
 ```
 
-If an argument is typed and the passed value does not match the given type, you'll get an error:
+Se um argumento é tipado e o valor inserido não é do mesmo tipo, um erro será lançado:\
 
 ```php
 function add(int $a, int $b, int $c) : int
@@ -882,7 +885,8 @@ $array = ['foo', 'bar'];
 $r = add(1, ...$array); // TypeError: add(): Argument #2 ($b) must be of type int, string given
 ```
 
-It is possible to use an associative array, but keys should match arguments names
+
+É possível passar um array associativo, mas as chaves desses corresponder aos nomes dos argumentos:
 
 ```php
 function add(int $a, int $b, int $c) : int
@@ -897,7 +901,7 @@ $r = add(1, ...$array);
 // $r = 6
 ```
 
-Order of the elements in the associative array doesn't matter:
+A ordem dos elementos em um array associativos não importa:
 
 ```php
 function add(int $a, int $b, int $c) : int
@@ -912,7 +916,7 @@ $r = add(1, ...$array);
 // $r = 6
 ```
 
-If a key doesn't match an argument's name, you'll get an error:
+Se a chave não corresponder a um argumento, um erro será lançado:
 
 ```php
 function add(int $a, int $b, int $c) : int
@@ -933,7 +937,7 @@ $r = add(1, ...$array); // PHP Error:  Unknown named parameter $d
 
 ![php-version-74](https://shields.io/badge/php->=7.4-blue)
 
-When you want to merge multiple arrays, you generally use `array_merge`:
+Quando você pretender combinar (unir) vários arrays, normalmente usa-se `array_merge`
 
 ```php
 $array1 = ['baz'];
@@ -943,7 +947,7 @@ $array3 = array_merge($array1,$array2);
 // $array3 = ['baz', 'foo', 'bar']
 ```
 
-But since PHP 7.4 (~ nov 2019), you can unpack indexed arrays, with spread operator:
+Desde de PHP 7.4 (~ nov 2019), você pode desempacotar arrays com spread operator:
 
 ```php
 $array1 = ['foo', 'bar'];
@@ -951,7 +955,7 @@ $array2 = ['baz', ...$array1];
 // $array2 = ['baz', 'foo', 'bar']
 ```
 
-Elements will be merged in the order they are passed:
+Elementos são combinados na ordem em que são passados:
 
 ```php
 $array1 = ['foo', 'bar'];
@@ -959,7 +963,7 @@ $array2 = ['baz', ...$array1, "qux"];
 // $array2 = ['baz', 'foo', 'bar', "qux"]
 ```
 
-It doesn't do any deduplication:
+Não é verificado qualquer valor duplicado:
 
 ```php
 $array1 = ['foo', 'bar'];
@@ -967,7 +971,7 @@ $array2 = ['foo', ...$array1];
 // $array2 = ['foo', 'foo', 'bar']
 ```
 
-You can unpack multiple arrays at once:
+Você pode desempacotar vários arrays ao mesmo tempo:
 
 ```php
 $array1 = ['foo', 'bar'];
@@ -976,7 +980,7 @@ $array3 = [ ...$array1, ...$array2];
 // $array3 = ['foo', 'bar', 'baz']
 ```
 
-You can unpack the same array multiple times:
+Também podemos desempacotar arrays multiplas vezes:
 
 ```php
 $array1 = ['foo', 'bar'];
@@ -984,7 +988,7 @@ $array2 = [ ...$array1, ...$array1];
 // $array2 = ['foo', 'bar', 'foo', 'bar']
 ```
 
-You can unpack an empty array with no error nor warning:
+Se tentarmos desempacotar um array vazio não será lançado qualquer erro ou aviso:
 
 ```php
 $array1 = [];
@@ -992,21 +996,21 @@ $array2 = ['foo', ...$array1];
 // $array2 = ['foo']
 ```
 
-You can unpack an array that has not been previously stored in a property:
+Você pode desempacotar um array, que não tenha sido previamente armazenado em uma variável:
 
 ```php
 $array1 = [...['foo', 'bar'], 'baz'];
 // $array1 = ['foo', 'bar', 'baz']
 ```
 
-Unpacking only works with arrays (or objects inplementing Traversable interface). If you try to unpack any other value, such as null, you'll get an error: 
+Desempacotar funciona apenas com arrays e objetos. Se você tentar desempacotar quaqluer outro valor, como null, um erro será lançado:
 
 ```php
 $array1 = null;
 $array2 = ['foo', ...$array1]; // PHP Error:  Only arrays and Traversables can be unpacked
 ```
 
-You can unpack the result of a function/method:
+Você também pode desempacotar o resultado de uma função/método:
 
 ```php
 function getArray() : array {
