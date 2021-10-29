@@ -7,7 +7,7 @@
 
 [![Tweet for help](https://img.shields.io/twitter/follow/smknstd?label=Tweet%20%40smknstd&style=social)](https://twitter.com/smknstd/)
 
-Traduzido por: [Daniel Lemes](daniel.lemes.dev)
+Traduzido por: [Daniel Lemes](https://github.com/lemesdaniel)
 > **Nota da tradução** Optei por não traduzir alguns termos por serem extremanento técnicos e poderia prejudicar em uma futura pesquisa do leitor, no entanto sinta-se a vontade para submeter uma PR se achar algum termo melhor e que seja de fácil entendimento
 
 ## Introdução
