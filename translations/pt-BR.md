@@ -27,11 +27,11 @@ Quando tiver dificuldade em entender algum conceito, eu sugiro que você busque 
 
 ## Sumário
 
-- [Moderno PHP cheatsheet](#modern-php-cheatsheet)
-    * [Inttrodução](#introduction)
-        + [Motivação](#motivation)
-        + [Recursos complementares](#complementary-resources)
-    * [Sumário](#table-of-contents)
+- [Moderno PHP cheatsheet](#moderno-php-cheatsheet)
+    * [Introdução](#introducao)
+        + [Motivação](#motivação)
+        + [Recursos complementares](#recursos-complementares)
+    * [Sumário](#sumario)
     * [Notions](#notions)
         + [Valor padrão para um parâmetro de uma função](#function-default-parameter-value)
         + [Type declaration](#type-declaration)
