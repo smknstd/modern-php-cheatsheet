@@ -21,7 +21,7 @@ This guide is not intended to teach you PHP from the ground up, but to help deve
 
 When you struggle to understand a notion, I suggest you look for answers on the following resources:
 - [Stitcher's blog](https://stitcher.io/blog)
-- [php.Watch](https://php.watch/versions)
+- [PHP.Watch](https://php.watch/versions)
 - [PHP The Right Way](https://phptherightway.com/)
 - [StackOverflow](https://stackoverflow.com/questions/tagged/php)
 
@@ -39,6 +39,7 @@ When you struggle to understand a notion, I suggest you look for answers on the 
         + [Null Coalescing](#null-coalescing)
         + [Nullsafe operator](#nullsafe-operator)
         + [Spread operator](#spread-operator)
+        + [Named arguments](#named-arguments)
 
 ## Notions
 
@@ -357,7 +358,7 @@ list($a, $b, $c) = $array; // PHP Warning:  Undefined array key 0 ...
 // $c = null
 ```
 
-But since PHP 7.1.0 (~ dec 2016), you can destruct it with another syntax based on keys:
+But since PHP 7.1 (~ dec 2016), you can destruct it with another syntax based on keys:
 
 ```php
 list('foo' => $a, 'bar' => $b, 'baz' => $c) = $array;
@@ -800,7 +801,8 @@ function countParameters(string $param, ...$options) : int
     return 1 + count($options);
 }
 
-countParameters('foo', null, [], true); // 4
+$a = countParameters('foo', null, [], true);
+// $a = 4
 ```
 
 When typed, you have to use properly typed values:
@@ -1009,10 +1011,109 @@ $array2 = ['foo', ...$array1]; // PHP Error:  Only arrays and Traversables can b
 You can unpack the result of a function/method:
 
 ```php
-function getArray() : array {
-  return ['foo', 'bar'];
+function getArray() : array
+{
+    return ['foo', 'bar'];
 }
 
 $array = [...getArray(), 'baz']; 
 // $array = ['foo', 'bar', 'baz']
 ```
+
+### Named arguments
+
+![php-version-80](https://shields.io/badge/php->=8.0-blue)
+
+Since PHP 8.0, it is possible to pass in arguments by name instead of their position.
+
+Considering a function like this:
+
+```php
+function concat(string $first, string $second) : string
+{
+    return $first . ' ' . $second;
+}
+$a = concat('foo', 'bar');
+// $a = 'foo bar'
+```
+
+You can have the same result with the named argument syntax:
+
+```php
+$a = concat(first: 'foo', second: 'bar');
+// $a = 'foo bar'
+```
+
+You can call it with arguments in a different order:
+
+```php
+$a = concat(second: 'bar', first: 'foo');
+// $a = 'foo bar'
+```
+
+You can skip optional parameters:
+
+```php
+function orGate(bool $option1 = false, bool $option2 = false, bool $option3 = false) : bool
+{
+   return $option1 || $option2 || $option3;
+}
+$a = orGate(option3: true);
+// $a = true
+```
+
+But you cannot skip a mandatory argument:
+
+```php
+$a = concat(second: 'bar');
+// TypeError: concat(): Argument #1 ($first) not passed
+```
+
+You cannot include some extra arguments:
+
+```php
+$a = concat(first: 'foo', second: 'bar', third: 'baz');
+// PHP Error:  Unknown named parameter $third
+```
+
+Named arguments also work with object constructor:
+
+```php
+Class Foo()
+{
+    public function __construct(
+        public string $first,
+        public string $second
+    ) {}
+    
+}
+$f = new Foo(first: 'bar', second: 'baz');
+```
+
+#### Named variadics
+
+You can use named arguments with a variadic parameter:
+
+```php
+function showParams(string ...$params) : array
+{
+    return $params;
+}
+$a = showParams(first: 'foo', second: 'bar', third: 'baz');
+// $a = ["first" => "foo", "second" => "bar", "third" => "baz"]
+```
+
+#### Unpacking named argument
+
+You can unpack an array as named arguments:
+
+```php
+$array = ['second' => 'bar', 'first' => 'foo']
+$a = concat(...$array);
+// $a = 'foo bar'
+```
+
+#### External resource
+
+- [Named arguments in depth on stitcher's blof](https://stitcher.io/blog/php-8-named-arguments)
+- [Named Parameters on PHP.Watch](https://php.watch/versions/8.0/named-parameters)
