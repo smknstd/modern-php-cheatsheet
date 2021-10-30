@@ -137,7 +137,7 @@ $a = myFunction();
 
 ![php-version-74](https://shields.io/badge/php->=7.4-blue)
 
-You can set a return type to a class property:
+You can set a type to a class property:
 
 ```php
 Class Foo()
