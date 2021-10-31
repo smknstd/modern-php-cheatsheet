@@ -885,50 +885,7 @@ $array = ['foo', 'bar'];
 $r = add(1, ...$array); // TypeError: add(): Argument #2 ($b) must be of type int, string given
 ```
 
-It is possible to use an associative array, but keys should match arguments names
-
-```php
-function add(int $a, int $b, int $c) : int
-{
-    return $a + $b + $c;
-}
-$array = [
-    "b" => 2,
-    "c" => 3
-];
-$r = add(1, ...$array);
-// $r = 6
-```
-
-Order of the elements in the associative array doesn't matter:
-
-```php
-function add(int $a, int $b, int $c) : int
-{
-    return $a + $b + $c;
-}
-$array = [
-    "c" => 3,
-    "b" => 2,
-];
-$r = add(1, ...$array);
-// $r = 6
-```
-
-If a key doesn't match an argument's name, you'll get an error:
-
-```php
-function add(int $a, int $b, int $c) : int
-{
-    return $a + $b + $c;
-}
-$array = [
-    "b" => 2,
-    "c" => 3,
-    "d" => 4,
-];
-$r = add(1, ...$array); // PHP Error:  Unknown named parameter $d
-```
+Since PHP 8.0, it is possible to unpack an associative array as it will use [named arguments](#unpacking-named-arguments).
 
 #### Array unpacking
 
@@ -1104,14 +1061,51 @@ $a = showParams(first: 'foo', second: 'bar', third: 'baz');
 // $a = ["first" => "foo", "second" => "bar", "third" => "baz"]
 ```
 
-#### Unpacking named argument
+#### Unpacking named arguments
 
-You can unpack an array as named arguments:
+You can unpack an associative array as named arguments if keys match arguments names:
 
 ```php
-$array = ['second' => 'bar', 'first' => 'foo']
-$a = concat(...$array);
-// $a = 'foo bar'
+function add(int $a, int $b, int $c) : int
+{
+    return $a + $b + $c;
+}
+$array = [
+    "b" => 2,
+    "c" => 3
+];
+$r = add(1, ...$array);
+// $r = 6
+```
+
+Order of the elements in the associative array doesn't matter:
+
+```php
+function add(int $a, int $b, int $c) : int
+{
+    return $a + $b + $c;
+}
+$array = [
+    "c" => 3,
+    "b" => 2,
+];
+$r = add(1, ...$array);
+// $r = 6
+```
+
+If a key doesn't match an argument's name, you'll get an error:
+
+```php
+function add(int $a, int $b, int $c) : int
+{
+    return $a + $b + $c;
+}
+$array = [
+    "b" => 2,
+    "c" => 3,
+    "d" => 4,
+];
+$r = add(1, ...$array); // PHP Error:  Unknown named parameter $d
 ```
 
 #### External resource
