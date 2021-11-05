@@ -3,26 +3,26 @@
 ![PHP Moderno Cheatsheet](https://i.imgur.com/2STEtgG.png)
 
 
-> Si te gusta este contenido, puedes contactarme o seguirme en Twitter. :+1:
+> Si te gusta este contenido, podés contactarme o seguirme en Twitter. :+1:
 
 [![Tweet for help](https://img.shields.io/twitter/follow/smknstd?label=Tweet%20%40smknstd&style=social)](https://twitter.com/smknstd/)
 
 Traducción por: [Cristian Ferreyra](https://github.com/backendrulz)
-> **Nota de traducción** Elegí no traducir algunos términos ya que son extremadamente técnicos y podrían dificultar el aprendizaje de futuros lectores. Sin embargo, siéntete libre de enviar un PR si encuentras un término mejor o que sea fácil de entender.
+> **Nota de traducción:** Elegí no traducir algunos términos ya que son extremadamente técnicos y podrían dificultar el aprendizaje de futuros lectores.
 
 ## Introducción
 
 ### Motivación
 
-Este documento es un cheatsheet para PHP de código que encontrará con frecuencia en proyectos modernos.
+Este documento es un cheatsheet para PHP con código que encontrará con frecuencia en proyectos modernos.
 
-Esta guía no está destinada a enseñarte PHP desde cero, sino a ayudar a los desarrolladores con conocimientos básicos que pueden tener dificultades para familiarizarse con las bases de código modernas (o digamos para aprender Laravel o Symfony, por ejemplo) debido a los nuevos conceptos y características de PHP. introducido a lo largo de los años.
+Esta guía no está destinada a enseñarte PHP desde cero, sino a ayudar a los desarrolladores con conocimientos básicos que pueden tener dificultades para familiarizarse con las bases de código modernas (o para aprender Laravel o Symfony, por ejemplo) debido a los nuevos conceptos y características que PHP ha introducido a lo largo de los años.
 
 > **Nota:** Los conceptos presentados acá se basan en la versión más reciente de PHP disponible ([PHP 8.0] (https://www.php.net/releases/8.0/en.php) en el momento de la última actualización)
 
 ### Recursos complementarios
 
-Cuando tengas dificultades para comprender un concepto, te sugiero que busques respuestas en los siguientes sitios:
+Cuando tengas dificultad para comprender un concepto, te sugiero que busques respuestas en los siguientes sitios:
 - [Stitcher's blog](https://stitcher.io/blog)
 - [PHP.Watch](https://php.watch/versions)
 - [Exploring php 8.0](https://leanpub.com/exploringphp80)
@@ -177,7 +177,7 @@ Class Foo()
 
 ![php-version-71](https://shields.io/badge/php->=7.1-blue)
 
-Cuando un parámetro no tiene tipo, puede aceptar un valor nulo (null):
+Cuando un parámetro no tiene tipo, puede aceptar un valor nulo:
 
 ```php
 function myFunction($param)
@@ -249,8 +249,8 @@ Pero void no puede ser "nullable":
 ```php
 function myFunction() : ?void
 {
-   // some code
-} 
+   // algún código
+}
 // PHP Fatal error:  Void type cannot be nullable
 ```
 
@@ -259,7 +259,7 @@ o
 ```php
 function myFunction() : void|null
 {
-   // some code
+   // algún código
 }
 // PHP Fatal error:  Void type cannot be nullable
 ```
@@ -579,7 +579,7 @@ $b = $a->baz ?? 'fallback';
 
 ##### Método de objeto
 
-También puede utilizar el operador null coalescing en la llamada al método de un objeto. Si el método existe, entonces no se activa el reslpado:
+También puede utilizar el operador null coalescing en la llamada al método de un objeto. Si el método existe, entonces no se activa el respaldo:
 
 ```php
 class Foo
@@ -758,7 +758,7 @@ function countParameters(string $param, string ...$options) : int
     foreach ($options as $option) {
         // podés iterar en $options
     }
- 
+
     return 1 + count($options);
 }
 
@@ -771,7 +771,7 @@ El parámetro variadic siempre debe ser el último parámetro declarado:
 
 ```php
 function countParameters(string ...$options, string $param)
-{ 
+{
    // algún código
 }
 // PHP Fatal error: Only the last parameter can be variadic
@@ -781,7 +781,7 @@ Solo se puede tener un parámetro variadic:
 
 ```php
 function countParameters(string ...$options, string ...$moreOptions)
-{ 
+{
    // algún código
 }
 // PHP Fatal error: Only the last parameter can be variadic
@@ -809,7 +809,7 @@ $a = countParameters('foo', null, [], true);
 // $a = 4
 ```
 
-Cuando es tipado, debe usar valores correctamente definidos:
+Cuando es tipado, tenés que usar valores correctamente definidos:
 
 ```php
 function countParameters(string $param, string ...$options) : int
@@ -824,7 +824,7 @@ countParameters('foo', []);
 // TypeError: countParameters(): Argument #2 must be of type string, array given
 ```
 
-#### Argument unpacking
+#### Desempaquetando argumentos
 
 ![php-version-56](https://shields.io/badge/php->=5.6-blue)
 
@@ -877,7 +877,7 @@ $r = add(1, ...$array);
 // $r = 3
 ```
 
-Si un argumento es tipado y el valor pasado no coincide con el tipo, obtendrás un error:
+Si un argumento es tipado y el valor no coincide con el tipo, obtendrás un error:
 
 ```php
 function add(int $a, int $b, int $c) : int
@@ -962,7 +962,7 @@ $array1 = [...['foo', 'bar'], 'baz'];
 // $array1 = ['foo', 'bar', 'baz']
 ```
 
-El desempaquetado solo funciona con matrices (u objetos que complementan la interfaz Traversable). Si intentás desempaquetar cualquier otro valor (como nulo), obtendrá un error:
+El desempaquetado solo funciona con matrices (u objetos que complementan la interfaz Traversable). Si intentás desempaquetar cualquier otro valor (como nulo), generará un error:
 
 ```php
 $array1 = null;
@@ -977,7 +977,7 @@ function getArray() : array
     return ['foo', 'bar'];
 }
 
-$array = [...getArray(), 'baz']; 
+$array = [...getArray(), 'baz'];
 // $array = ['foo', 'bar', 'baz']
 ```
 
@@ -985,7 +985,7 @@ $array = [...getArray(), 'baz'];
 
 ![php-version-80](https://shields.io/badge/php->=8.0-blue)
 
-Desde PHP 8.0, es posible pasar argumentos por nombre en lugar de por su posición.
+Desde PHP 8.0, es posible pasar argumentos por nombre en lugar de su posición.
 
 Considerando una función como esta:
 
@@ -1046,7 +1046,7 @@ Class Foo()
         public string $first,
         public string $second
     ) {}
-    
+
 }
 $f = new Foo(first: 'bar', second: 'baz');
 ```
