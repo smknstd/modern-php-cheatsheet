@@ -1156,7 +1156,7 @@ fn ($foo) => return $foo;
 
 #### Outer scope
 
-The short closure doesn't require the "use" keyword to be able to access properties from the outer scope :
+The short closure doesn't require the `use` keyword to be able to access properties from the outer scope :
 
 ```php
 $bar = 10;
@@ -1165,7 +1165,7 @@ $a = $baz(1);
 //$a = 11
 ```
 
-The keyword is not allowed :
+The keyword `use` is not allowed :
 
 ```php
 $bar = 10;
