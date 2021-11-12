@@ -41,6 +41,7 @@ When you struggle to understand a notion, I suggest you look for answers on the 
         + [Nullsafe operator](#nullsafe-operator)
         + [Spread operator](#spread-operator)
         + [Named arguments](#named-arguments)
+        + [Short closures](#short-closures)
 
 ## Notions
 
@@ -1112,3 +1113,68 @@ $r = add(1, ...$array); // PHP Error:  Unknown named parameter $d
 
 - [Named arguments in depth on stitcher's blof](https://stitcher.io/blog/php-8-named-arguments)
 - [Named Parameters on PHP.Watch](https://php.watch/versions/8.0/named-parameters)
+
+### Short closures
+
+![php-version-74](https://shields.io/badge/php->=7.4-blue)
+
+Short closures, also called arrow functions, are an alternative way of writing [anonymous functions](https://www.php.net/manual/en/functions.anonymous.php) in a shorter syntax. The main goal of short closures is to reduce verbosity when possible.
+
+```php
+$foo = fn ($bar) => $bar + 1;
+$a = $foo(1);
+// $a = 2
+```
+
+You cannot give a name to a short closure :
+
+```php
+fn foo($bar) => $bar + 1;
+// PHP Parse error: Syntax error, unexpected T_STRING, expecting '('
+```
+
+You can use short closure as function parameter :
+
+```php
+$myArray = [10,20,30];
+
+$total = array_reduce($myArray, fn ($carry, $item) => $carry + $item, 0)
+```
+
+Type hinting is allowed as in a normal function :
+
+```php
+fn (int $foo) : int => return $foo;
+```
+
+You don't need to use the `return` keyword as it is not allowed here :
+
+```php
+fn ($foo) => return $foo;
+// PHP Parse error: Syntax error, unexpected T_RETURN
+```
+
+#### Outer scope
+
+The short closure doesn't require the "use" keyword to be able to access properties from the outer scope :
+
+```php
+$bar = 10;
+$baz = fn ($foo) => return $foo + $bar;
+$a = $baz(1);
+//$a = 11
+```
+
+The keyword is not allowed :
+
+```php
+$bar = 10;
+fn ($foo) use ($bar) => return $foo + $bar;
+// PHP Parse error: Syntax error, unexpected T_USE, expecting T_DOUBLE_ARROW
+```
+
+You could use `$this` as in any other function :
+
+```php
+fn () => return $this->foo + 1;
+```
