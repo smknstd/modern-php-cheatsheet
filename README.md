@@ -1118,9 +1118,9 @@ $r = add(1, ...$array); // PHP Error:  Unknown named parameter $d
 
 ![php-version-74](https://shields.io/badge/php->=7.4-blue)
 
-Short closures, also called arrow functions, are an alternative way of writing [anonymous functions](https://www.php.net/manual/en/functions.anonymous.php) in a shorter syntax. The main goal of short closures is to reduce verbosity when possible.
+Short closures, also called arrow functions, are an alternative way of writing [anonymous functions](https://www.php.net/manual/en/functions.anonymous.php) in a shorter syntax. The main goal of short closures is to reduce verbosity when it is possible : if there is only a single expression.
 
-Here is an example of a simple closure :
+Here is an example of a simple closure with only one expression :
 
 ```php
 $foo = function ($bar) {
