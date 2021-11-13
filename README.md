@@ -1120,6 +1120,18 @@ $r = add(1, ...$array); // PHP Error:  Unknown named parameter $d
 
 Short closures, also called arrow functions, are an alternative way of writing [anonymous functions](https://www.php.net/manual/en/functions.anonymous.php) in a shorter syntax. The main goal of short closures is to reduce verbosity when possible.
 
+Here is an example of a simple closure :
+
+```php
+$foo = function ($bar) {
+    return $bar + 1;
+}
+$a = $foo(1);
+// $a = 2
+```
+
+You can write the same function with a short closure :
+
 ```php
 $foo = fn ($bar) => $bar + 1;
 $a = $foo(1);
@@ -1133,7 +1145,7 @@ fn foo($bar) => $bar + 1;
 // PHP Parse error: Syntax error, unexpected T_STRING, expecting '('
 ```
 
-You can use short closure as function parameter :
+You can use short closure as function parameter. For example as a "callable" parameter in PHP's [array_reduce](https://www.php.net/manual/en/function.array-reduce.php) :
 
 ```php
 $myArray = [10,20,30];
@@ -1176,5 +1188,5 @@ fn ($foo) use ($bar) => return $foo + $bar;
 You could use `$this` as in any other function :
 
 ```php
-fn () => return $this->foo + 1;
+fn () => $this->foo + 1;
 ```
