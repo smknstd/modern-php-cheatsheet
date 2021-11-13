@@ -1150,7 +1150,8 @@ You can use short closure as function parameter. For example as a "callable" par
 ```php
 $myArray = [10,20,30];
 
-$total = array_reduce($myArray, fn ($carry, $item) => $carry + $item, 0)
+$total = array_reduce($myArray, fn ($carry, $item) => $carry + $item, 0);
+// $total = 60
 ```
 
 Type hinting is allowed as in a normal function :
