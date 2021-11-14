@@ -1157,7 +1157,7 @@ $total = array_reduce($myArray, fn ($carry, $item) => $carry + $item, 0);
 Type hinting is allowed as in a normal function :
 
 ```php
-fn (int $foo) : int => return $foo;
+fn (int $foo) : int => $foo;
 ```
 
 You don't need to use the `return` keyword as it is not allowed here :
@@ -1173,7 +1173,7 @@ The short closure doesn't require the `use` keyword to be able to access propert
 
 ```php
 $bar = 10;
-$baz = fn ($foo) => return $foo + $bar;
+$baz = fn ($foo) => $foo + $bar;
 $a = $baz(1);
 //$a = 11
 ```
@@ -1182,7 +1182,7 @@ The keyword `use` is not allowed :
 
 ```php
 $bar = 10;
-fn ($foo) use ($bar) => return $foo + $bar;
+fn ($foo) use ($bar) => $foo + $bar;
 // PHP Parse error: Syntax error, unexpected T_USE, expecting T_DOUBLE_ARROW
 ```
 
