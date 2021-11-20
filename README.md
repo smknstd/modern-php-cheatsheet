@@ -43,6 +43,7 @@ When you struggle to understand a notion, I suggest you look for answers on the 
         + [Spread operator](#spread-operator)
         + [Named arguments](#named-arguments)
         + [Short closures](#short-closures)
+        + [Match expression](#match-expression)
 
 ## Notions
 
@@ -1279,4 +1280,72 @@ You could use `$this` as in any other function :
 
 ```php
 fn () => $this->foo + 1;
+```
+
+### Match expression
+
+![php-version-80](https://shields.io/badge/php->=8.0-blue)
+
+Since PHP 8.0, there is a new `match` syntax similar to the `switch` syntax. As each matching case must only contain one expression, it can't be used and replace a switch statement in every situation. It is significantly shorter and easier to read though.
+
+The match expression always returns a value. Each condition only allows a single expression, and it immediately returns the value and will not fall-through following conditions without an explicit `break` statement:
+
+```php
+$foo = 'baz';
+$a = match($foo) {
+    'bar' => 1,
+    'baz' => 2,
+    'qux' => 3,
+}
+// $a = 2
+```
+
+It throws an exception when the value can't match:
+
+```php
+$foo = 'qux';
+$a = match($foo) {
+    'bar' => 1,
+    'baz' => 2,
+}
+// PHP Error:  Unhandled match value of type string
+```
+
+But it supports a default condition:
+
+```php
+$foo = 'qux';
+$a = match($foo) {
+    'bar' => 1,
+    'baz' => 2,
+    default => 3,
+}
+// $a = 3
+```
+
+It allows multiple conditions in a single arm:
+
+```php
+$foo = 'bar';
+$a = match($foo) {
+    'bar', 'baz' => 1,
+    default => 2,
+}
+// $a = 1
+```
+
+It does strict type-safe comparison (without type coercion):
+
+```php
+function showType($param) {
+    return match ($param) {
+        1 => 'Integer',
+        '1' => 'String',
+        true => 'Boolean',
+    };
+}
+
+showType(1); // "Integer 1"
+showType('1'); // "String 1"
+showType(true); // "Bool true"
 ```
