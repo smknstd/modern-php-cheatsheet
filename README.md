@@ -1359,7 +1359,7 @@ showType(true); // "Boolean"
 
 ![php-version-80](https://shields.io/badge/php->=8.0-blue)
 
-Since PHP 8.0, there is a new interface named `Stringable`, that indicates a class has a `__toString()` magic method. PHP automatically adds the Stringable interface to all classes that implement a __toString() method.
+Since PHP 8.0, there is a new interface named `Stringable`, that indicates a class has a `__toString()` magic method. PHP automatically adds the Stringable interface to all classes that implement that method.
 
 ```php
 interface Stringable {
