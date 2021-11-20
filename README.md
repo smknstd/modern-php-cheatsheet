@@ -35,6 +35,7 @@ When you struggle to understand a notion, I suggest you look for answers on the 
     * [Table of contents](#table-of-contents)
     * [Notions](#notions)
         + [Function default parameter value](#function-default-parameter-value)
+        + [Trailing comma](#trailing-comma)
         + [Type declaration](#type-declaration)
         + [Destructuring arrays](#destructuring-arrays)
         + [Null Coalescing](#null-coalescing)
@@ -73,6 +74,94 @@ $a = myFunction(null);
 
 $b = myFunction($undefined); // PHP Warning:  Undefined variable $undefined
 // $b = null
+```
+
+### Trailing comma
+
+A trailing comma, also known as a dangling comma, is a comma symbol that is typed after the last item of a list of elements. One of the major benefits when used with multilines, is that [diff outputs are cleaner](https://medium.com/@nikgraf/why-you-should-enforce-dangling-commas-for-multiline-statements-d034c98e36f8).
+
+#### Array
+
+You can use trailing comma in arrays :
+
+```php
+$array = [
+    'foo',
+    'bar',
+];
+```
+
+#### Grouped use statement
+
+![php-version-72](https://shields.io/badge/php->=7.2-blue)
+
+Since PHP 7.2, you can use trailing comma in grouped use statement:
+
+```php
+use Symfony\Component\HttpKernel\{
+    Controller\ControllerResolverInterface,
+    Exception\NotFoundHttpException,
+    Event\PostResponseEvent,
+};
+```
+
+#### Function and method call
+
+![php-version-73](https://shields.io/badge/php->=7.3-blue)
+
+Since PHP 7.3, you can use trailing comma when calling a function:
+
+```php
+function myFunction($foo, $bar)
+{
+    return true;
+}
+$a = myFunction(
+    'baz',
+    'qux',
+);
+```
+
+and when calling a method:
+
+```php
+$f = new Foo();
+$f->myMethod(
+    'baz',
+    'qux',
+);
+```
+
+#### Function parameters
+
+![php-version-80](https://shields.io/badge/php->=8.0-blue)
+
+Since PHP 8.0, you can use trailing comma when declaring function parameters:
+
+```php
+function myFunction(
+    $foo,
+    $bar,
+)
+{
+    return true;
+}
+```
+
+#### Closure's use statement
+
+![php-version-80](https://shields.io/badge/php->=8.0-blue)
+
+Since PHP 8.0, you can use trailing comma with closure's use statement:
+
+```php
+function() use (
+    $foo,
+    $bar,
+)
+{
+    return true;
+}
 ```
 
 ### Type declaration
