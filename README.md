@@ -1383,7 +1383,7 @@ $a = myFunction(new Foo);
 // $a = 'bar'
 ```
 
-If a given class doesn't implement `__toString()`, you'll get an exception:
+If a given class doesn't implement `__toString()`, you'll get an error:
 
 ```php
 class Foo {
