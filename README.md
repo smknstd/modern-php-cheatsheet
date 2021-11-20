@@ -44,6 +44,7 @@ When you struggle to understand a notion, I suggest you look for answers on the 
         + [Named arguments](#named-arguments)
         + [Short closures](#short-closures)
         + [Match expression](#match-expression)
+        + [Stringable interface](#stringable-interface)
 
 ## Notions
 
@@ -186,7 +187,7 @@ $b = myFunction('foo'); // TypeError: myFunction(): Argument #1 ($param) must be
 You can set a return type to a function:
 
 ```php
-function myFunction() : int
+function myFunction(): int
 {
     return 'foo';
 }
@@ -196,7 +197,7 @@ $a = myFunction(); // TypeError: myFunction(): Return value must be of type int,
 When a function should not return something, you can use the type "void":
 
 ```php
-function myFunction() : void
+function myFunction(): void
 {
     return 'foo';
 }
@@ -206,7 +207,7 @@ function myFunction() : void
 You cannot return null either:
 
 ```php
-function myFunction() : void
+function myFunction(): void
 {
     return null;
 }
@@ -216,7 +217,7 @@ function myFunction() : void
 However, using return to exit the function is valid:
 
 ```php
-function myFunction() : void
+function myFunction(): void
 {
     return;
 }
@@ -246,7 +247,7 @@ $f->bar = 'baz'; // TypeError: Cannot assign string to property Foo::$bar of typ
 You can use a “union type” that accepts values of multiple different types, rather than a single one:
 
 ```php
-function myFunction(string|int|array $param) : string|int|array
+function myFunction(string|int|array $param): string|int|array
 {
     return $param;
 }
@@ -289,7 +290,7 @@ $a = myFunction(null); // TypeError: myFunction(): Argument #1 ($param) must be 
 If a function has a return type, it won't accept null value either:
 
 ```php
-function myFunction() : string
+function myFunction(): string
 {
     return null;
 }
@@ -321,12 +322,12 @@ $a = myFunction(null);
 It also works with return type:
 
 ```php
-function myFunction(?string $param) : ?string
+function myFunction(?string $param): ?string
 {
     return $param;
 }
 // or
-function myFunction(string|null $param) : string|null
+function myFunction(string|null $param): string|null
 {
     return $param;
 }
@@ -335,7 +336,7 @@ function myFunction(string|null $param) : string|null
 But void cannot be nullable:
 
 ```php
-function myFunction() : ?void
+function myFunction(): ?void
 {
    // some code
 } 
@@ -345,7 +346,7 @@ function myFunction() : ?void
 or
 
 ```php
-function myFunction() : void|null
+function myFunction(): void|null
 {
    // some code
 }
@@ -840,7 +841,7 @@ $a?->foo = 'bar'; // PHP Fatal error:  Can't use nullsafe operator in write cont
 Since PHP 5.6 (~ aug 2014), you can add a variadic parameter to any function that let you use an argument lists with variable-length:
 
 ```php
-function countParameters(string $param, string ...$options) : int
+function countParameters(string $param, string ...$options): int
 {
 
     foreach ($options as $option) {
@@ -888,7 +889,7 @@ function countParameters(string $param, string ...$options = [])
 When not typed, it accepts any value:
 
 ```php
-function countParameters(string $param, ...$options) : int
+function countParameters(string $param, ...$options): int
 {
     return 1 + count($options);
 }
@@ -900,7 +901,7 @@ $a = countParameters('foo', null, [], true);
 When typed, you have to use properly typed values:
 
 ```php
-function countParameters(string $param, string ...$options) : int
+function countParameters(string $param, string ...$options): int
 {
     return 1 + count($options);
 }
@@ -919,7 +920,7 @@ countParameters('foo', []);
 Arrays and traversable objects can be unpacked into argument lists when calling functions by using the spread operator:
 
 ```php
-function add(int $a, int $b, int $c) : int
+function add(int $a, int $b, int $c): int
 {
     return $a + $b + $c;
 }
@@ -932,7 +933,7 @@ $r = add(1, ...$array);
 The given array can have more elements than needed:
 
 ```php
-function add(int $a, int $b, int $c) : int
+function add(int $a, int $b, int $c): int
 {
     return $a + $b + $c;
 }
@@ -945,7 +946,7 @@ $r = add(1, ...$array);
 The given array can't have lesser elements than needed:
 
 ```php
-function add(int $a, int $b, int $c) : int
+function add(int $a, int $b, int $c): int
 {
     return $a + $b + $c;
 }
@@ -956,7 +957,7 @@ $r = add(1, ...$array); // TypeError: Too few arguments to function add(), 2 pas
 Except when some function arguments have a default value:
 
 ```php
-function add(int $a, int $b, int $c = 0) : int
+function add(int $a, int $b, int $c = 0): int
 {
     return $a + $b + $c;
 }
@@ -968,7 +969,7 @@ $r = add(1, ...$array);
 If an argument is typed and the passed value does not match the given type, you'll get an error:
 
 ```php
-function add(int $a, int $b, int $c) : int
+function add(int $a, int $b, int $c): int
 {
     return $a + $b + $c;
 }
@@ -1060,7 +1061,7 @@ $array2 = ['foo', ...$array1]; // PHP Error:  Only arrays and Traversables can b
 You can unpack the result of a function/method:
 
 ```php
-function getArray() : array
+function getArray(): array
 {
     return ['foo', 'bar'];
 }
@@ -1078,7 +1079,7 @@ Since PHP 8.0, it is possible to pass in arguments by name instead of their posi
 Considering a function like this:
 
 ```php
-function concat(string $first, string $second) : string
+function concat(string $first, string $second): string
 {
     return $first . ' ' . $second;
 }
@@ -1103,7 +1104,7 @@ $a = concat(second: 'bar', first: 'foo');
 You can skip optional parameters:
 
 ```php
-function orGate(bool $option1 = false, bool $option2 = false, bool $option3 = false) : bool
+function orGate(bool $option1 = false, bool $option2 = false, bool $option3 = false): bool
 {
    return $option1 || $option2 || $option3;
 }
@@ -1144,7 +1145,7 @@ $f = new Foo(first: 'bar', second: 'baz');
 You can use named arguments with a variadic parameter:
 
 ```php
-function showParams(string ...$params) : array
+function showParams(string ...$params): array
 {
     return $params;
 }
@@ -1157,7 +1158,7 @@ $a = showParams(first: 'foo', second: 'bar', third: 'baz');
 You can unpack an associative array as named arguments if keys match arguments names:
 
 ```php
-function add(int $a, int $b, int $c) : int
+function add(int $a, int $b, int $c): int
 {
     return $a + $b + $c;
 }
@@ -1172,7 +1173,7 @@ $r = add(1, ...$array);
 Order of the elements in the associative array doesn't matter:
 
 ```php
-function add(int $a, int $b, int $c) : int
+function add(int $a, int $b, int $c): int
 {
     return $a + $b + $c;
 }
@@ -1187,7 +1188,7 @@ $r = add(1, ...$array);
 If a key doesn't match an argument's name, you'll get an error:
 
 ```php
-function add(int $a, int $b, int $c) : int
+function add(int $a, int $b, int $c): int
 {
     return $a + $b + $c;
 }
@@ -1235,7 +1236,7 @@ fn foo($bar) => $bar + 1;
 // PHP Parse error: Syntax error, unexpected T_STRING, expecting '('
 ```
 
-You can use short closure as function parameter. For example as a "callable" parameter in PHP's [array_reduce](https://www.php.net/manual/en/function.array-reduce.php) :
+You can use short closure as function parameter. For example as a "callable" parameter in PHP's [array_reduce](https://www.php.net/manual/en/function.array-reduce.php):
 
 ```php
 $myArray = [10,20,30];
@@ -1247,7 +1248,7 @@ $total = array_reduce($myArray, fn ($carry, $item) => $carry + $item, 0);
 Type hinting is allowed as in a normal function :
 
 ```php
-fn (int $foo) : int => $foo;
+fn (int $foo): int => $foo;
 ```
 
 You don't need to use the `return` keyword as it is not allowed here :
@@ -1354,4 +1355,61 @@ showType(true); // "Boolean"
 
 - [Match expression on PHP.Watch](https://php.watch/versions/8.0/match-expression)
 
+### Stringable interface
 
+![php-version-80](https://shields.io/badge/php->=8.0-blue)
+
+Since PHP 8.0, there is a new interface named `Stringable`, that indicates a class has a `__toString()` magic method. PHP automatically adds the Stringable interface to all classes that implement a __toString() method.
+
+```php
+interface Stringable {
+    public function __toString(): string;
+}
+```
+
+When you define a parameter with `Stringable` type, it will check that the given class implements the `Stringable` interface:
+
+```php
+class Foo {
+    public function __toString(): string {
+        return 'bar';
+    }
+}
+
+function myFunction(Stringable $param): string {
+    return (string) $param;
+}
+$a = myFunction(new Foo);
+// $a = 'bar'
+```
+
+If a given class doesn't implement `__toString()`, you'll get an exception:
+
+```php
+class Foo {
+}
+
+function myFunction(Stringable $param): string {
+    return (string) $param;
+}
+$a = myFunction(new Foo);
+// TypeError: myFunction(): Argument #1 ($param) must be of type Stringable, Foo given
+```
+
+A stringable type doesn't accept string:
+
+```php
+function myFunction(Stringable $param): string {
+    return (string) $param;
+}
+$a = myFunction('foo');
+// TypeError: myFunction(): Argument #1 ($param) must be of type Stringable, string given
+```
+
+Of course, to accept both string and Stringable, you can use a union type:
+
+```php
+function myFunction(string|Stringable $param): string {
+    return (string) $param;
+}
+```
