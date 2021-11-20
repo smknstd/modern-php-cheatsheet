@@ -1345,9 +1345,9 @@ function showType($param) {
     };
 }
 
-showType(1); // "Integer 1"
-showType('1'); // "String 1"
-showType(true); // "Bool true"
+showType(1); // "Integer"
+showType('1'); // "String"
+showType(true); // "Boolean"
 ```
 
 #### External resource
