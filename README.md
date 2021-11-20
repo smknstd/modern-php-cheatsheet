@@ -1349,3 +1349,9 @@ showType(1); // "Integer 1"
 showType('1'); // "String 1"
 showType(true); // "Bool true"
 ```
+
+#### External resource
+
+- [Match expression on PHP.Watch](https://php.watch/versions/8.0/match-expression)
+
+
