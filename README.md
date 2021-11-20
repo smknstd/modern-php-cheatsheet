@@ -1334,7 +1334,7 @@ $a = match($foo) {
 // $a = 1
 ```
 
-It does strict type-safe comparison (without type coercion):
+It does strict type-safe comparison without type coercion (it's like using === instead of ==):
 
 ```php
 function showType($param) {
