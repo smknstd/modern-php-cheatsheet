@@ -266,7 +266,7 @@ Class Foo
 
 ![php-version-81](https://shields.io/badge/php->=8.1-blue)
 
-Since PHP 8.1, you can use an "intersection type" (also known as "pure") that enforce that a given value belong to every types. For example this param needs to implement both __Stringable__ and __Countable__ interfaces:
+Since PHP 8.1, you can use an "intersection type" (also known as "pure") that enforce that a given value belong to every types. For example this param needs to implement both ___Stringable___ and ___Countable___ interfaces:
 
 ```php
 function myFunction(Stringable&Countable $param): Stringable&Countable
