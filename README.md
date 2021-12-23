@@ -15,7 +15,7 @@ This document is a cheatsheet for PHP you will frequently encounter in modern pr
 
 This guide is not intended to teach you PHP from the ground up, but to help developers with basic knowledge who may struggle to get familiar with modern codebases (or let's say to learn Laravel or Symfony for instance) because of the new PHP concepts and features introduced over the years.
 
-> **Note:** Concepts introduced here are based on the most recent version of PHP available ([PHP 8.0](https://www.php.net/releases/8.0/en.php) at the time of the last update)
+> **Note:** Concepts introduced here are based on the most recent version of PHP available ([PHP 8.1](https://www.php.net/releases/8.1/en.php) at the time of the last update)
 
 ### Complementary Resources
 
