@@ -977,7 +977,7 @@ $array = ['foo', 'bar'];
 $r = add(1, ...$array); // TypeError: add(): Argument #2 ($b) must be of type int, string given
 ```
 
-Since PHP 8.0, it is possible to unpack an associative array as it will use [named arguments](#unpacking-named-arguments).
+Since PHP 8.0, it is possible to unpack an associative array (string-keyed) as it will use [named arguments](#unpacking-named-arguments).
 
 #### Array unpacking
 
@@ -1068,6 +1068,43 @@ function getArray(): array
 
 $array = [...getArray(), 'baz']; 
 // $array = ['foo', 'bar', 'baz']
+```
+
+##### Associative array
+
+![php-version-81](https://shields.io/badge/php->=8.1-blue)
+
+Since php 8.1, you can unpack associative array (string-keyed):
+
+```php
+$array1 = ['foo' => 'bar'];
+$array2 = [
+   'baz' => 'qux', 
+   ...$array1
+];
+// $array2 = ['baz' => 'qux', 'foo' => 'bar',]
+```
+
+You can unpack array with an already existing key:
+
+```php
+$array1 = ['foo' => 'bar'];
+$array2 = [
+   'foo' => 'baz', 
+   ...$array1
+];
+// $array2 = ['foo' => 'bar',]
+```
+
+You can unpack an empty array without error nor warning:
+
+```php
+$array1 = [];
+$array2 = [
+   ...$array1,
+   ...[]
+];
+// $array2 = []
 ```
 
 ### Named arguments
