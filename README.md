@@ -232,7 +232,7 @@ $a = myFunction();
 You can set a type to a class property:
 
 ```php
-Class Foo()
+Class Foo
 {
     public int $bar;
 }
@@ -244,7 +244,7 @@ $f->bar = 'baz'; // TypeError: Cannot assign string to property Foo::$bar of typ
 
 ![php-version-80](https://shields.io/badge/php->=8.0-blue)
 
-You can use a “union type” that accepts values of multiple different types, rather than a single one:
+Since PHP 8.0, you can use a “union type” that accepts values of multiple different types, rather than a single one:
 
 ```php
 function myFunction(string|int|array $param): string|int|array
@@ -256,11 +256,55 @@ function myFunction(string|int|array $param): string|int|array
 It also works with class property:
 
 ```php
-Class Foo()
+Class Foo
 {
     public string|int|array $bar;
 }
 ```
+
+#### Intersection type
+
+![php-version-81](https://shields.io/badge/php->=8.1-blue)
+
+Since PHP 8.1, you can use an "intersection type" (also known as "pure") that enforce that a given value belong to every types. For example this param needs to implement both __Stringable__ and __Countable__ interfaces:
+
+```php
+function myFunction(Stringable&Countable $param): Stringable&Countable
+{
+    return $param;
+}
+Class Foo
+{
+    public function __toString() {
+        return "something";
+    }
+}
+myFunction(new Foo());
+// TypeError: myFunction(): Argument #1 ($param) must be of type Stringable&Countable, Foo given
+```
+
+It also works with class property:
+
+```php
+Class Foo
+{
+    public Stringable&Countable $bar;
+}
+```
+
+Intersection type only supports class and interfaces. Scalar types (string, int, array, null, mixed, etc) are not allowed:
+
+```php
+function myFunction(string&Countable $param)
+{
+    return $param;
+}
+// PHP Fatal error:  Type string cannot be part of an intersection type
+```
+
+##### External resource
+
+- [Intersection types on PHP.Watch](https://php.watch/versions/8.1/intersection-types)
 
 #### Nullable type
 
@@ -356,7 +400,7 @@ function myFunction(): void|null
 You can set a nullable type to a class property:
 
 ```php
-Class Foo()
+Class Foo
 {
     public int|null $bar;
 }
@@ -1166,7 +1210,7 @@ $a = concat(first: 'foo', second: 'bar', third: 'baz');
 Named arguments also work with object constructor:
 
 ```php
-Class Foo()
+Class Foo
 {
     public function __construct(
         public string $first,
