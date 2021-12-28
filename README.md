@@ -28,15 +28,15 @@ When you struggle to understand a notion, I suggest you look for answers on the 
 
 ### Recent PHP releases
 
-| Major Version                                      |Release date|
-|----------------------------------------------------|---|
+| Version                                      |Release date|
+|----------------------------------------------|---|
 | [PHP 8.1](https://www.php.net/releases/8.1/en.php) |November 2021|
 | [PHP 8.0](https://www.php.net/releases/8.0/en.php) |November 2020|
-| PHP 7.4                                            |November 2019|
-| PHP 7.3                                            |December 2018|
-| PHP 7.2                                            |November 2017|
-| PHP 7.1                                            |December 2016|
-| PHP 7.0                                            |December 2015|
+| PHP 7.4                                      |November 2019|
+| PHP 7.3                                      |December 2018|
+| PHP 7.2                                      |November 2017|
+| PHP 7.1                                      |December 2016|
+| PHP 7.0                                      |December 2015|
 
 More infos on [php.net](https://www.php.net/supported-versions.php).
 
@@ -510,7 +510,7 @@ list($a, $b, $c) = $array; // PHP Warning:  Undefined array key 0 ...
 // $c = null
 ```
 
-But since PHP 7.1 (~ dec 2016), you can destruct it with another syntax based on keys:
+But since PHP 7.1, you can destruct it with another syntax based on keys:
 
 ```php
 list('foo' => $a, 'bar' => $b, 'baz' => $c) = $array;
@@ -551,7 +551,7 @@ list('moe' => $d) = $array; // PHP Warning:  Undefined array key "moe"
 
 ![php-version-70](https://shields.io/badge/php->=7.0-blue)
 
-Since PHP 7.0 (~ dec 2015), you can use the null coalescing operator to provide a fallback when a property is null with no error nor warning:
+Since PHP 7.0, you can use the null coalescing operator to provide a fallback when a property is null with no error nor warning:
 
 ```php
 $a = null;
@@ -897,7 +897,7 @@ $a?->foo = 'bar'; // PHP Fatal error:  Can't use nullsafe operator in write cont
 
 ![php-version-56](https://shields.io/badge/php->=5.6-blue)
 
-Since PHP 5.6 (~ aug 2014), you can add a variadic parameter to any function that let you use an argument lists with variable-length:
+Since PHP 5.6 (~ august 2014), you can add a variadic parameter to any function that let you use an argument lists with variable-length:
 
 ```php
 function countParameters(string $param, string ...$options): int
@@ -1054,7 +1054,7 @@ $array3 = array_merge($array1,$array2);
 // $array3 = ['baz', 'foo', 'bar']
 ```
 
-But since PHP 7.4 (~ nov 2019), you can unpack indexed arrays, with spread operator:
+But since PHP 7.4, you can unpack indexed arrays, with spread operator:
 
 ```php
 $array1 = ['foo', 'bar'];
