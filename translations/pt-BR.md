@@ -778,7 +778,7 @@ function countParameters(string ...$options, string $param)
 // PHP Fatal error: Only the last parameter can be variadic
 ```
 
-Você pode definir um ou mais parâmetros variáveis:
+Você pode ter apenas um parâmetro variável:
 
 ```php
 function countParameters(string ...$options, string ...$moreOptions)
