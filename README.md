@@ -26,12 +26,27 @@ When you struggle to understand a notion, I suggest you look for answers on the 
 - [PHP The Right Way](https://phptherightway.com/)
 - [StackOverflow](https://stackoverflow.com/questions/tagged/php)
 
+### Recent PHP releases
+
+| Major Version                                      |Release date|
+|----------------------------------------------------|---|
+| [PHP 8.1](https://www.php.net/releases/8.1/en.php) |November 2021|
+| [PHP 8.0](https://www.php.net/releases/8.0/en.php) |November 2020|
+| PHP 7.4                                            |November 2019|
+| PHP 7.3                                            |December 2018|
+| PHP 7.2                                            |November 2017|
+| PHP 7.1                                            |December 2016|
+| PHP 7.0                                            |December 2015|
+
+More infos on [php.net](https://www.php.net/supported-versions.php).
+
 ## Table of Contents
 
 - [Modern PHP cheatsheet](#modern-php-cheatsheet)
     * [Introduction](#introduction)
         + [Motivation](#motivation)
         + [Complementary resources](#complementary-resources)
+        + [Recent PHP releases](#recent-php-releases)
     * [Table of contents](#table-of-contents)
     * [Notions](#notions)
         + [Function default parameter value](#function-default-parameter-value)
