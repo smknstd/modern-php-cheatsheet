@@ -486,6 +486,41 @@ list($a, $b, $c, $d) = $array; // PHP Warning:  Undefined array key 3
 // $d = null;
 ```
 
+You can also swap variables with destructuring assignments, considering you have variable like:
+```php
+$a = 'foo';
+$b = 'bar';
+```
+
+So if you want to swap `$a` and `$b` instead of using a temporary variable like this:
+
+```php
+$temp = $a;
+$a = $b;
+$b = $temp;
+
+// $a = 'bar'
+// $b = 'foo'
+```
+
+You can swap it using the list syntax:
+
+```php
+list($a, $b) = [$b, $a];
+
+// $a = 'bar'
+// $b = 'foo'
+```
+
+Or since PHP 7.1, the shorthand syntax:
+
+```php
+[$a, $b] = [$b, $a];
+
+// $a = 'bar'
+// $b = 'foo'
+```
+
 #### Associative array
 
 ![php-version-71](https://shields.io/badge/php->=7.1-blue)
