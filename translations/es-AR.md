@@ -7,7 +7,7 @@
 
 [![Tweet for help](https://img.shields.io/twitter/follow/smknstd?label=Tweet%20%40smknstd&style=social)](https://twitter.com/smknstd/)
 
-Traducción por: [Cristian Ferreyra](https://github.com/backendrulz)
+Traducción por: [Cristian Ferreyra](https://github.com/backendrulz) [![backendrulz](https://img.shields.io/twitter/follow/backendrulz?label=Tweet%20%40backendrulz&style=social)](https://twitter.com/backendrulz/)
 > **Nota de traducción:** Elegí no traducir algunos términos ya que son extremadamente técnicos y podrían dificultar el aprendizaje de futuros lectores.
 
 ## Introducción
