@@ -1489,3 +1489,61 @@ showType(true); // "Boolean"
 
 - [Match expression on PHP.Watch](https://php.watch/versions/8.0/match-expression)
 
+### Interfaz Stringable
+
+![php-version-80](https://shields.io/badge/php->=8.0-blue)
+
+Desde PHP 8.0, hay una nueva interfaz llamada `Stringable`, que indica que una clase tiene un método mágico `__toString()`. PHP agrega automáticamente la interfaz `Stringable` a todas las clases que implementan ese método.
+
+```php
+interface Stringable {
+    public function __toString(): string;
+}
+```
+
+Cuando se define un parámetro con el tipo `Stringable`, comprobará que la clase dada implementa la interfaz `Stringable`:
+
+```php
+class Foo {
+    public function __toString(): string {
+        return 'bar';
+    }
+}
+
+function myFunction(Stringable $param): string {
+    return (string) $param;
+}
+$a = myFunction(new Foo);
+// $a = 'bar'
+```
+
+Si una clase dada no implementa `__toString()`, obtendrá un error:
+
+```php
+class Foo {
+}
+
+function myFunction(Stringable $param): string {
+    return (string) $param;
+}
+$a = myFunction(new Foo);
+// TypeError: myFunction(): Argument #1 ($param) must be of type Stringable, Foo given
+```
+
+Un tipo `Stringable` no acepta `string`:
+
+```php
+function myFunction(Stringable $param): string {
+    return (string) $param;
+}
+$a = myFunction('foo');
+// TypeError: myFunction(): Argument #1 ($param) must be of type Stringable, string given
+```
+
+Por supuesto, para aceptar tanto `string` como `Stringable`, puede usar un tipo de unión:
+
+```php
+function myFunction(string|Stringable $param): string {
+    return (string) $param;
+}
+```
