@@ -1417,3 +1417,75 @@ Podés usar `$this` como en cualquier otra función:
 fn () => $this->foo + 1;
 ```
 
+### Expresión de coincidencia Match
+
+![php-version-80](https://shields.io/badge/php->=8.0-blue)
+
+Desde PHP 8.0, existe una nueva sintaxis `match` similar a la sintaxis `switch`. Como cada caso coincidente solo debe contener una expresión, no se puede usar y reemplazar una declaración de cambio en cada situación. Sin embargo, es significativamente más corto y más fácil de leer.
+
+La expresión `match` siempre devuelve un valor. Cada condición solo permite una sola expresión, e inmediatamente devuelve el valor y no fallará en las siguientes condiciones sin una declaración explícita de `break`:
+
+```php
+$foo = 'baz';
+$a = match($foo) {
+    'bar' => 1,
+    'baz' => 2,
+    'qux' => 3,
+}
+// $a = 2
+```
+
+Lanza una excepción cuando el valor no puede coincidir:
+
+```php
+$foo = 'qux';
+$a = match($foo) {
+    'bar' => 1,
+    'baz' => 2,
+}
+// PHP Error:  Unhandled match value of type string
+```
+
+Pero admite una condición predeterminada:
+
+```php
+$foo = 'qux';
+$a = match($foo) {
+    'bar' => 1,
+    'baz' => 2,
+    default => 3,
+}
+// $a = 3
+```
+
+Permite múltiples condiciones en un solo brazo:
+
+```php
+$foo = 'bar';
+$a = match($foo) {
+    'bar', 'baz' => 1,
+    default => 2,
+}
+// $a = 1
+```
+
+Hace una comparación estricta de tipo seguro sin coerción de tipo (es como usar `===` en lugar de `==`):
+
+```php
+function showType($param) {
+    return match ($param) {
+        1 => 'Integer',
+        '1' => 'String',
+        true => 'Boolean',
+    };
+}
+
+showType(1); // "Integer"
+showType('1'); // "String"
+showType(true); // "Boolean"
+```
+
+#### Recurso externo
+
+- [Match expression on PHP.Watch](https://php.watch/versions/8.0/match-expression)
+
