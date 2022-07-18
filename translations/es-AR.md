@@ -280,6 +280,50 @@ Class Foo()
 }
 ```
 
+#### Tipo de intersección
+
+![php-version-81](https://shields.io/badge/php->=8.1-blue)
+
+Desde PHP 8.1, podés usar un "tipo de intersección" (también conocido como "puro") que exige que un valor dado pertenezca a todos los tipos. Por ejemplo, este parámetro necesita implementar las interfaces *Stringable* y *Countable*:
+
+```php
+function myFunction(Stringable&Countable $param): Stringable&Countable
+{
+    return $param;
+}
+Class Foo
+{
+    public function __toString() {
+        return "something";
+    }
+}
+myFunction(new Foo());
+// TypeError: myFunction(): Argument #1 ($param) must be of type Stringable&Countable, Foo given
+```
+
+También funciona con propiedades de clase:
+
+```php
+Class Foo
+{
+    public Stringable&Countable $bar;
+}
+```
+
+El tipo de intersección solo admite clases e interfaces. Los tipos escalares (string, int, array, null, mixed, etc.) no están permitidos:
+
+```php
+function myFunction(string&Countable $param)
+{
+    return $param;
+}
+// PHP Fatal error:  Type string cannot be part of an intersection type
+```
+
+##### Recurso externo
+
+- [Intersection types on PHP.Watch](https://php.watch/versions/8.1/intersection-types)
+
 #### Tipo Nullable
 
 ![php-version-71](https://shields.io/badge/php->=7.1-blue)
