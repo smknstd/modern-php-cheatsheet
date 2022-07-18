@@ -489,6 +489,41 @@ list($a, $b, $c, $d) = $array; // PHP Warning:  Undefined array key 3
 // $d = null;
 ```
 
+También podés intercambiar variables con asignaciones de desestructuración, considerando que tenés variables como:
+```php
+$a = 'foo';
+$b = 'bar';
+```
+
+Entonces, si necesitás intercambiar `$a` y `$b` en lugar de usar una variable temporal como esta:
+
+```php
+$temp = $a;
+$a = $b;
+$b = $temp;
+
+// $a = 'bar'
+// $b = 'foo'
+```
+
+Podés intercambiarlas usando la sintaxis de lista:
+
+```php
+list($a, $b) = [$b, $a];
+
+// $a = 'bar'
+// $b = 'foo'
+```
+
+O desde PHP 7.1, la sintaxis abreviada:
+
+```php
+[$a, $b] = [$b, $a];
+
+// $a = 'bar'
+// $b = 'foo'
+```
+
 #### Matriz asociativa
 
 ![php-version-71](https://shields.io/badge/php->=7.1-blue)
