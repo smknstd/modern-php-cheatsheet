@@ -29,6 +29,20 @@ Cuando tengas dificultad para comprender un concepto, te sugiero que busques res
 - [PHP The Right Way](https://phptherightway.com/)
 - [StackOverflow](https://stackoverflow.com/questions/tagged/php)
 
+### Lanzamientos recientes de PHP
+
+| Version                                      |Fecha de lanzamiento|
+|----------------------------------------------|---|
+| [PHP 8.1](https://www.php.net/releases/8.1/es.php) |Noviembre 2021|
+| [PHP 8.0](https://www.php.net/releases/8.0/es.php) |Noviembre 2020|
+| PHP 7.4                                      |Noviembre 2019|
+| PHP 7.3                                      |Diciembre 2018|
+| PHP 7.2                                      |Noviembre 2017|
+| PHP 7.1                                      |Diciembre 2016|
+| PHP 7.0                                      |Diciembre 2015|
+
+Mas información en [php.net](https://www.php.net/supported-versions.php).
+
 ## Tabla de contenidos
 
 - [PHP moderno cheatsheet](#php-moderno-cheatsheet)
