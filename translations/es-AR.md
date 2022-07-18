@@ -49,15 +49,20 @@ Mas información en [php.net](https://www.php.net/supported-versions.php).
     * [Introducción](#introducción)
         + [Motivación](#motivación)
         + [Recursos complementarios](#recursos-complementarios)
+        + [Lanzamientos recientes de PHP](#lanzamientos-recientes-de-php)
     * [Tabla de contenidos](#tabla-de-contenidos)
     * [Fundamentos](#fundamentos)
         + [Parámetro por defecto de función](#parámetro-por-defecto-de-función)
+        + [Coma final](#coma-final)
         + [Declaración de tipo](#declaración-de-tipo)
         + [Desestructuración de matrices](#desestructuración-de-matrices)
         + [Null Coalescing](#null-coalescing)
         + [Operador Nullsafe](#operador-nullsafe)
         + [Operador Spread](#operador-spread)
         + [Argumentos nombrados](#argumentos-nombrados)
+        + [Funciones flecha](#funciones-flecha)
+        + [Expresión de coincidencia Match](#expresión-de-coincidencia-match)
+        + [Interfaz Stringable](#interfaz-stringable)
 
 ## Fundamentos
 
