@@ -96,6 +96,94 @@ $b = myFunction($undefined); // PHP Warning:  Undefined variable $undefined
 // $b = null
 ```
 
+### Coma final
+
+Una coma final es un símbolo de coma que se escribe después del último elemento de una lista de elementos. Uno de los principales beneficios cuando se usa con multilíneas es que [las diferencias son más limpias](https://medium.com/@nikgraf/why-you-should-enforce-dangling-commas-for-multiline-statements-d034c98e36f8).
+
+#### Matriz
+
+Podés usar una coma final en matrices:
+
+```php
+$array = [
+    'foo',
+    'bar',
+];
+```
+
+#### Declaración de uso agrupado
+
+![php-version-72](https://shields.io/badge/php->=7.2-blue)
+
+Desde PHP 7.2, podés usar una coma final en declaraciones de uso agrupadas:
+
+```php
+use Symfony\Component\HttpKernel\{
+    Controller\ControllerResolverInterface,
+    Exception\NotFoundHttpException,
+    Event\PostResponseEvent,
+};
+```
+
+#### Llamada de función y método
+
+![php-version-73](https://shields.io/badge/php->=7.3-blue)
+
+Desde PHP 7.3, podés usar una coma final al llamar a una función:
+
+```php
+function myFunction($foo, $bar)
+{
+    return true;
+}
+$a = myFunction(
+    'baz',
+    'qux',
+);
+```
+
+y al llamar a un método:
+
+```php
+$f = new Foo();
+$f->myMethod(
+    'baz',
+    'qux',
+);
+```
+
+#### Parámetros de función
+
+![php-version-80](https://shields.io/badge/php->=8.0-blue)
+
+Desde PHP 8.0, podés usar una coma final al declarar los parámetros de una función:
+
+```php
+function myFunction(
+    $foo,
+    $bar,
+)
+{
+    return true;
+}
+```
+
+#### Declaración de uso
+
+![php-version-80](https://shields.io/badge/php->=8.0-blue)
+
+Desde PHP 8.0, podés usar una coma final en la declaración de uso:
+
+```php
+function() use (
+    $foo,
+    $bar,
+)
+{
+    return true;
+}
+```
+
 ### Declaración de tipo
 
 ![php-version-70](https://shields.io/badge/php->=7.0-blue)
