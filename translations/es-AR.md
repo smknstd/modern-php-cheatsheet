@@ -18,7 +18,7 @@ Este documento es un cheatsheet para PHP con código que encontrará con frecuen
 
 Esta guía no está destinada a enseñarte PHP desde cero, sino a ayudar a los desarrolladores con conocimientos básicos que pueden tener dificultades para familiarizarse con las bases de código modernas (o para aprender Laravel o Symfony, por ejemplo) debido a los nuevos conceptos y características que PHP ha introducido a lo largo de los años.
 
-> **Nota:** Los conceptos presentados acá se basan en la versión más reciente de PHP disponible ([PHP 8.0] (https://www.php.net/releases/8.0/en.php) en el momento de la última actualización)
+> **Nota:** Los conceptos presentados acá se basan en la versión más reciente de PHP disponible ([PHP 8.1] (https://www.php.net/releases/8.1/en.php) en el momento de la última actualización)
 
 ### Recursos complementarios
 
