@@ -765,7 +765,7 @@ $b = $a->baz ?? 'fallback';
 
 ##### Método de objeto
 
-También puede utilizar el operador null coalescing en la llamada al método de un objeto. Si el método existe, entonces no se activa el respaldo:
+También podés utilizar el operador null coalescing en la llamada al método de un objeto. Si el método existe, entonces no se activa el respaldo:
 
 ```php
 class Foo
