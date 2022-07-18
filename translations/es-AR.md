@@ -1338,3 +1338,82 @@ $r = add(1, ...$array); // PHP Error:  Unknown named parameter $d
 
 - [Named arguments in depth on stitcher's blof](https://stitcher.io/blog/php-8-named-arguments)
 - [Named Parameters on PHP.Watch](https://php.watch/versions/8.0/named-parameters)
+
+### Funciones flecha
+
+![php-version-74](https://shields.io/badge/php->=7.4-blue)
+
+Las funciones flecha son una alternativa a las [funciones anónimas](https://www.php.net/manual/es/functions.anonymous.php) usando una sintaxis mas corta. El objetivo principal es reducir la verbosidad cuando sea posible: si solo hay una expresión.
+
+Acá hay un ejemplo de una función simple con una sola expresión:
+
+```php
+$foo = function ($bar) {
+    return $bar + 1;
+}
+$a = $foo(1);
+// $a = 2
+```
+
+Podés escribir la misma función usando una función flecha:
+
+```php
+$foo = fn ($bar) => $bar + 1;
+$a = $foo(1);
+// $a = 2
+```
+
+No le podés asignar un nombre a una función flecha:
+
+```php
+fn foo($bar) => $bar + 1;
+// PHP Parse error: Syntax error, unexpected T_STRING, expecting '('
+```
+
+Podés usar una función flecha como un parámetro. Por ejemplo, como un parámetro "invocable" en [array_reduce](https://www.php.net/manual/es/function.array-reduce.php):
+
+```php
+$myArray = [10,20,30];
+
+$total = array_reduce($myArray, fn ($carry, $item) => $carry + $item, 0);
+// $total = 60
+```
+
+Se permite la sugerencia de tipo como en una función normal:
+
+```php
+fn (int $foo): int => $foo;
+```
+
+No es necesario usar `return` ya que no está permitido:
+
+```php
+fn ($foo) => return $foo;
+// PHP Parse error: Syntax error, unexpected T_RETURN
+```
+
+#### Ámbito exterior
+
+La función flecha requiere la palabra clave `use` para poder acceder a las propiedades desde el ámbito externo:
+
+```php
+$bar = 10;
+$baz = fn ($foo) => $foo + $bar;
+$a = $baz(1);
+//$a = 11
+```
+
+La palabra clave `use` no está permitida:
+
+```php
+$bar = 10;
+fn ($foo) use ($bar) => $foo + $bar;
+// PHP Parse error: Syntax error, unexpected T_USE, expecting T_DOUBLE_ARROW
+```
+
+Podés usar `$this` como en cualquier otra función:
+
+```php
+fn () => $this->foo + 1;
+```
+
