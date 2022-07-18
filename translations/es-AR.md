@@ -1167,6 +1167,43 @@ $array = [...getArray(), 'baz'];
 // $array = ['foo', 'bar', 'baz']
 ```
 
+##### Matriz asociativa
+
+![php-version-81](https://shields.io/badge/php->=8.1-blue)
+
+Desde php 8.1, podés desempaquetar una matriz asociativa (con clave de cadena):
+
+```php
+$array1 = ['foo' => 'bar'];
+$array2 = [
+   'baz' => 'qux',
+   ...$array1
+];
+// $array2 = ['baz' => 'qux', 'foo' => 'bar',]
+```
+
+Podés desempaquetar la matriz con una clave ya existente:
+
+```php
+$array1 = ['foo' => 'bar'];
+$array2 = [
+   'foo' => 'baz',
+   ...$array1
+];
+// $array2 = ['foo' => 'bar',]
+```
+
+Podés desempaquetar una matriz vacía sin error ni advertencia:
+
+```php
+$array1 = [];
+$array2 = [
+   ...$array1,
+   ...[]
+];
+// $array2 = []
+```
+
 ### Argumentos Nombrados
 
 ![php-version-80](https://shields.io/badge/php->=8.0-blue)
