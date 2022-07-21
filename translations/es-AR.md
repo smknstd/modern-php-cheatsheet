@@ -7,7 +7,7 @@
 
 [![Tweet for help](https://img.shields.io/twitter/follow/smknstd?label=Tweet%20%40smknstd&style=social)](https://twitter.com/smknstd/)
 
-Traducción por: [Cristian Ferreyra](https://github.com/backendrulz)
+Traducción por: [Cristian Ferreyra](https://github.com/backendrulz) [![backendrulz](https://img.shields.io/twitter/follow/backendrulz?label=Tweet%20%40backendrulz&style=social)](https://twitter.com/backendrulz/)
 > **Nota de traducción:** Elegí no traducir algunos términos ya que son extremadamente técnicos y podrían dificultar el aprendizaje de futuros lectores.
 
 ## Introducción
@@ -18,7 +18,7 @@ Este documento es un cheatsheet para PHP con código que encontrará con frecuen
 
 Esta guía no está destinada a enseñarte PHP desde cero, sino a ayudar a los desarrolladores con conocimientos básicos que pueden tener dificultades para familiarizarse con las bases de código modernas (o para aprender Laravel o Symfony, por ejemplo) debido a los nuevos conceptos y características que PHP ha introducido a lo largo de los años.
 
-> **Nota:** Los conceptos presentados acá se basan en la versión más reciente de PHP disponible ([PHP 8.0] (https://www.php.net/releases/8.0/en.php) en el momento de la última actualización)
+> **Nota:** Los conceptos presentados acá se basan en la versión más reciente de PHP disponible ([PHP 8.1] (https://www.php.net/releases/8.1/es.php) en el momento de la última actualización)
 
 ### Recursos complementarios
 
@@ -29,21 +29,40 @@ Cuando tengas dificultad para comprender un concepto, te sugiero que busques res
 - [PHP The Right Way](https://phptherightway.com/)
 - [StackOverflow](https://stackoverflow.com/questions/tagged/php)
 
+### Lanzamientos recientes de PHP
+
+| Version                                      |Fecha de lanzamiento|
+|----------------------------------------------|---|
+| [PHP 8.1](https://www.php.net/releases/8.1/es.php) |Noviembre 2021|
+| [PHP 8.0](https://www.php.net/releases/8.0/es.php) |Noviembre 2020|
+| PHP 7.4                                      |Noviembre 2019|
+| PHP 7.3                                      |Diciembre 2018|
+| PHP 7.2                                      |Noviembre 2017|
+| PHP 7.1                                      |Diciembre 2016|
+| PHP 7.0                                      |Diciembre 2015|
+
+Mas información en [php.net](https://www.php.net/supported-versions.php).
+
 ## Tabla de contenidos
 
 - [PHP moderno cheatsheet](#php-moderno-cheatsheet)
     * [Introducción](#introducción)
         + [Motivación](#motivación)
         + [Recursos complementarios](#recursos-complementarios)
+        + [Lanzamientos recientes de PHP](#lanzamientos-recientes-de-php)
     * [Tabla de contenidos](#tabla-de-contenidos)
     * [Fundamentos](#fundamentos)
         + [Parámetro por defecto de función](#parámetro-por-defecto-de-función)
+        + [Coma final](#coma-final)
         + [Declaración de tipo](#declaración-de-tipo)
         + [Desestructuración de matrices](#desestructuración-de-matrices)
         + [Null Coalescing](#null-coalescing)
         + [Operador Nullsafe](#operador-nullsafe)
         + [Operador Spread](#operador-spread)
         + [Argumentos nombrados](#argumentos-nombrados)
+        + [Funciones flecha](#funciones-flecha)
+        + [Expresión de coincidencia Match](#expresión-de-coincidencia-match)
+        + [Interfaz Stringable](#interfaz-stringable)
 
 ## Fundamentos
 
@@ -75,6 +94,94 @@ $a = myFunction(null);
 
 $b = myFunction($undefined); // PHP Warning:  Undefined variable $undefined
 // $b = null
+```
+
+### Coma final
+
+Una coma final es un símbolo de coma que se escribe después del último elemento de una lista de elementos. Uno de los principales beneficios cuando se usa con multilíneas es que [las diferencias son más limpias](https://medium.com/@nikgraf/why-you-should-enforce-dangling-commas-for-multiline-statements-d034c98e36f8).
+
+#### Matriz
+
+Podés usar una coma final en matrices:
+
+```php
+$array = [
+    'foo',
+    'bar',
+];
+```
+
+#### Declaración de uso agrupado
+
+![php-version-72](https://shields.io/badge/php->=7.2-blue)
+
+Desde PHP 7.2, podés usar una coma final en declaraciones de uso agrupadas:
+
+```php
+use Symfony\Component\HttpKernel\{
+    Controller\ControllerResolverInterface,
+    Exception\NotFoundHttpException,
+    Event\PostResponseEvent,
+};
+```
+
+#### Llamada de función y método
+
+![php-version-73](https://shields.io/badge/php->=7.3-blue)
+
+Desde PHP 7.3, podés usar una coma final al llamar a una función:
+
+```php
+function myFunction($foo, $bar)
+{
+    return true;
+}
+$a = myFunction(
+    'baz',
+    'qux',
+);
+```
+
+y al llamar a un método:
+
+```php
+$f = new Foo();
+$f->myMethod(
+    'baz',
+    'qux',
+);
+```
+
+#### Parámetros de función
+
+![php-version-80](https://shields.io/badge/php->=8.0-blue)
+
+Desde PHP 8.0, podés usar una coma final al declarar los parámetros de una función:
+
+```php
+function myFunction(
+    $foo,
+    $bar,
+)
+{
+    return true;
+}
+```
+
+#### Declaración de uso
+
+![php-version-80](https://shields.io/badge/php->=8.0-blue)
+
+Desde PHP 8.0, podés usar una coma final en la declaración de uso:
+
+```php
+function() use (
+    $foo,
+    $bar,
+)
+{
+    return true;
+}
 ```
 
 ### Declaración de tipo
@@ -172,6 +279,50 @@ Class Foo()
     public string|int|array $bar;
 }
 ```
+
+#### Tipo de intersección
+
+![php-version-81](https://shields.io/badge/php->=8.1-blue)
+
+Desde PHP 8.1, podés usar un "tipo de intersección" (también conocido como "puro") que exige que un valor dado pertenezca a todos los tipos. Por ejemplo, este parámetro necesita implementar las interfaces *Stringable* y *Countable*:
+
+```php
+function myFunction(Stringable&Countable $param): Stringable&Countable
+{
+    return $param;
+}
+Class Foo
+{
+    public function __toString() {
+        return "something";
+    }
+}
+myFunction(new Foo());
+// TypeError: myFunction(): Argument #1 ($param) must be of type Stringable&Countable, Foo given
+```
+
+También funciona con propiedades de clase:
+
+```php
+Class Foo
+{
+    public Stringable&Countable $bar;
+}
+```
+
+El tipo de intersección solo admite clases e interfaces. Los tipos escalares (string, int, array, null, mixed, etc.) no están permitidos:
+
+```php
+function myFunction(string&Countable $param)
+{
+    return $param;
+}
+// PHP Fatal error:  Type string cannot be part of an intersection type
+```
+
+##### Recurso externo
+
+- [Intersection types on PHP.Watch](https://php.watch/versions/8.1/intersection-types)
 
 #### Tipo Nullable
 
@@ -336,6 +487,41 @@ list($a, $b, $c, $d) = $array; // PHP Warning:  Undefined array key 3
 // $b = 'bar'
 // $c = 'baz'
 // $d = null;
+```
+
+También podés intercambiar variables con asignaciones de desestructuración, considerando que tenés variables como:
+```php
+$a = 'foo';
+$b = 'bar';
+```
+
+Entonces, si necesitás intercambiar `$a` y `$b` en lugar de usar una variable temporal como esta:
+
+```php
+$temp = $a;
+$a = $b;
+$b = $temp;
+
+// $a = 'bar'
+// $b = 'foo'
+```
+
+Podés intercambiarlas usando la sintaxis de lista:
+
+```php
+list($a, $b) = [$b, $a];
+
+// $a = 'bar'
+// $b = 'foo'
+```
+
+O desde PHP 7.1, la sintaxis abreviada:
+
+```php
+[$a, $b] = [$b, $a];
+
+// $a = 'bar'
+// $b = 'foo'
 ```
 
 #### Matriz asociativa
@@ -579,7 +765,7 @@ $b = $a->baz ?? 'fallback';
 
 ##### Método de objeto
 
-También puede utilizar el operador null coalescing en la llamada al método de un objeto. Si el método existe, entonces no se activa el respaldo:
+También podés utilizar el operador null coalescing en la llamada al método de un objeto. Si el método existe, entonces no se activa el respaldo:
 
 ```php
 class Foo
@@ -981,6 +1167,43 @@ $array = [...getArray(), 'baz'];
 // $array = ['foo', 'bar', 'baz']
 ```
 
+##### Matriz asociativa
+
+![php-version-81](https://shields.io/badge/php->=8.1-blue)
+
+Desde php 8.1, podés desempaquetar una matriz asociativa (con clave de cadena):
+
+```php
+$array1 = ['foo' => 'bar'];
+$array2 = [
+   'baz' => 'qux',
+   ...$array1
+];
+// $array2 = ['baz' => 'qux', 'foo' => 'bar',]
+```
+
+Podés desempaquetar la matriz con una clave ya existente:
+
+```php
+$array1 = ['foo' => 'bar'];
+$array2 = [
+   'foo' => 'baz',
+   ...$array1
+];
+// $array2 = ['foo' => 'bar',]
+```
+
+Podés desempaquetar una matriz vacía sin error ni advertencia:
+
+```php
+$array1 = [];
+$array2 = [
+   ...$array1,
+   ...[]
+];
+// $array2 = []
+```
+
 ### Argumentos Nombrados
 
 ![php-version-80](https://shields.io/badge/php->=8.0-blue)
@@ -1115,3 +1338,212 @@ $r = add(1, ...$array); // PHP Error:  Unknown named parameter $d
 
 - [Named arguments in depth on stitcher's blof](https://stitcher.io/blog/php-8-named-arguments)
 - [Named Parameters on PHP.Watch](https://php.watch/versions/8.0/named-parameters)
+
+### Funciones flecha
+
+![php-version-74](https://shields.io/badge/php->=7.4-blue)
+
+Las funciones flecha son una alternativa a las [funciones anónimas](https://www.php.net/manual/es/functions.anonymous.php) usando una sintaxis mas corta. El objetivo principal es reducir la verbosidad cuando sea posible: si solo hay una expresión.
+
+Acá hay un ejemplo de una función simple con una sola expresión:
+
+```php
+$foo = function ($bar) {
+    return $bar + 1;
+}
+$a = $foo(1);
+// $a = 2
+```
+
+Podés escribir la misma función usando una función flecha:
+
+```php
+$foo = fn ($bar) => $bar + 1;
+$a = $foo(1);
+// $a = 2
+```
+
+No le podés asignar un nombre a una función flecha:
+
+```php
+fn foo($bar) => $bar + 1;
+// PHP Parse error: Syntax error, unexpected T_STRING, expecting '('
+```
+
+Podés usar una función flecha como un parámetro. Por ejemplo, como un parámetro "invocable" en [array_reduce](https://www.php.net/manual/es/function.array-reduce.php):
+
+```php
+$myArray = [10,20,30];
+
+$total = array_reduce($myArray, fn ($carry, $item) => $carry + $item, 0);
+// $total = 60
+```
+
+Se permite la sugerencia de tipo como en una función normal:
+
+```php
+fn (int $foo): int => $foo;
+```
+
+No es necesario usar `return` ya que no está permitido:
+
+```php
+fn ($foo) => return $foo;
+// PHP Parse error: Syntax error, unexpected T_RETURN
+```
+
+#### Ámbito exterior
+
+La función flecha requiere la palabra clave `use` para poder acceder a las propiedades desde el ámbito externo:
+
+```php
+$bar = 10;
+$baz = fn ($foo) => $foo + $bar;
+$a = $baz(1);
+//$a = 11
+```
+
+La palabra clave `use` no está permitida:
+
+```php
+$bar = 10;
+fn ($foo) use ($bar) => $foo + $bar;
+// PHP Parse error: Syntax error, unexpected T_USE, expecting T_DOUBLE_ARROW
+```
+
+Podés usar `$this` como en cualquier otra función:
+
+```php
+fn () => $this->foo + 1;
+```
+
+### Expresión de coincidencia Match
+
+![php-version-80](https://shields.io/badge/php->=8.0-blue)
+
+Desde PHP 8.0, existe una nueva sintaxis `match` similar a la sintaxis `switch`. Como cada caso coincidente solo debe contener una expresión, no se puede usar y reemplazar una declaración de cambio en cada situación. Sin embargo, es significativamente más corto y más fácil de leer.
+
+La expresión `match` siempre devuelve un valor. Cada condición solo permite una sola expresión, e inmediatamente devuelve el valor y no fallará en las siguientes condiciones sin una declaración explícita de `break`:
+
+```php
+$foo = 'baz';
+$a = match($foo) {
+    'bar' => 1,
+    'baz' => 2,
+    'qux' => 3,
+}
+// $a = 2
+```
+
+Lanza una excepción cuando el valor no puede coincidir:
+
+```php
+$foo = 'qux';
+$a = match($foo) {
+    'bar' => 1,
+    'baz' => 2,
+}
+// PHP Error:  Unhandled match value of type string
+```
+
+Pero admite una condición predeterminada:
+
+```php
+$foo = 'qux';
+$a = match($foo) {
+    'bar' => 1,
+    'baz' => 2,
+    default => 3,
+}
+// $a = 3
+```
+
+Permite múltiples condiciones en un solo brazo:
+
+```php
+$foo = 'bar';
+$a = match($foo) {
+    'bar', 'baz' => 1,
+    default => 2,
+}
+// $a = 1
+```
+
+Hace una comparación estricta de tipo seguro sin coerción de tipo (es como usar `===` en lugar de `==`):
+
+```php
+function showType($param) {
+    return match ($param) {
+        1 => 'Integer',
+        '1' => 'String',
+        true => 'Boolean',
+    };
+}
+
+showType(1); // "Integer"
+showType('1'); // "String"
+showType(true); // "Boolean"
+```
+
+#### Recurso externo
+
+- [Match expression on PHP.Watch](https://php.watch/versions/8.0/match-expression)
+
+### Interfaz Stringable
+
+![php-version-80](https://shields.io/badge/php->=8.0-blue)
+
+Desde PHP 8.0, hay una nueva interfaz llamada `Stringable`, que indica que una clase tiene un método mágico `__toString()`. PHP agrega automáticamente la interfaz `Stringable` a todas las clases que implementan ese método.
+
+```php
+interface Stringable {
+    public function __toString(): string;
+}
+```
+
+Cuando se define un parámetro con el tipo `Stringable`, comprobará que la clase dada implementa la interfaz `Stringable`:
+
+```php
+class Foo {
+    public function __toString(): string {
+        return 'bar';
+    }
+}
+
+function myFunction(Stringable $param): string {
+    return (string) $param;
+}
+$a = myFunction(new Foo);
+// $a = 'bar'
+```
+
+Si una clase dada no implementa `__toString()`, obtendrá un error:
+
+```php
+class Foo {
+}
+
+function myFunction(Stringable $param): string {
+    return (string) $param;
+}
+$a = myFunction(new Foo);
+// TypeError: myFunction(): Argument #1 ($param) must be of type Stringable, Foo given
+```
+
+Un tipo `Stringable` no acepta `string`:
+
+```php
+function myFunction(Stringable $param): string {
+    return (string) $param;
+}
+$a = myFunction('foo');
+// TypeError: myFunction(): Argument #1 ($param) must be of type Stringable, string given
+```
+
+Por supuesto, para aceptar tanto `string` como `Stringable`, puede usar un tipo de unión:
+
+```php
+function myFunction(string|Stringable $param): string {
+    return (string) $param;
+}
+```
