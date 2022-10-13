@@ -1085,7 +1085,7 @@ When you want to merge multiple arrays, you generally use `array_merge`:
 $array1 = ['baz'];
 $array2 = ['foo', 'bar'];
 
-$array3 = array_merge($array1,$array2);
+$array3 = array_merge($array1, $array2);
 // $array3 = ['baz', 'foo', 'bar']
 ```
 
