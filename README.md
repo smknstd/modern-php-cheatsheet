@@ -22,7 +22,8 @@ This guide is not intended to teach you PHP from the ground up, but to help deve
 When you struggle to understand a notion, I suggest you look for answers on the following resources:
 - [Stitcher's blog](https://stitcher.io/blog)
 - [PHP.Watch](https://php.watch/versions)
-- [Exploring php 8.0](https://leanpub.com/exploringphp80)
+- [Exploring PHP 8.0](https://leanpub.com/exploringphp80)
+- [PHP 8 in a nutshell](https://amitmerchant.gumroad.com/l/php8-in-a-nutshell)
 - [PHP The Right Way](https://phptherightway.com/)
 - [StackOverflow](https://stackoverflow.com/questions/tagged/php)
 
