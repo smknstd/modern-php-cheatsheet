@@ -31,6 +31,7 @@ When you struggle to understand a notion, I suggest you look for answers on the 
 
 | Version                                      |Release date|
 |----------------------------------------------|---|
+| [PHP 8.2](https://www.php.net/releases/8.2/en.php) |December 2022|
 | [PHP 8.1](https://www.php.net/releases/8.1/en.php) |November 2021|
 | [PHP 8.0](https://www.php.net/releases/8.0/en.php) |November 2020|
 | PHP 7.4                                      |November 2019|
