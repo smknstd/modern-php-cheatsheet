@@ -1335,7 +1335,7 @@ $r = add(1, ...$array); // PHP Error:  Unknown named parameter $d
 
 #### External resource
 
-- [Named arguments in depth on stitcher's blof](https://stitcher.io/blog/php-8-named-arguments)
+- [Named arguments in depth on stitcher's blog](https://stitcher.io/blog/php-8-named-arguments)
 - [Named Parameters on PHP.Watch](https://php.watch/versions/8.0/named-parameters)
 
 ### Short closures
@@ -1546,3 +1546,120 @@ function myFunction(string|Stringable $param): string {
     return (string) $param;
 }
 ```
+
+### Enums
+
+![php-version-81](https://shields.io/badge/php->=8.1-blue)
+
+An Enum defines a new type, which has a fixed, limited number of possible legal values.
+
+```php
+enum Status
+{
+    case DRAFT;
+    case PUBLISHED;
+    case ARCHIVED;
+}
+```
+
+In an Enum, each case definition is case-sensitive. Historically, in PHP we generally represent "constants" with uppercase to distinguish them from normal variables, so it makes sense to stick to uppercase notation for enum cases. But note that this will work fine and define 3 different cases:
+
+```php
+enum MyEnum
+{
+    case FOO;
+    case foo;
+    case Foo;
+}
+```
+
+Now you can compare easily enums with type safe operator `===`:
+
+```php
+$statusA = Status::PENDING;
+
+if ($statusA === Status::PENDING) {
+    // true
+}
+```
+
+Also an enum behaves like a traditional PHP object:
+
+```php
+$statusA = Status::PENDING;
+$statusB = Status::PENDING;
+$statusC = Status::ARCHIVED;
+
+$statusA === $statusB; // true
+$statusA === $statusC; // false
+$statusC instanceof Status; // true
+```
+
+You can use Enum to enforce types:
+
+```php
+function myFunction(Status $param)
+{
+    return $param;
+}
+$a = myFunction(Status::DRAFT);
+// $a = Status::DRAFT
+$b = myFunction('foo'); // TypeError: myFunction(): Argument #1 ($param) must be of type Status, string given
+```
+
+###  Enum methods
+
+You can define methods with an Enum :
+
+```php
+enum Status
+{
+    case DRAFT;
+    case PUBLISHED;
+    
+    public function label(): string
+    {
+        return match($this) 
+        {
+            Status::DRAFT => 'Not ready...',   
+            Status::PUBLISHED => 'Published !',   
+        };
+    }
+}
+```
+
+then you can use methods on any enum instance:
+
+```php
+$a = Status::DRAFT;
+$a->label(); // 'Not ready...'
+```
+
+### Backed values
+
+Sometimes you need to assign a proper value to each enum case (ex: to store it in a database, comparison, etc). You should define the type of the back value. Here is an example with a backed value defined as an `int` :
+
+```php
+enum HttpStatus: int
+{
+    case OK = 200;
+    case NOT_FOUND = 404;
+    case INTERNAL_SERVER_ERROR = 500;
+}
+```
+
+And here is an example of a backed value defined as a `string`:
+
+```php
+enum Status: string
+{
+    case DRAFT = 'draft';
+    case PUBLISHED = 'published';
+}
+```
+
+#### External resource
+
+- [Enums manual on PHP official documentation](https://www.php.net/manual/en/language.enumerations.php)
+- [Enums on PHP.Watch](https://php.watch/versions/8.0/match-expression)
+- [Enums style guide on stitcher's blog](https://stitcher.io/blog/php-enum-style-guide)
