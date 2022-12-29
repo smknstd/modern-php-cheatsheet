@@ -62,6 +62,7 @@ More infos on [php.net](https://www.php.net/supported-versions.php).
         + [Short closures](#short-closures)
         + [Match expression](#match-expression)
         + [Stringable interface](#stringable-interface)
+        + [Enums](#enums)
 
 ## Notions
 
