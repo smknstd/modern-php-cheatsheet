@@ -1548,3 +1548,118 @@ function myFunction(string|Stringable $param): string {
     return (string) $param;
 }
 ```
+
+### Enums
+
+![php-version-81](https://shields.io/badge/php->=8.1-blue)
+
+Un Enum (o enumeración) define un nuevo tipo, que tiene un número fijo y limitado de posibles valores.
+
+```php
+enum Status
+{
+    case DRAFT;
+    case PUBLISHED;
+    case ARCHIVED;
+}
+```
+
+En un Enum, cada definición distingue entre mayúsculas y minúsculas. Históricamente, en PHP generalmente representamos "constantes" con mayúsculas para distinguirlas de las variables normales, por lo que tiene sentido apegarse a la notación en mayúsculas para los casos de enumeración. Tené en cuenta que esto funcionará y definirá 3 casos diferentes:
+
+```php
+enum MyEnum
+{
+    case FOO;
+    case foo;
+    case Foo;
+}
+```
+
+Ahora podés comparar fácilmente las enumeraciones con el tipo de operador seguro `===`:
+
+```php
+$statusA = Status::PENDING;
+if ($statusA === Status::PENDING) {
+    // true
+}
+```
+
+Además, una enumeración se comporta como un objeto PHP tradicional:
+
+```php
+$statusA = Status::PENDING;
+$statusB = Status::PENDING;
+$statusC = Status::ARCHIVED;
+$statusA === $statusB; // true
+$statusA === $statusC; // false
+$statusC instanceof Status; // true
+```
+
+Podés usar Enum para hacer cumplir los tipos:
+
+```php
+function myFunction(Status $param)
+{
+    return $param;
+}
+$a = myFunction(Status::DRAFT);
+// $a = Status::DRAFT
+$b = myFunction('foo'); // TypeError: myFunction(): Argument #1 ($param) must be of type Status, string given
+```
+
+###  Métodos en Enum
+
+Podés definir métodos en un Enum:
+
+```php
+enum Status
+{
+    case DRAFT;
+    case PUBLISHED;
+    
+    public function label(): string
+    {
+        return match($this) 
+        {
+            Status::DRAFT => 'Not ready...',   
+            Status::PUBLISHED => 'Published !',   
+        };
+    }
+}
+```
+
+Entonces podés usar los métodos en cualquier instancia de enum:
+
+```php
+$a = Status::DRAFT;
+$a->label(); // 'Not ready...'
+```
+
+### Valores de respaldo
+
+A veces es necesario asignar un valor propio a cada caso (ej: para almacenarlo en una base de datos, comparación, etc). Tenés que definir el tipo del valor. Acá hay un ejemplo con un valor definido como un `int` :
+
+```php
+enum HttpStatus: int
+{
+    case OK = 200;
+    case NOT_FOUND = 404;
+    case INTERNAL_SERVER_ERROR = 500;
+}
+```
+
+Y acá hay un ejemplo de un valor definido como `string`:
+
+```php
+enum Status: string
+{
+    case DRAFT = 'draft';
+    case PUBLISHED = 'published';
+}
+```
+
+#### Recursos externos
+
+- [Manual de Enums en la documentación oficial de PHP](https://www.php.net/manual/es/language.enumerations.php)
+- [Enums en PHP.Watch](https://php.watch/versions/8.0/match-expression)
+- [Guía de estilo para Enums en stitcher's blog](https://stitcher.io/blog/php-enum-style-guide)
