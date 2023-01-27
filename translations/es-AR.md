@@ -63,6 +63,7 @@ Mas información en [php.net](https://www.php.net/supported-versions.php).
         + [Funciones flecha](#funciones-flecha)
         + [Expresión de coincidencia Match](#expresión-de-coincidencia-match)
         + [Interfaz Stringable](#interfaz-stringable)
+        + [Enums](#enums)
 
 ## Fundamentos
 
