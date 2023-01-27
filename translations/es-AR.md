@@ -1337,7 +1337,7 @@ $r = add(1, ...$array); // PHP Error:  Unknown named parameter $d
 
 #### Recursos adicionales
 
-- [Named arguments in depth on stitcher's blof](https://stitcher.io/blog/php-8-named-arguments)
+- [Named arguments in depth on stitcher's blog](https://stitcher.io/blog/php-8-named-arguments)
 - [Named Parameters on PHP.Watch](https://php.watch/versions/8.0/named-parameters)
 
 ### Funciones flecha
