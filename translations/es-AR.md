@@ -33,6 +33,7 @@ Cuando tengas dificultad para comprender un concepto, te sugiero que busques res
 
 | Version                                      |Fecha de lanzamiento|
 |----------------------------------------------|---|
+| [PHP 8.2](https://www.php.net/releases/8.2/en.php) |Diciembre 2022|
 | [PHP 8.1](https://www.php.net/releases/8.1/es.php) |Noviembre 2021|
 | [PHP 8.0](https://www.php.net/releases/8.0/es.php) |Noviembre 2020|
 | PHP 7.4                                      |Noviembre 2019|
