@@ -25,7 +25,8 @@ Esta guía no está destinada a enseñarte PHP desde cero, sino a ayudar a los d
 Cuando tengas dificultad para comprender un concepto, te sugiero que busques respuestas en los siguientes sitios:
 - [Stitcher's blog](https://stitcher.io/blog)
 - [PHP.Watch](https://php.watch/versions)
-- [Exploring php 8.0](https://leanpub.com/exploringphp80)
+- [Exploring PHP 8.0](https://leanpub.com/exploringphp80)
+- [PHP 8 in a nutshell](https://amitmerchant.gumroad.com/l/php8-in-a-nutshell)
 - [PHP The Right Way](https://phptherightway.com/)
 - [StackOverflow](https://stackoverflow.com/questions/tagged/php)
 
