@@ -15,7 +15,7 @@ This document is a cheatsheet for PHP you will frequently encounter in modern pr
 
 This guide is not intended to teach you PHP from the ground up, but to help developers with basic knowledge who may struggle to get familiar with modern codebases (or let's say to learn Laravel or Symfony for instance) because of the new PHP concepts and features introduced over the years.
 
-> **Note:** Concepts introduced here are based on the most recent version of PHP available ([PHP 8.1](https://www.php.net/releases/8.1/en.php) at the time of the last update)
+> **Note:** Concepts introduced here are based on the most recent version of PHP available ([PHP 8.3](https://www.php.net/releases/8.3/en.php) at the time of the last update)
 
 ### Complementary Resources
 
@@ -29,16 +29,17 @@ When you struggle to understand a notion, I suggest you look for answers on the 
 
 ### Recent PHP releases
 
-| Version                                      |Release date|
-|----------------------------------------------|---|
-| [PHP 8.2](https://www.php.net/releases/8.2/en.php) |December 2022|
-| [PHP 8.1](https://www.php.net/releases/8.1/en.php) |November 2021|
-| [PHP 8.0](https://www.php.net/releases/8.0/en.php) |November 2020|
-| PHP 7.4                                      |November 2019|
-| PHP 7.3                                      |December 2018|
-| PHP 7.2                                      |November 2017|
-| PHP 7.1                                      |December 2016|
-| PHP 7.0                                      |December 2015|
+| Version                                            | Release date  |
+|----------------------------------------------------|---------------|
+| [PHP 8.3](https://www.php.net/releases/8.3/en.php) | December 2023 |
+| [PHP 8.2](https://www.php.net/releases/8.2/en.php) | December 2022 |
+| [PHP 8.1](https://www.php.net/releases/8.1/en.php) | November 2021 |
+| [PHP 8.0](https://www.php.net/releases/8.0/en.php) | November 2020 |
+| PHP 7.4                                            | November 2019 |
+| PHP 7.3                                            | December 2018 |
+| PHP 7.2                                            | November 2017 |
+| PHP 7.1                                            | December 2016 |
+| PHP 7.0                                            | December 2015 |
 
 More infos on [php.net](https://www.php.net/supported-versions.php).
 
@@ -63,6 +64,7 @@ More infos on [php.net](https://www.php.net/supported-versions.php).
         + [Match expression](#match-expression)
         + [Stringable interface](#stringable-interface)
         + [Enums](#enums)
+        + [Multiple lines string syntax](#multiple-lines-string-syntax)
 
 ## Notions
 
@@ -1608,7 +1610,7 @@ $a = myFunction(Status::DRAFT);
 $b = myFunction('foo'); // TypeError: myFunction(): Argument #1 ($param) must be of type Status, string given
 ```
 
-###  Enum methods
+####  Enum methods
 
 You can define methods with an Enum :
 
@@ -1636,7 +1638,7 @@ $a = Status::DRAFT;
 $a->label(); // 'Not ready...'
 ```
 
-### Backed values
+#### Backed values
 
 Sometimes you need to assign a proper value to each enum case (ex: to store it in a database, comparison, etc). You should define the type of the back value. Here is an example with a backed value defined as an `int` :
 
@@ -1664,3 +1666,39 @@ enum Status: string
 - [Enums manual on PHP official documentation](https://www.php.net/manual/en/language.enumerations.php)
 - [Enums on PHP.Watch](https://php.watch/versions/8.0/match-expression)
 - [Enums style guide on stitcher's blog](https://stitcher.io/blog/php-enum-style-guide)
+
+### Multiple lines string syntax
+
+![php-version-73](https://shields.io/badge/php->=7.3-blue)
+
+When you want to define a string value that contains multiple lines, you generally use double quotes and escape line breaks:
+
+```php
+$string = "Hello\nWorld";
+```
+
+Since PHP 7.3, there is a new option for specifying a string value over multiple lines. By placing it between an opening identifier and a closing identifier:
+
+```php
+$string = <<<IDENTIFIER
+Hello 
+World
+IDENTIFIER;
+```
+
+You can use any identifier you want, but it must be the same at the beginning and at the end of the string. It can't be a variable. 
+
+The closing identifier can be followed by other code on the same line:
+
+```php
+$array = ['foo', 'bar', <<<IDENTIFIER
+  hello
+  world
+  IDENTIFIER, 'baz', 'qux',
+];
+```
+
+#### External resource
+
+- [Relaxed heredoc and nowdoc on PHP.Watch](https://php.watch/versions/7.3/relaxed-heredoc-nowdoc)
+- [Heredoc nowdoc on andycarter.dev's blog](https://andycarter.dev/blog/what-are-php-heredoc-nowdoc)
