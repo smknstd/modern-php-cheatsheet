@@ -18,14 +18,15 @@ Este documento es un cheatsheet para PHP con código que encontrará con frecuen
 
 Esta guía no está destinada a enseñarte PHP desde cero, sino a ayudar a los desarrolladores con conocimientos básicos que pueden tener dificultades para familiarizarse con las bases de código modernas (o para aprender Laravel o Symfony, por ejemplo) debido a los nuevos conceptos y características que PHP ha introducido a lo largo de los años.
 
-> **Nota:** Los conceptos presentados acá se basan en la versión más reciente de PHP disponible ([PHP 8.1] (https://www.php.net/releases/8.1/es.php) en el momento de la última actualización)
+> **Nota:** Los conceptos presentados acá se basan en la versión más reciente de PHP disponible ([PHP 8.1](https://www.php.net/releases/8.1/es.php) en el momento de la última actualización)
 
 ### Recursos complementarios
 
 Cuando tengas dificultad para comprender un concepto, te sugiero que busques respuestas en los siguientes sitios:
 - [Stitcher's blog](https://stitcher.io/blog)
 - [PHP.Watch](https://php.watch/versions)
-- [Exploring php 8.0](https://leanpub.com/exploringphp80)
+- [Exploring PHP 8.0](https://leanpub.com/exploringphp80)
+- [PHP 8 in a nutshell](https://amitmerchant.gumroad.com/l/php8-in-a-nutshell)
 - [PHP The Right Way](https://phptherightway.com/)
 - [StackOverflow](https://stackoverflow.com/questions/tagged/php)
 
@@ -33,6 +34,7 @@ Cuando tengas dificultad para comprender un concepto, te sugiero que busques res
 
 | Version                                      |Fecha de lanzamiento|
 |----------------------------------------------|---|
+| [PHP 8.2](https://www.php.net/releases/8.2/en.php) |Diciembre 2022|
 | [PHP 8.1](https://www.php.net/releases/8.1/es.php) |Noviembre 2021|
 | [PHP 8.0](https://www.php.net/releases/8.0/es.php) |Noviembre 2020|
 | PHP 7.4                                      |Noviembre 2019|
@@ -63,6 +65,7 @@ Mas información en [php.net](https://www.php.net/supported-versions.php).
         + [Funciones flecha](#funciones-flecha)
         + [Expresión de coincidencia Match](#expresión-de-coincidencia-match)
         + [Interfaz Stringable](#interfaz-stringable)
+        + [Enums](#enums)
 
 ## Fundamentos
 
@@ -1088,7 +1091,7 @@ Cuando se desea fusionar varias matrices, generalmente se usa `array_merge`:
 $array1 = ['baz'];
 $array2 = ['foo', 'bar'];
 
-$array3 = array_merge($array1,$array2);
+$array3 = array_merge($array1, $array2);
 // $array3 = ['baz', 'foo', 'bar']
 ```
 
@@ -1336,7 +1339,7 @@ $r = add(1, ...$array); // PHP Error:  Unknown named parameter $d
 
 #### Recursos adicionales
 
-- [Named arguments in depth on stitcher's blof](https://stitcher.io/blog/php-8-named-arguments)
+- [Named arguments in depth on stitcher's blog](https://stitcher.io/blog/php-8-named-arguments)
 - [Named Parameters on PHP.Watch](https://php.watch/versions/8.0/named-parameters)
 
 ### Funciones flecha
@@ -1547,3 +1550,118 @@ function myFunction(string|Stringable $param): string {
     return (string) $param;
 }
 ```
+
+### Enums
+
+![php-version-81](https://shields.io/badge/php->=8.1-blue)
+
+Un Enum (o enumeración) define un nuevo tipo, que tiene un número fijo y limitado de posibles valores.
+
+```php
+enum Status
+{
+    case DRAFT;
+    case PUBLISHED;
+    case ARCHIVED;
+}
+```
+
+En un Enum, cada definición distingue entre mayúsculas y minúsculas. Históricamente, en PHP generalmente representamos "constantes" con mayúsculas para distinguirlas de las variables normales, por lo que tiene sentido apegarse a la notación en mayúsculas para los casos de enumeración. Tené en cuenta que esto funcionará y definirá 3 casos diferentes:
+
+```php
+enum MyEnum
+{
+    case FOO;
+    case foo;
+    case Foo;
+}
+```
+
+Ahora podés comparar fácilmente las enumeraciones con el tipo de operador seguro `===`:
+
+```php
+$statusA = Status::PENDING;
+if ($statusA === Status::PENDING) {
+    // true
+}
+```
+
+Además, una enumeración se comporta como un objeto PHP tradicional:
+
+```php
+$statusA = Status::PENDING;
+$statusB = Status::PENDING;
+$statusC = Status::ARCHIVED;
+$statusA === $statusB; // true
+$statusA === $statusC; // false
+$statusC instanceof Status; // true
+```
+
+Podés usar Enum para hacer cumplir los tipos:
+
+```php
+function myFunction(Status $param)
+{
+    return $param;
+}
+$a = myFunction(Status::DRAFT);
+// $a = Status::DRAFT
+$b = myFunction('foo'); // TypeError: myFunction(): Argument #1 ($param) must be of type Status, string given
+```
+
+###  Métodos en Enum
+
+Podés definir métodos en un Enum:
+
+```php
+enum Status
+{
+    case DRAFT;
+    case PUBLISHED;
+    
+    public function label(): string
+    {
+        return match($this) 
+        {
+            Status::DRAFT => 'Not ready...',   
+            Status::PUBLISHED => 'Published !',   
+        };
+    }
+}
+```
+
+Entonces podés usar los métodos en cualquier instancia de enum:
+
+```php
+$a = Status::DRAFT;
+$a->label(); // 'Not ready...'
+```
+
+### Valores de respaldo
+
+A veces es necesario asignar un valor propio a cada caso (ej: para almacenarlo en una base de datos, comparación, etc). Tenés que definir el tipo del valor. Acá hay un ejemplo con un valor definido como un `int` :
+
+```php
+enum HttpStatus: int
+{
+    case OK = 200;
+    case NOT_FOUND = 404;
+    case INTERNAL_SERVER_ERROR = 500;
+}
+```
+
+Y acá hay un ejemplo de un valor definido como `string`:
+
+```php
+enum Status: string
+{
+    case DRAFT = 'draft';
+    case PUBLISHED = 'published';
+}
+```
+
+#### Recursos externos
+
+- [Manual de Enums en la documentación oficial de PHP](https://www.php.net/manual/es/language.enumerations.php)
+- [Enums en PHP.Watch](https://php.watch/versions/8.0/match-expression)
+- [Guía de estilo para Enums en stitcher's blog](https://stitcher.io/blog/php-enum-style-guide)
